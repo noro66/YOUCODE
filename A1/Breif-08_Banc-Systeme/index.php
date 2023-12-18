@@ -72,7 +72,8 @@
                                 <td>email@gmail.com</td>
                                 <td>8796547456</td>
                                 <td>
-                                    <a href="#" title="Veiw Details" class="text-success"></a>
+                                    <a href="#" title="Veiw Details" class="text-success"><i style="font-size:24px" class="fa">&#xf06e; </i></a>&nbsp;&nbsp;
+                                    <a href="#" title="Veiw Details" class="text-success"><i style="font-size:24px" class="fa">&#xf044;</i></a>
                                 </td>
                             </tr>
                         </tbody>
