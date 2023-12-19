@@ -65,17 +65,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center text-secondary">
-                                <td>1</td>
-                                <td>User Name</td>
-                                <td>User lname 1</td>
-                                <td>email@gmail.com</td>
-                                <td>8796547456</td>
-                                <td>
-                                    <a href="#" title="Veiw Details" class="text-success"><i style="font-size:24px" class="fa">&#xf06e; </i></a>&nbsp;&nbsp;
-                                    <a href="#" title="Veiw Details" class="text-success"><i style="font-size:24px" class="fa">&#xf044;</i></a>
-                                </td>
-                            </tr>
+                            <?php for ($i = 1; $i < 100; $i++) : ?>
+                                <tr class="text-center text-secondary">
+                                    <td><?= $i ?></td>
+                                    <td>User Name</td>
+                                    <td>User lname <?= $i ?></td>
+                                    <td>email@gmail.com</td>
+                                    <td>8796547456</td>
+                                    <td>
+                                        <a href="#" title="Veiw Details" class="text-success"><i style="font-size:24px" class="fa">&#xf06e; </i></a>&nbsp;&nbsp;
+                                        <a href="#" title="EDITE" class="text-success"><i style="font-size:24px" class="fa">&#xf044;</i></a>
+                                        <a href="#" title="DELETE" class="text-success"><i class="material-icons text-danger">&#xe92b;</i></a>
+                                    </td>
+                                </tr>
+                            <?php endfor; ?>
                         </tbody>
                     </table>
                 </div>
@@ -84,10 +87,17 @@
     </div>
 
 
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("table").DataTable();
+        });
+    </script>
 </body>
 
 </html>
