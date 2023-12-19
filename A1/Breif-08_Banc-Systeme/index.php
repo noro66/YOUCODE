@@ -45,8 +45,8 @@
                 <h4 class="mt-2 text-primary">ALL users in dateabase !</h4>
             </div>
             <div class="col-lg-6">
-                <button type="button" class="btn btn-primary m-1 float-end d-flex align-items-center"><i class="material-icons">&#xe147;</i>&nbsp;Add User</button>
-                <!-- <a href="#" class="btn btn-success m-1 float-right"></a> -->
+                <button type="button" class="btn btn-primary m-1 float-end d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <i class="material-icons">&#xe147;</i>&nbsp;Add User</button>
             </div>
         </div>
         <hr class="my-1">
@@ -74,7 +74,7 @@
                                     <td>8796547456</td>
                                     <td>
                                         <a href="#" title="Veiw Details" class="text-success"><i style="font-size:24px" class="fa">&#xf06e; </i></a>&nbsp;&nbsp;
-                                        <a href="#" title="EDITE" class="text-success"><i style="font-size:24px" class="fa">&#xf044;</i></a>
+                                        <a href="#" title="EDITE" class="text-success"><i style="font-size:24px" class="fa text-primary">&#xf044;</i></a>
                                         <a href="#" title="DELETE" class="text-success"><i class="material-icons text-danger">&#xe92b;</i></a>
                                     </td>
                                 </tr>
@@ -82,6 +82,43 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add New User Modal-->
+    <div class="modal fade" id="addModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New User</h4>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="" method="post" id="">
+
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-danger w-100" id="insert" name="insert">
+                        </div>
+                    </form>
+                </div>
+
+
+
             </div>
         </div>
     </div>
