@@ -259,7 +259,7 @@
                                 del_id: del_id
                             },
                             success: function(response) {
-                                console.log(response);
+                                showAllUsers();
                             }
                         });
                     }
