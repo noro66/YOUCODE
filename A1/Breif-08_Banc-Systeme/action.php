@@ -64,3 +64,9 @@ if (isset($_POST['action']) && $_POST['action'] == "update") {
     $phone = $_POST["phoneNumber"];
     $db->update($id, $fname, $lname, $email, $phone);
 }
+
+if (isset($_POST['del_id'])) {
+    $id = $_POST['del_id'];
+
+    $db->delete($id);
+}

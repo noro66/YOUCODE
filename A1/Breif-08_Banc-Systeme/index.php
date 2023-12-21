@@ -135,126 +135,138 @@
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-                    showAllUsers();
+            showAllUsers();
 
-                    function showAllUsers() {
+            function showAllUsers() {
+                $.ajax({
+                    url: "action.php",
+                    type: 'POST',
+                    data: {
+                        action: "view"
+                    },
+                    success: function(response) {
+                        $("#showUser").html(response);
+                        $("table").DataTable({
+                            order: [0, 'desc']
+                        });
+                    }
+                })
+            }
+            // insert ajax request
+            $("#insert").click(function(e) {
+                if ($("#form-data")[0].checkValidity()) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "action.php",
+                        type: "POST",
+                        data: $("#form-data").serialize() + "&action=insert",
+                        success: function(response) {
+                            Swal.fire({
+                                position: "center-center",
+                                icon: "success",
+                                title: "User Added Successfully !",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $("#addModal").modal('hide');
+                            $("#form-data")[0].reset();
+                            showAllUsers();
+                        }
+                    });
+                } else {
+                    console.log("Form is not valid");
+                }
+            });
+
+            $("body").on("click", ".editBtn", function(e) {
+                e.preventDefault();
+                edit_id = $(this).attr('id');
+                $.ajax({
+                    url: "action.php",
+                    type: "POST",
+                    data: {
+                        edit_id: edit_id
+                    },
+                    success: function(response) {
+                        try {
+                            data = JSON.parse(response);
+
+                            // Check if the response is an object and has the expected properties
+                            if (typeof data === 'object' && data !== null && 'id' in data && 'first_name' in data && 'last_name' in data && 'email' in data && 'phone' in data) {
+                                // Update form fields with the received data
+                                $('#id').val(data.id);
+                                $('#fname').val(data.first_name);
+                                $('#lname').val(data.last_name);
+                                $('#email-ed').val(data.email);
+                                $('#phoneNumber-ed').val(data.phone);
+                            } else {
+                                console.error('Invalid data format in the server response');
+                                // Optionally show an error message to the user
+                            }
+                        } catch (error) {
+                            console.error('Error parsing JSON response:', error);
+                            // Optionally show an error message to the user
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error: " + status + " - " + error);
+                    }
+                });
+            });
+
+            $("#update").click(function(e) {
+                if ($("#edit-form-data")[0].checkValidity()) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "action.php",
+                        type: "POST",
+                        data: $("#edit-form-data").serialize() + "&action=update",
+                        success: function(response) {
+                            Swal.fire({
+                                position: "center-center",
+                                icon: "success",
+                                title: "User Updated Successfully !",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $("#editModal").modal('hide');
+                            $("#edit-form-data")[0].reset();
+                            showAllUsers();
+                        }
+                    });
+                } else {
+                    console.log("Form is not valid");
+                }
+            });
+            $('body').on('click', '.delBtn', function(e) {
+                e.preventDefault();
+                var td = $(this).closest('tr');
+                del_id = $(this).attr('id');
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.value) {
                         $.ajax({
                             url: "action.php",
                             type: 'POST',
                             data: {
-                                action: "view"
+                                del_id: del_id
                             },
                             success: function(response) {
-                                $("#showUser").html(response);
-                                $("table").DataTable({
-                                    order: [0, 'desc']
-                                });
-                            }
-                        })
-                    }
-                    // insert ajax request
-                    $("#insert").click(function(e) {
-                        if ($("#form-data")[0].checkValidity()) {
-                            e.preventDefault();
-                            $.ajax({
-                                url: "action.php",
-                                type: "POST",
-                                data: $("#form-data").serialize() + "&action=insert",
-                                success: function(response) {
-                                    Swal.fire({
-                                        position: "center-center",
-                                        icon: "success",
-                                        title: "User Added Successfully !",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    $("#addModal").modal('hide');
-                                    $("#form-data")[0].reset();
-                                    showAllUsers();
-                                }
-                            });
-                        } else {
-                            console.log("Form is not valid");
-                        }
-                    });
-
-                    $("body").on("click", ".editBtn", function(e) {
-                        e.preventDefault();
-                        edit_id = $(this).attr('id');
-                        $.ajax({
-                            url: "action.php",
-                            type: "POST",
-                            data: {
-                                edit_id: edit_id
-                            },
-                            success: function(response) {
-                                try {
-                                    data = JSON.parse(response);
-
-                                    // Check if the response is an object and has the expected properties
-                                    if (typeof data === 'object' && data !== null && 'id' in data && 'first_name' in data && 'last_name' in data && 'email' in data && 'phone' in data) {
-                                        // Update form fields with the received data
-                                        $('#id').val(data.id);
-                                        $('#fname').val(data.first_name);
-                                        $('#lname').val(data.last_name);
-                                        $('#email-ed').val(data.email);
-                                        $('#phoneNumber-ed').val(data.phone);
-                                    } else {
-                                        console.error('Invalid data format in the server response');
-                                        // Optionally show an error message to the user
-                                    }
-                                } catch (error) {
-                                    console.error('Error parsing JSON response:', error);
-                                    // Optionally show an error message to the user
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                console.error("AJAX Error: " + status + " - " + error);
+                                console.log(response);
                             }
                         });
-                    });
+                    }
+                });
 
-                    $("#update").click(function(e) {
-                        if ($("#edit-form-data")[0].checkValidity()) {
-                            e.preventDefault();
-                            $.ajax({
-                                url: "action.php",
-                                type: "POST",
-                                data: $("#edit-form-data").serialize() + "&action=update",
-                                success: function(response) {
-                                    Swal.fire({
-                                        position: "center-center",
-                                        icon: "success",
-                                        title: "User Updated Successfully !",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    $("#editModal").modal('hide');
-                                    $("#edit-form-data")[0].reset();
-                                    showAllUsers();
-                                }
-                            });
-                        } else {
-                            console.log("Form is not valid");
-                        }
-                    });
-                    $('body').on('click', 'delBtn', function(e) {
-                        e.preventDefault();
-                        var td = $(this).closest('tr');
-                        del_id = $(this).attr('id');
-                        Swal.fire({
-                            title: "Are you sure?",
-                            text: "You won't be able to revert this!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
-                        }).then((result) => {
-                            if (result.value) {}
-
-                        })
-                    });
+            });
+        });
     </script>
 </body>
 
