@@ -23,16 +23,20 @@ class Database
 
     public function insert($fname, $lname, $email, $phone)
     {
-        $sql = "INSERT INTO users (first_name, last_name, email, phone) 
-                VALUES (:fname, :lname, :email, :phone";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute(['fname' => $fname, 'lname' => $lname, 'email' => $email, 'phone' => $phone]);
-        return TRUE;
+        try {
+            $sql = "INSERT INTO users (first_name, last_name, email, phone) 
+                VALUES (:fname, :lname, :email, :phone);";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute(['fname' => $fname, 'lname' => $lname, 'email' => $email, 'phone' => $phone]);
+            return TRUE;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     public function read()
     {
-        $sql = "SELECT * FROM users";
         try {
             $sql = "SELECT * FROM users";
             $stmt = $this->connect()->prepare($sql);
@@ -52,16 +56,16 @@ class Database
 
     public function getUserById($id)
     {
-
-
         try {
-            $sql = " SELECT * FROM users WHERE id = :id";
+            $sql = "SELECT * FROM users WHERE id = :id";
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
+
+            return $result !== false ? $result : null;
         } catch (PDOException $e) {
-            echo "Error : " . $e->getMessage();
+            error_log("Error in getUserById: " . $e->getMessage());
+            return null;
         }
     }
 
@@ -103,10 +107,13 @@ class Database
 }
 
 
-$do = new Database();
-echo "<pre>";
-print_r($do->read());
-echo "<pre>";
+// $do = new Database();
+// $row = $do->getUserById(25);
+// print_r($row);
+// $do->insert('mohamed', 'ohmo', 'moha@gmail.com', '9878676598');
+// echo "<pre>";
+// print_r($do->read());
+// echo "<pre>";
 
-echo "<br>";
-echo $do->totalRowcount();
+// echo "<br>";
+// echo $do->totalRowcount();
