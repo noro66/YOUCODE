@@ -10,12 +10,12 @@ if (isset($_POST['action']) && $_POST["action"] == "view") {
         $output .= '                    <table class="table table-striped table-sm table-bordered">
                         <thead>
                             <tr class="text-center">
-                                <th>id</th>
-                                <th>Fist name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th>Action</th>
+                                <th class="text-center">id</th>
+                                <th class="text-center">Fist name</th>
+                                <th class="text-center">Last Name</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Phone Number</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>';
@@ -69,4 +69,11 @@ if (isset($_POST['del_id'])) {
     $id = $_POST['del_id'];
 
     $db->delete($id);
+}
+
+if (isset($_POST['info_id'])) {
+
+    $id = $_POST['info_id'];
+    $row = $db->getUserById($id);
+    echo json_encode($row);
 }

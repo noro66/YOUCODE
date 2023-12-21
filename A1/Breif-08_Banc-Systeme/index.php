@@ -240,7 +240,7 @@
             });
             $('body').on('click', '.delBtn', function(e) {
                 e.preventDefault();
-                var td = $(this).closest('tr');
+                var tr = $(this).closest('tr');
                 del_id = $(this).attr('id');
                 Swal.fire({
                     title: "Are you sure?",
@@ -259,6 +259,12 @@
                                 del_id: del_id
                             },
                             success: function(response) {
+                                tr.css('background-color', '#ff6666');
+                                Swal.fire(
+                                    'Deleted',
+                                    'User deleted successfully !',
+                                    'success'
+                                );
                                 showAllUsers();
                             }
                         });
@@ -266,6 +272,27 @@
                 });
 
             });
+
+            $('body').on('click', '.infoBtn', function(e) {
+                e.preventDefault();
+                info_id = $(this).attr('id');
+                $.ajax({
+                    url: "action.php",
+                    type: "POST",
+                    data: {
+                        info_id: info_id
+                    },
+                    success: function(response) {
+                        data = JSON.parse(response);
+                        Swal.fire({
+                            title: '<strong>User  Info: ID(' + data.id + ')</strong>',
+                            type: 'info',
+                            html: '<b>First Name: </b>' + data.first_name + '<br><b>Last Name: </b>' + data.last_name + '<br><b>Email : </b>' + data.email + '<br><b>Phone : </b>' + data.phone,
+                        })
+                    }
+                })
+            });
+
         });
     </script>
 </body>
