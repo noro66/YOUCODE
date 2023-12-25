@@ -57,6 +57,17 @@ if (isset($_SESSION['userid']) && isset($_SESSION['useruid'])) {
                             <span>Don't have an account?</span>
                             <a class="btn btn-outline-primary ml-2" href="signup.php">Signup Now</a>
                         </div>
+                        <?php if (isset($_GET['error'])) {
+                            if ($_GET['error'] === 'invalidusername!' || 'invalidusename') {
+                                $msg = "Invalid Username  !";
+                            }
+                            if ($_GET['error'] === 'wrongpassword!') {
+                                $msg = "Sorry Wrong Password Please Enter a Valid One!";
+                            }
+                        ?>
+                            <br>
+                            <div class="alert alert-danger" role="alert"> <?php echo $msg ?> </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
