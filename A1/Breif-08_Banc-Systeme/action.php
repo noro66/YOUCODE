@@ -1,7 +1,7 @@
 <?php
-require "db.php";
+require "user.php";
 
-$db = new  Database();
+$db = new  User();
 
 if (isset($_POST['action']) && $_POST["action"] == "view") {
     $output = '';
@@ -51,7 +51,6 @@ if (isset($_POST['action']) && $_POST['action'] == "insert") {
 
 if (isset($_POST['edit_id'])) {
     $id = $_POST['edit_id'];
-    // echo $id;
     $row = $db->getUserById($id);
     echo json_encode($row);
 }
