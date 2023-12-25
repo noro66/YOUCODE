@@ -50,9 +50,26 @@
                 </div>
                 <button type="submit" class="btn btn-success" name="submit">Sign Up</button>
             </form>
+            <?php if (isset($_GET['error'])) {
+                if ($_GET['error'] === 'uidtaken') {
+                    $msg = "Sorry This Username is taken !";
+                }
+                if ($_GET['error'] === 'invalidemail') {
+                    $msg = "Sorry  Invalid email Please enter a valid one!";
+                }
+                if ($_GET['error'] === 'pwdnotmatch') {
+                    $msg = "Sorry  Passwords does not match please try again!";
+                }
+                if ($_GET['error'] === 'emptyinput') {
+                    $msg = " please fill all the fields!";
+                }
+            ?>
+                <br>
+                <div class="alert alert-danger" role="alert"> <?php echo $msg ?> </div>
+            <?php } ?>
         </div>
-
     </div>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
