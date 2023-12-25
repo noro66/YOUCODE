@@ -14,6 +14,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
     $signup->singnupUser();
 
-    header("location: ../index.php?error=none");
-
+    header("location: ../veiw/login.php?error=none");
 }

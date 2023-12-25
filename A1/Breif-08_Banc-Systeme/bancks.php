@@ -1,15 +1,3 @@
-<?php
-
-session_start();
-if (!isset($_SESSION['userid']) || !isset($_SESSION['useruid'])) {
-    session_start();
-    session_unset();
-    session_destroy();
-    header("location: veiw/login.php");
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,20 +23,13 @@ if (!isset($_SESSION['userid']) || !isset($_SESSION['useruid'])) {
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">BANCKS</a>
+                        <a class="nav-link" href="bancks.php">BANCKS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">AGENCES</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="users.php">USERS</a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="includes/logout.php" method="post" class="nav-link">
-                            <button type="submit" class="btn btn-outline-light" name="logout">
-                                <i class="fa fa-sign-out"></i> Logout
-                            </button>
-                        </form>
                     </li>
                 </ul>
             </div>
