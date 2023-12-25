@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['userid']) && isset($_SESSION['useruid'])) {
+    // echo "connected";
+    header("location: ../index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
