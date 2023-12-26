@@ -1,27 +1,27 @@
  $(document).ready(function() {
             showAllUsers();
 
-            function showAllUsers() {
-                $.ajax({
-                    url: "../action.php",
-                    type: 'POST',
-                    data: {
-                        action: "view"
-                    },
-                    success: function(response) {
-                        $("#showUser").html(response);
-                        $("table").DataTable({
-                            order: [0]
-                        });
-                    }
-                })
-            }
+function showAllUsers() {
+    $.ajax({
+        url: "action.php",
+        method: 'POST',
+        data: {
+            action: "view"
+        },
+        success: function(response) {
+            $("#showUser").html(response);
+            $("table").DataTable({
+                order: [[0, 'desc']]
+            });
+        }
+    });
+}
             
             $("#insert").click(function(e) {
                 if ($("#form-data")[0].checkValidity()) {
                     e.preventDefault();
                     $.ajax({
-                        url: "../action.php",
+                        url: "action.php",
                         type: "POST",
                         data: $("#form-data").serialize() + "&action=insert",
                         success: function(response) {
@@ -46,7 +46,7 @@
                 e.preventDefault();
                 edit_id = $(this).attr('id');
                 $.ajax({
-                    url: "../action.php",
+                    url: "action.php",
                     type: "POST",
                     data: {
                         edit_id: edit_id
@@ -78,7 +78,7 @@
                 e.preventDefault();
                 if ($("#edit-form-data")[0].checkValidity()) {
                     $.ajax({
-                        url: "../action.php",
+                        url: "action.php",
                         method: "POST",
                         data: $("#edit-form-data").serialize() + "&action=update",
                         success: function(response) {
@@ -113,7 +113,7 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            url: "../action.php",
+                            url: "action.php",
                             type: 'POST',
                             data: {
                                 del_id: del_id

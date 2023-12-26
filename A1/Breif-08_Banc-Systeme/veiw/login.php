@@ -59,14 +59,20 @@ if (isset($_SESSION['userid']) && isset($_SESSION['useruid'])) {
                         </div>
                         <?php if (isset($_GET['error'])) {
                             if ($_GET['error'] === 'invalidusername!' || 'invalidusename') {
-                                $msg = "Invalid Username  !";
+                                $msg = "Usernaem or Password incorrect !";
+                                $s = 'danger';
                             }
                             if ($_GET['error'] === 'wrongpassword!') {
-                                $msg = "Sorry Wrong Password Please Enter a Valid One!";
+                                $msg = "Usernaem or Password incorrect !";
+                                $s = 'danger';
+                            }
+                            if ($_GET['error'] === 'none') {
+                                $msg = "sign up successfully  !";
+                                $s = 'success';
                             }
                         ?>
                             <br>
-                            <div class="alert alert-danger" role="alert"> <?php echo $msg ?> </div>
+                            <div class="alert alert-<?php echo $s ?>" role="alert"> <?php echo $msg ?> </div>
                         <?php } ?>
                     </div>
                 </div>

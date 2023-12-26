@@ -1,5 +1,5 @@
 <?php
-require "user.php";
+require_once "User.php";
 
 $db = new  User();
 

@@ -152,7 +152,7 @@ if (!isset($_SESSION['userid']) || !isset($_SESSION['useruid'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.js"></script>
-    <script src="ajax.js" type="text/javascript"></script>
+    <script src="veiw\ajax.js" type="text/javascript"></script>
 
 </body>
 

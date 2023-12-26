@@ -1,13 +1,11 @@
 <?php
 
-
 trait Database
 {
-    private $dsn = "mysql:host=localhost;dbname=datatest";
-    private $user = 'root';
-    private $pass = '';
-    private $pdo;
-
+    protected $dsn = "mysql:host=localhost;dbname=datatest";
+    protected $user = 'root';
+    protected $pass = '';
+    protected $pdo;
 
     public function connect()
     {
@@ -16,26 +14,9 @@ trait Database
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $this->pdo;
         } catch (PDOException $e) {
-            echo "Error :  " . $e->getMessage();
+            // Log the error instead of echoing it
+            error_log("Database Connection Error: " . $e->getMessage());
             return false;
         }
     }
 }
-
-
-
-
-
-
-
-
-// $do = new Database();
-// $row = $do->getUserById(25);
-// print_r($row);
-// $do->insert('mohamed', 'ohmo', 'moha@gmail.com', '9878676598');
-// echo "<pre>";
-// print_r($do->read());
-// echo "<pre>";
-
-// echo "<br>";
-// echo $do->totalRowcount();
