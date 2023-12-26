@@ -27,13 +27,13 @@ $table = getTable($pdo, 'client');
     <link href="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>BANCK</title>
+    <title>ASSURANCE</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"> <i style="font-size:24px" class="fa">&#xf19c;</i>BANCK</a>
+            <a class="navbar-brand" href="index.php"><i class="material-icons d-flex justify-content-center">money</i>ASSURANCE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -85,8 +85,6 @@ $table = getTable($pdo, 'client');
         </div>
         <form action="" method="post"><input class="btn btn-primary" type="submit" value="reset" name="submit"></form>
         <a href="ajoutmultiple.php" class="btn btn-primary m-1 float-end d-flex align-items-center"><i class="material-icons">&#xe147;</i>&nbsp;Add Claim</a>
-
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
