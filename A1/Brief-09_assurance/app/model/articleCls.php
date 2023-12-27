@@ -6,8 +6,8 @@ Class Article{
 
 
     private $id;
-    private $Title;
-    private $content;
+    private $title;
+    private $description;
     private $date;
     private $client_id;
     private $insurer_id;
@@ -16,9 +16,9 @@ Class Article{
 
 
 
-    public function __construct($id,$Title,$content,$date,$client_id, $insurer_id){
-        $this->Title= $Title;
-        $this->content = $content ;
+    public function __construct($id,$title,$description,$date,$client_id, $insurer_id){
+        $this->title= $title;
+        $this->description = $description ;
         $this->client_id = $client_id ;
         $this->insurer_id = $insurer_id ;
         $this->date = $date;
@@ -31,32 +31,32 @@ Class Article{
 
 
 
-    public function getid(){
+    public function getId(){
         return $this->id;
     }
     
     public function getTitle(){
-        return $this->Title;
+        return $this->title;
     }
-    public function setTitle($Title){
-        $this->Title = $Title;
+    public function setTitle($title){
+        $this->title = $title;
     }
-    public function getcontent(){
-        return $this->content;
+    public function getDescription(){
+        return $this->description;
     }
-    public function setcontent($content){
-        $this->content = $content;
+    public function setDescription($description){
+        $this->description = $description;
     }
-    public function getdateDate(){
+    public function getDate(){
         return $this->date;
     }
-    public function setdateDate($date){
+    public function setDate($date){
         $this->date = $date;
     }
-    public function getclient_id(){
+    public function getClient_id(){
         return $this->client_id;
     }
-    public function getinsurer_id(){
+    public function getInsurer_id(){
         return $this->insurer_id;
     }
    
