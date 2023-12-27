@@ -9,13 +9,13 @@ Class Prime{
     private $id;
     private $amount;
     private $date;
-    private $claim_ID;
+    private $claim_id;
     
-    public function __construct($amount,$date, $claim_ID){
+    public function __construct($amount,$date, $claim_id){
     
       $this->amount = $amount;
       $this->date = $date;
-      $this->claim_ID = $claim_ID;
+      $this->$claim_id = $$claim_id;
       
     }
     
@@ -40,8 +40,8 @@ Class Prime{
     }
 
   
-    public function getClaim_ID(){
-        return $this->claim_ID;
+    public function getClaim_id(){
+        return $this->claim_id;
     }
 }
 

@@ -10,9 +10,7 @@ Class Claim{
     private $id;
     private $name;
     private $descreption;
-
     private $date;
-    
     private $article_id;
     
     public function __construct($id, $name, $descreption,$date, $article_id){
