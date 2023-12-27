@@ -1,11 +1,11 @@
 <?php
 interface RefundServiceInterface{
 
-    public function addPrime(Prime $Prime);
-    public function ShowPrime();
-    public function editingPrime($id);
-    public function UpdatePrime(Prime $Prime,$id);
-    public function DeletePrime($id);
+    public function addRefund(Refund $Refund);
+    public function ShowRefund();
+    public function editingRefund($id);
+    public function UpdateRefund(Refund $Refund,$id);
+    public function DeleteRefund($id);
 
 }
 ?>
