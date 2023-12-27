@@ -2,7 +2,7 @@
 
 
 
-Class Assurance{
+Class Insurer{
 
 
 private $id;
@@ -18,24 +18,24 @@ public function __construct($id,$name,$adress){
 }
 
 
-public function getAssuranceId($id){
-    return $this->$id;
+public function getInsurerd(){
+    return $this->id;
 }
 
-public function getAssuranceName($name){
+public function getInsurerName(){
     return $this->name;
 }
 
-public function setAssuranceName($name){
+public function setInsurerName($name){
     $this->name = $name;
 }
 
-public function getadreadress($adress){
-    return $this->$adress;
+public function getInsurerAdreadress(){
+    return $this->adress;
 }
 
-public function setadreAdress($adress){
-    $this->$adress = $adress;
+public function setInsurerAdreadress($adress){
+    $this->adress = $adress;
 }
 
 
