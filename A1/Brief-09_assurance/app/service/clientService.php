@@ -22,8 +22,8 @@ class ClientServices implements ClientServicesInterface{
         $result->bindparam(":adress", $adress);
         $result->bindparam(":Phone", $Phone);
         $result->execute();
-        $id = $db->lastInsertId();
-        return $id;
+        // $id = $db->lastInsertId();
+        // return $id;
     }
 
 
@@ -55,21 +55,15 @@ public function ShowfiltredClient($id){
 }
 
     
-    public function editingClient($id){
+    public function getUserById($id){
        
 
         $db = $this->connect();
             $clientInfo = "SELECT * FROM client WHERE id = $id";
             $getClient = $db->query($clientInfo);
             $result = $getClient->fetch(PDO::FETCH_ASSOC);
-            $id = $result["id"];
-            $first_name = $result["first_name"];
-            $adress = $result["adress"];
-            $last_name = $result["last_name"];
-            $phone = $result["phone"];
-
         
-            return [$id,$first_name, $adress,$last_name, $phone];
+            return $result;
     
 }
 
@@ -98,6 +92,20 @@ public function ShowfiltredClient($id){
         $stmt->execute();
     }
 
+      public function totalRowcount()
+    {
+        $db = $this->connect();
+        
+        try {
+            $sql = "SELECT * FROM users";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $t_rows = $stmt->rowCount();
+            return $t_rows;
+        } catch (PDOException $e) {
+            echo "Error : " . $e->getMessage();
+        }
+    }
 
 }
 ?>

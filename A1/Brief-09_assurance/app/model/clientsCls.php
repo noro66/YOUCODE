@@ -11,12 +11,11 @@ Class Client{
     private $adress;
 
     
-    public function __construct($id,$first_name,$last_name,$adress,$phone){
+    public function __construct($first_name,$last_name,$adress,$phone){
         $this->first_name= $first_name;
         $this->last_name = $last_name ;
         $this->adress = $adress;
         $this->phone = $phone ;
-        $this->id = $id;
     }
 
 

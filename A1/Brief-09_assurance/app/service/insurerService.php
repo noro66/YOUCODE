@@ -3,9 +3,10 @@ require_once("insurerServiceInterface.php");
 require_once("../model/insurerCls.php");
 require_once("../model/database/connection.php");
 class InsurerService implements InsurerServiceinterface{
+    
     use Connection;
-
     protected $db;
+    
     public function addInsurer(Insurer $Insurer){
         $db = $this->connect();
 

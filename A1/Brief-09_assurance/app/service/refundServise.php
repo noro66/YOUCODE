@@ -10,7 +10,7 @@ class RefundServices  implements RefundServiceInterface{
         $db = $this->connect();
     
         $Amount = $Refund->getAmount();
-        $Claim_ID = $Refund->getClaim_ID();
+        $Claim_ID = $Refund->getClaim_id();
         $DateRefund = $Refund->getDate();
     
         $query = "INSERT INTO Refund ( amount, date,claim_ID) VALUES ( :Amount, :Date,:Claim_ID )";
