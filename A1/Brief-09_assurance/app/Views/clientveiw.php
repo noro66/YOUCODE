@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
+
     <title>Clients</title>
 </head>
 
@@ -79,14 +81,15 @@
                                 placeholder="Last Name">
                         </div>
                         <div class="mb-3">
-                            <input type="adress" class="form-control" id="adress" name="adress" placeholder="Adress">
+                            <input type="text" class="form-control" id="adress" name="adress" placeholder="Adress">
                         </div>
                         <div class="mb-3">
                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
                                 placeholder="Phone Number">
                         </div>
                         <div class="mb-3">
-                            <input type="submit" class="btn btn-danger w-100" id="insert" name="insert">
+                            <input type="submit" value="Add Client" class="btn btn-danger w-100" id="insert"
+                                name="insert">
                         </div>
                     </form>
                 </div>

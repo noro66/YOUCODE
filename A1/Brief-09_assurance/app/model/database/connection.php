@@ -1,18 +1,13 @@
 <?php
-include 'config.php';;
 
 
 trait Connection {
-
-    protected function connect()
-    {
+    public function connect() {
 
         try {
-            
-        return new PDO('mysl:host=localhost;dbname=assurance','root','Password123@');
-             
+            return new PDO('mysql:host=localhost;dbname=assurance', 'root', 'Password123@');
         } catch (PDOException $e) {
-            die($e->getMessage());
+            echo "The data is not connected: " . $e->getMessage();
         }
     }
-}
+} 

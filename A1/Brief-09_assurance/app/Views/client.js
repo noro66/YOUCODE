@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 function showAllUsers() {
 $.ajax({
-url: "clientCtl.php",
+url: "../Controllers/clientCtl.php",
 method: 'POST',
 data: {
     action: "view"
@@ -21,7 +21,7 @@ success: function(response) {
         if ($("#form-data")[0].checkValidity()) {
             e.preventDefault();
             $.ajax({
-                url: "clientCtl.php",
+                url: "../Controllers/clientCtl.php",
                 type: "POST",
                 data: $("#form-data").serialize() + "&action=insert",
                 success: function(response) {
@@ -46,7 +46,7 @@ success: function(response) {
         e.preventDefault();
         edit_id = $(this).attr('id');
         $.ajax({
-            url: "clientCtl.php",
+            url: "../Controllers/clientCtl.php",
             type: "POST",
             data: {
                 edit_id: edit_id
@@ -59,7 +59,7 @@ success: function(response) {
                         $('#id').val(data.id);
                         $('#fname').val(data.first_name);
                         $('#lname').val(data.last_name);
-                        $('#email-ed').val(data.email);
+                        $('#adress').val(data.adress);
                         $('#phoneNumber-ed').val(data.phone);
                     } else {
                         console.error('Invalid data format in the server response');
@@ -78,7 +78,7 @@ success: function(response) {
         e.preventDefault();
         if ($("#edit-form-data")[0].checkValidity()) {
             $.ajax({
-                url: "clientCtl.php",
+                url: "../Controllers/clientCtl.php",
                 method: "POST",
                 data: $("#edit-form-data").serialize() + "&action=update",
                 success: function(response) {
@@ -113,7 +113,7 @@ success: function(response) {
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "clientCtl.php",
+                    url: "../Controllers/clientCtl.php",
                     type: 'POST',
                     data: {
                         del_id: del_id
@@ -137,7 +137,7 @@ success: function(response) {
         e.preventDefault();
         info_id = $(this).attr('id');
         $.ajax({
-            url: "clientCtl.php",
+            url: "../Controllers/clientCtl.php",
             type: "POST",
             data: {
                 info_id: info_id

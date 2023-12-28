@@ -1,5 +1,12 @@
 <?php
-require_once "clientService.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+require_once __DIR__ . '/../service/clientServicesInterface.php';
+
+require_once  __DIR__ . "/../service/clientService.php";
+
 
 $clientService = new ClientServices();
 
@@ -48,7 +55,7 @@ if (isset($_POST['action']) && $_POST['action'] == "insert") {
     
     $fname = $_POST["firstName"];
     $lname = $_POST["lastName"];
-    $email = $_POST["Adress"];
+    $adress = $_POST["adress"];
     $phone = $_POST["phoneNumber"];
     $client = new Client($fname, $lname, $adress, $phone);
 
@@ -65,7 +72,7 @@ if (isset($_POST['action']) && $_POST['action'] == "update") {
     $id = $_POST['id'];
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
-    $email = $_POST["Adress"];
+    $adress = $_POST["adress"];
     $phone = $_POST["phoneNumber"];
     $client = new Client($fname, $lname, $adress, $phone);
 
