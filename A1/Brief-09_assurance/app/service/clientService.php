@@ -31,7 +31,7 @@ class ClientServices implements ClientServicesInterface{
 
 public function ShowClient(){
     $db = $this->connect();
-    $query = "SELECT * FROM clients ORDER BY  id DESC";
+    $query = "SELECT * FROM clients ORDER BY  id";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@ public function ShowfiltredClient($id){
        
 
         $db = $this->connect();
-            $clientInfo = "SELECT * FROM client WHERE id = $id";
+            $clientInfo = "SELECT * FROM clients WHERE id = $id";
             $getClient = $db->query($clientInfo);
             $result = $getClient->fetch(PDO::FETCH_ASSOC);
         

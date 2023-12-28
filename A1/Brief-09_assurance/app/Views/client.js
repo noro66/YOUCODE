@@ -53,14 +53,15 @@ success: function(response) {
             },
             success: function(response) {
                 try {
+                    console.log(response);
                     data = JSON.parse(response);
 
-                    if (typeof data === 'object' && data !== null && 'id' in data && 'first_name' in data && 'last_name' in data && 'email' in data && 'phone' in data) {
+                    if (data) {
                         $('#id').val(data.id);
                         $('#fname').val(data.first_name);
                         $('#lname').val(data.last_name);
-                        $('#adress').val(data.adress);
-                        $('#phoneNumber-ed').val(data.phone);
+                        $('#adress-up').val(data.adress);
+                        $('#phoneNumber-up').val(data.phone);
                     } else {
                         console.error('Invalid data format in the server response');
                     }
@@ -147,7 +148,7 @@ success: function(response) {
                 Swal.fire({
                     title: '<pre><strong>User  Info: ID(' + data.id + ')</strong></pre>',
                     type: 'info',
-                    html: `<pre><b>First Name: </b> ${data.first_name}<br><b>Last Name:  </b> ${data.last_name}  <br>         <b>  Email : </b> ${data.email}<br><b>Phone : </b>${data.phone}</pre>`,
+                    html: `<pre><b>First Name: </b> ${data.first_name}<br><b>Last Name:  </b> ${data.last_name}  <br>         <b>  Adress : </b> ${data.adress}<br><b>Phone : </b>${data.phone}</pre>`,
                 })
             }
         })

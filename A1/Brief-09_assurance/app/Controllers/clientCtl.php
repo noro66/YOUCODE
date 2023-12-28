@@ -3,7 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
-require_once __DIR__ . '/../service/clientServicesInterface.php';
 
 require_once  __DIR__ . "/../service/clientService.php";
 
@@ -57,7 +56,7 @@ if (isset($_POST['action']) && $_POST['action'] == "insert") {
     $lname = $_POST["lastName"];
     $adress = $_POST["adress"];
     $phone = $_POST["phoneNumber"];
-    $client = new Client($fname, $lname, $adress, $phone);
+    $client = new Client($id, $fname, $lname, $adress, $phone);
 
     $clientService->addClient($client);
 }
@@ -65,6 +64,7 @@ if (isset($_POST['action']) && $_POST['action'] == "insert") {
 if (isset($_POST['edit_id'])) {
     $id = $_POST['edit_id'];
     $row = $clientService->getUserById($id);
+    
     echo json_encode($row);
 }
 
@@ -74,7 +74,7 @@ if (isset($_POST['action']) && $_POST['action'] == "update") {
     $lname = $_POST["lname"];
     $adress = $_POST["adress"];
     $phone = $_POST["phoneNumber"];
-    $client = new Client($fname, $lname, $adress, $phone);
+    $client = new Client($id, $fname, $lname, $adress, $phone);
 
     $clientService->UpdateClient($client,$id);
 }

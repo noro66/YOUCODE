@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"> <i style="font-size:24px" class="fa">&#xf19c;</i>
-                BANCK</a>
+                ASSURANCE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,7 +37,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="text-center text-danger font-weight-normal my-3">Banck Users</h4>
+                <h4 class="text-center text-danger font-weight-normal my-3">assurance Users</h4>
             </div>
         </div>
         <div class="row">
@@ -118,10 +118,10 @@
                             <input type="text" class="form-control" id="lname" name="lname" required>
                         </div>
                         <div class="mb-3">
-                            <input type="adress" class="form-control" id="adress" name="adress" required>
+                            <input type="text" class="form-control" id="adress-up" name="adress" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                            <input type="text" class="form-control" id="phoneNumber-up" name="phoneNumber">
                         </div>
                         <div class="mb-3">
                             <input type="submit" class="btn btn-danger w-100" id="update" name="update" value="Update">
