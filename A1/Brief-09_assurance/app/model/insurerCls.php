@@ -2,44 +2,31 @@
 
 
 
-Class Insurer{
+class Insurer {
+    
+    private $id;
+    private $name;
+    private $address;
 
+    public function __construct($id, $name, $address) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->address = $address;
+    }
 
-private $id;
-private $name;
-private $adress;
+    public function getId() {
+        return $this->id;
+    }
 
-public function __construct($id,$name,$adress){
-    $this->$id = $id;
-    $this->name= $name;
-    $this->adress = $adress ;
-   
+    public function getName() {
+        return $this->name;
+    }
 
+    public function getAddress() {
+        return $this->address;
+    }
 }
 
-
-public function getInsurerd(){
-    return $this->id;
-}
-
-public function getInsurerName(){
-    return $this->name;
-}
-
-public function setInsurerName($name){
-    $this->name = $name;
-}
-
-public function getInsurerAdreadress(){
-    return $this->adress;
-}
-
-public function setInsurerAdreadress($adress){
-    $this->adress = $adress;
-}
-
-
-}
 
 
 ?>

@@ -10,14 +10,14 @@ class InsurerService implements InsurerServiceinterface{
     public function addInsurer(Insurer $Insurer){
         $db = $this->connect();
 
-        $name = $Insurer->getInsurerName();
-        $adrees = $Insurer->getInsurerAdreadress();
+        $name = $Insurer->getName();
+        $address = $Insurer->getAddress();
         
 
-        $query = "INSERT INTO Insurer (name,adrees) VALUES (:name,:adrees)";
+        $query = "INSERT INTO insurer (name,address) VALUES (:name,:address)";
         $result = $db->prepare($query);
         $result->bindparam(":name", $name);
-        $result->bindparam(":adrees", $adrees);
+        $result->bindparam(":address", $address);
    
         $result->execute();
     }
@@ -27,56 +27,66 @@ class InsurerService implements InsurerServiceinterface{
 
 
 public function ShowInsurer(){
-    $db = $this->connect();
-    $query = "SELECT * FROM Insurer ORDER BY  id DESC";
+
+    try {
+        $db = $this->connect();
+    $query = "SELECT id, name, address FROM insurer";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $Insurers = array(); 
     foreach($fetching as $row){
-        $Insurers[] = new Insurer($row["id"], $row["name"], $row["adrees"]);
+        $Insurers[] = new Insurer($row["id"], $row["name"], $row["address"]);
     }
     return $Insurers;
+    } catch (PDOException $e) {
+        echo "Error : " . $e->getMessage();
+    }
 }
 
 
     
-    public function editingInsurer($id){
+    public function getInsurerById($id){
        
 
         $db = $this->connect();
-            $InsurerInfo = "SELECT * FROM Insurer WHERE id  = $id";
+            $InsurerInfo = "SELECT * FROM insurer WHERE id  = $id";
             $getInsurer = $db->query($InsurerInfo);
             $result = $getInsurer->fetch(PDO::FETCH_ASSOC);
         
-            $adrees = $result["adrees"];
-            $name = $result["name"];
-         
+            $address = $result["address"];
+            $name = $result["name"];  
+            $id = $result["id"];        
 
-        
-            return [$name, $adrees];
+            return [$id, $name, $address];
     
 }
 
 
     public function UpdateInsurer(Insurer $Insurer,$id){
-        $db = $this->connect();
-        $name = $Insurer->getInsurername();
-        $adrees = $Insurer->getInsurerAdreadress();
-      
-        $query  = "UPDATE insurer SET name=:name , adrees=:adrees  WHERE id = :id";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
-        $stmt->bindParam(":adrees", $adrees, PDO::PARAM_STR);
 
-        $stmt->execute();
+try {
+    $db = $this->connect();
+        
+    $name = $Insurer->getName();
+    $address = $Insurer->getAddress();
+  
+    $query  = "UPDATE insurer SET name=:name , address=:address  WHERE id = :id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+    $stmt->bindParam(":address", $address, PDO::PARAM_STR);
+
+    $stmt->execute();
+} catch (PDOException $e) {
+    echo "Error " . $e->getMessage(); 
+}
 
     }
     public function DeleteInsurer($id){
         $db = $this->connect();
 
-        $query = "DELETE FROM Insurer WHERE id = :id";
+        $query = "DELETE FROM insurer WHERE id = :id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();

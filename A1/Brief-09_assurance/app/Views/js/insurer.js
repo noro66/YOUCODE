@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 function showAllUsers() {
 $.ajax({
-url: "../Controllers/clientCtl.php",
+url: "../Controllers/insurerCrl.php",
 method: 'POST',
 data: {
     action: "view"
@@ -21,8 +21,8 @@ success: function(response) {
         if ($("#form-data")[0].checkValidity()) {
             e.preventDefault();
             $.ajax({
-                url: "../Controllers/clientCtl.php",
-                type: "POST",
+                url: "../Controllers/insurerCrl.php",
+                method: "POST",
                 data: $("#form-data").serialize() + "&action=insert",
                 success: function(response) {
                     Swal.fire({
@@ -46,7 +46,7 @@ success: function(response) {
         e.preventDefault();
         edit_id = $(this).attr('id');
         $.ajax({
-            url: "../Controllers/clientCtl.php",
+            url: "../Controllers/insurerCrl.php",
             type: "POST",
             data: {
                 edit_id: edit_id
@@ -57,11 +57,11 @@ success: function(response) {
                     data = JSON.parse(response);
 
                     if (data) {
-                        $('#id').val(data.id);
-                        $('#fname').val(data.first_name);
-                        $('#lname').val(data.last_name);
-                        $('#adress-up').val(data.adress);
-                        $('#phoneNumber-up').val(data.phone);
+                    console.log(data);
+
+                        $('#id').val(data[0]);
+                        $('#Name-ed').val(data[1]);
+                        $('#Adress-ed').val(data[2]);
                     } else {
                         console.error('Invalid data format in the server response');
                     }
@@ -79,7 +79,7 @@ success: function(response) {
         e.preventDefault();
         if ($("#edit-form-data")[0].checkValidity()) {
             $.ajax({
-                url: "../Controllers/clientCtl.php",
+                url: "../Controllers/insurerCrl.php",
                 method: "POST",
                 data: $("#edit-form-data").serialize() + "&action=update",
                 success: function(response) {
@@ -114,7 +114,7 @@ success: function(response) {
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "../Controllers/clientCtl.php",
+                    url: "../Controllers/insurerCrl.php",
                     type: 'POST',
                     data: {
                         del_id: del_id
@@ -138,7 +138,7 @@ success: function(response) {
         e.preventDefault();
         info_id = $(this).attr('id');
         $.ajax({
-            url: "../Controllers/clientCtl.php",
+            url: "../Controllers/insurerCrl.php",
             type: "POST",
             data: {
                 info_id: info_id
