@@ -148,7 +148,7 @@ success: function(response) {
                 Swal.fire({
                     title: '<pre><strong>User  Info: ID(' + data.id + ')</strong></pre>',
                     type: 'info',
-                    html: `<pre><b>First Name: </b> ${data.first_name}<br><b>Last Name:  </b> ${data.last_name}  <br>         <b>  Adress : </b> ${data.adress}<br><b>Phone : </b>${data.phone}</pre>`,
+                    html: `<pre><b>First Name: </b> ${data.first_name}<br><b>Last Name:  </b> ${data.last_name}  <br>         <b>  Adress : </b> ${data.adress}<br><b>Phone : </b>${data.phone}</br></pre>`,
                 })
             }
         })
