@@ -5,7 +5,7 @@ interface ArticleServiceInterface{
     public function DeleteArticle($id);
     public function getArticleById($id);
     public function UpdateArticle(Article $article,$id);
-    public function ShowArticle();
+    public function ShowArticle($client_id);
 
 }
 ?>

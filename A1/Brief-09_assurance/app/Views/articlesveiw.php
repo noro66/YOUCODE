@@ -1,3 +1,6 @@
+<?php
+     require_once "../service/insurerService.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,7 +70,6 @@
     </main>
 
     <!-- Add New Article Modal -->
-    <!-- Add New Article Modal -->
     <div class="modal fade" id="addModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -99,15 +101,32 @@
                             <label for="client_id" class="form-label">Client ID</label>
                             <?php
                             $clientId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-                        ?>
+                            ?>
                             <input type="text" class="form-control" id="client_id" name="client_id"
-                                placeholder="Enter the client ID" value="<?= $clientId ?>" required>
+                                placeholder="Enter the client ID" value="<?= $clientId ?>" readonly required>
                         </div>
+
                         <div class="mb-3">
-                            <label for="insurer_id" class="form-label">Insurer ID</label>
-                            <input type="text" class="form-control" id="insurer_id" name="insurer_id"
-                                placeholder="Enter the insurer ID" required>
+                            <label for="insurer_id" class="form-label">Insurer</label>
+                            <select class="form-select" id="insurer_id" name="insurer_id" required>
+                                <?php
+                                $insrv = new InsurerService();
+                                $insurersList = $insrv->ShowInsurer();
+                                var_dump($insurersList);
+
+                                // if ($insurersList) {
+                                
+                                // foreach ($insurersList as $insurer) {
+                                //     $id = $insurer['id'];
+                                //     $name = $insurer['name'];
+                                //     echo "<option value='$id'>$name</option>";
+                                // }
+                                // }
+
+                                ?>
+                            </select>
                         </div>
+
                         <div class="mb-3">
                             <button type="submit" class="btn btn-success w-100" id="insert" name="insert">Add
                                 Article</button>

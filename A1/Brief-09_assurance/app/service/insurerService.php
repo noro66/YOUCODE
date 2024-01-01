@@ -30,7 +30,7 @@ public function ShowInsurer(){
 
     try {
         $db = $this->connect();
-    $query = "SELECT id, name, address FROM insurer";
+    $query = "SELECT * FROM insurer";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);

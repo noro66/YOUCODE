@@ -4,14 +4,15 @@ ini_set('display_errors', 1);
 
 
 
-require_once  __DIR__ . "/../service/articleService .php";
+require_once  "../service/articleService.php";
 
 
 $articleService  = new ArticleService ();
 
 if (isset($_POST['action']) && $_POST["action"] == "view") {
+    $id = $_POST['clientId'];
     $output = '';
-    $data = $articleService->ShowArticle();
+    $data = $articleService->ShowArticle($id);
 
     if (!empty($data)) {
         $output .= '<table class="table table-striped table-sm table-bordered">
@@ -40,7 +41,7 @@ if (isset($_POST['action']) && $_POST["action"] == "view") {
                         <a href="#" title="View Details" class="text-success infoBtn" id="' . $row->getId() . '"><i style="font-size:24px" class="fa">&#xf06e; </i></a>&nbsp;&nbsp;
                         <a href="#" title="Edit" class="text-success editBtn" data-bs-toggle="modal" data-bs-target="#editModal" id="' . $row->getId() . '"><i style="font-size:24px" class="fa text-primary">&#xf044;</i></a>
                         <a href="#" title="Delete" class="text-success delBtn" id="' . $row->getId() . '"><i class="material-icons text-danger"  >&#xe92b;</i></a>
-                        <a type="button" href="articlesview.php?id=' . $row->getId() . '" class="btn btn-success">Show Article</a>
+                        <a type="button" href="articlesview.php?id=' . $row->getId() . '" class="btn btn-success">Show Claims</a>
                     </td>
                 </tr>';
         }

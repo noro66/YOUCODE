@@ -1,21 +1,25 @@
 $(document).ready(function() {
 
-function showAllArticles(client_id) {
-    $.ajax({
-        url: "../Controllers/articleCtl.php",
-        method: 'POST',
-        data: {
-            action: "view",
-            client_id: client_id
-        },
-        success: function (response) {
-            $("#showUser").html(response);
-            $("table").DataTable({
-                order: [[0, 'desc']]
-            });
-        }
-    });
-}
+    function showAllArticles(clientId) {
+        $.ajax({
+            url: "../Controllers/articleCrl.php",
+            method: 'POST',
+            data: {
+                action: "view",
+                clientId: clientId
+            },
+            success: function (response) {
+                $("#showUser").html(response);
+                $("table").DataTable({
+                    order: [[0, 'desc']]
+                });
+            }
+        });
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientId = urlParams.get('id');
+    
+    showAllArticles(clientId);    
 
 
     
@@ -23,11 +27,10 @@ $("#insert").click(function (e) {
     if ($("#form-data")[0].checkValidity()) {
         e.preventDefault();
         $.ajax({
-            url: "../Controllers/articleCtl.php",
+            url: "../Controllers/articleCrl.php",
             method: "POST",
             data: $("#form-data").serialize() + "&action=insert",
             success: function (response) {
-                // Update success message and other actions
                 Swal.fire({
                     position: "center-center",
                     icon: "success",
@@ -37,7 +40,7 @@ $("#insert").click(function (e) {
                 });
                 $("#addModal").modal('hide');
                 $("#form-data")[0].reset();
-                showAllArticles(); // Update function name
+                showAllArticles(clientId); 
             }
         });
     } else {
@@ -45,12 +48,11 @@ $("#insert").click(function (e) {
     }
 });
 
-    // Update functionality
 $('body').on('click', '.editBtn', function (e) {
     e.preventDefault();
     edit_id = $(this).attr('id');
     $.ajax({
-        url: "../Controllers/articleCtl.php",
+        url: "../Controllers/articleCrl.php",
         type: "POST",
         data: {
             edit_id: edit_id
@@ -83,7 +85,7 @@ $("#update").click(function (e) {
     e.preventDefault();
     if ($("#edit-form-data")[0].checkValidity()) {
         $.ajax({
-            url: "../Controllers/articleCtl.php",
+            url: "../Controllers/articleCrl.php",
             method: "POST",
             data: $("#edit-form-data").serialize() + "&action=update",
             success: function (response) {
@@ -96,7 +98,7 @@ $("#update").click(function (e) {
                 });
                 $("#editModal").modal('hide');
                 $("#edit-form-data")[0].reset();
-                showAllArticles();
+                showAllArticles(clientId);
             }
         });
     } else {
@@ -131,7 +133,7 @@ $("#update").click(function (e) {
                             'User deleted successfully !',
                             'success'
                         );
-                        showAllUsers();
+                        showAllArticles(clientId);
                     }
                 });
             }
@@ -143,7 +145,7 @@ $("#update").click(function (e) {
         e.preventDefault();
         info_id = $(this).attr('id');
         $.ajax({
-            url: "../Controllers/clientCtl.php",
+            url: "../Controllers/articleCrl.php",
             type: "POST",
             data: {
                 info_id: info_id
@@ -151,12 +153,13 @@ $("#update").click(function (e) {
             success: function(response) {
                 data = JSON.parse(response);
                 Swal.fire({
-                    title: '<pre><strong>User  Info: ID(' + data.id + ')</strong></pre>',
+                    title: `<pre><strong>Article Info: ID(${data.id})</strong></pre>`,
                     type: 'info',
-                    html: `<pre><b>First Name: </b> ${data.first_name}<br><b>Last Name:  </b> ${data.last_name}  <br>         <b>  Adress : </b> ${data.adress}<br><b>Phone : </b>${data.phone}</br></pre>`,
-                })
+                    html: `<pre><b>Title: </b> ${data.title}<br><b>Content: </b> ${data.content}<br><b>Date: </b> ${data.date}<br><b>Client ID: </b>${data.client_id}<br><b>Insurer ID: </b>${data.insurer_id}</pre>`,
+                });
             }
-        })
+        });
     });
+    
 
 });

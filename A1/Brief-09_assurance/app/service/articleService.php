@@ -36,15 +36,15 @@ class ArticleService  implements ArticleServiceInterface{
 
 
 
-    public function ShowArticle(){
+    public function ShowArticle($id){
     $db = $this->connect();
-    $query = "SELECT * FROM article ORDER BY  id DESC";
+    $query = "SELECT * FROM article where client_id = $id";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $Article = array(); 
     foreach($fetching as $row){
-        $Article[] = new Article($row["id"], $row["Title"],$row["content"],$row["date"], $row["client_id"],$row['insurer']);
+        $Article[] = new Article($row["id"], $row["title"],$row["content"],$row["date"], $row["client_id"],$row['insurer_id']);
     }
     return $Article;
     }
