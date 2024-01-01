@@ -7,7 +7,7 @@ Class Article{
 
     private $id;
     private $title;
-    private $description;
+    private $content;
     private $date;
     private $client_id;
     private $insurer_id;
@@ -16,9 +16,9 @@ Class Article{
 
 
 
-    public function __construct($id,$title,$description,$date,$client_id, $insurer_id){
+    public function __construct($id,$title,$content,$date,$client_id, $insurer_id){
         $this->title= $title;
-        $this->description = $description ;
+        $this->content = $content ;
         $this->client_id = $client_id ;
         $this->insurer_id = $insurer_id ;
         $this->date = $date;
@@ -41,11 +41,11 @@ Class Article{
     public function setTitle($title){
         $this->title = $title;
     }
-    public function getDescription(){
-        return $this->description;
+    public function getcontent(){
+        return $this->content;
     }
-    public function setDescription($description){
-        $this->description = $description;
+    public function setcontent($content){
+        $this->content = $content;
     }
     public function getDate(){
         return $this->date;
