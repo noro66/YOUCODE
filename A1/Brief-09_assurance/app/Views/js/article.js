@@ -1,5 +1,38 @@
 $(document).ready(function() {
 
+
+
+    function populateInsurersSelect(insurers) {
+        console.log(insurers); // Log the insurers variable
+        $("#insurer_id").empty();
+    
+        for (let i = 0; i < insurers.length; i++) {
+            $("#insurer_id").append(`<option value="${insurers[i][0]}">${insurers[i][1]}</option>`);
+        }
+    }
+    
+    function fetchInsurersData() {
+        $.ajax({
+            url: '../Controllers/articleCrl.php',
+            method: 'POST',
+            data: { action: 'insurer' },
+            dataType: 'json', // Specify the expected data type
+            success: function (data) {
+                console.log(data);
+                populateInsurersSelect(data);
+            },
+            error: function (error) {
+                console.error('Error fetching insurers data:', error);
+            }
+        });
+    }
+    
+    $("#addModal").on("show.bs.modal", function (e) {
+        fetchInsurersData();
+    });
+    
+
+
     function showAllArticles(clientId) {
         $.ajax({
             url: "../Controllers/articleCrl.php",
@@ -18,6 +51,9 @@ $(document).ready(function() {
     }
     const urlParams = new URLSearchParams(window.location.search);
     const clientId = urlParams.get('id');
+
+    $("#client_id").val(clientId);
+
     
     showAllArticles(clientId);    
 

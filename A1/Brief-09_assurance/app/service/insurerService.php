@@ -44,6 +44,25 @@ public function ShowInsurer(){
     }
 }
 
+public function ShowInsurer1(){
+
+    try {
+        $db = $this->connect();
+    $query = "SELECT * FROM insurer";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $Insurers = array(); 
+    foreach($fetching as $row){
+        $ins = new Insurer($row["id"], $row["name"], $row["address"]);
+        $Insurers[] = [$ins->getId(),$ins->getName()];
+    }
+    return $Insurers;
+    } catch (PDOException $e) {
+        echo "Error : " . $e->getMessage();
+    }
+}
+
 
     
     public function getInsurerById($id){

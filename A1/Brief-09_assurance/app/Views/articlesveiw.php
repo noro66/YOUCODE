@@ -1,5 +1,8 @@
 <?php
      require_once "../service/insurerService.php";
+     error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,32 +101,9 @@
                             <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="client_id" class="form-label">Client ID</label>
-                            <?php
-                            $clientId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-                            ?>
-                            <input type="text" class="form-control" id="client_id" name="client_id"
-                                placeholder="Enter the client ID" value="<?= $clientId ?>" readonly required>
-                        </div>
-
-                        <div class="mb-3">
                             <label for="insurer_id" class="form-label">Insurer</label>
                             <select class="form-select" id="insurer_id" name="insurer_id" required>
-                                <?php
-                                $insrv = new InsurerService();
-                                $insurersList = $insrv->ShowInsurer();
-                                var_dump($insurersList);
-
-                                // if ($insurersList) {
-                                
-                                // foreach ($insurersList as $insurer) {
-                                //     $id = $insurer['id'];
-                                //     $name = $insurer['name'];
-                                //     echo "<option value='$id'>$name</option>";
-                                // }
-                                // }
-
-                                ?>
+                                <option value="">selct option</option>
                             </select>
                         </div>
 

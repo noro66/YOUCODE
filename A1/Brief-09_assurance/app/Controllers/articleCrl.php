@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 
 require_once  "../service/articleService.php";
+require_once  "../service/insurerService.php";
 
 
 $articleService  = new ArticleService ();
@@ -67,6 +68,22 @@ if (isset($_POST['action']) && $_POST['action'] == "insert") {
 
     $articleService->addArticle($article);
 }
+
+if (isset($_POST['action']) && $_POST['action'] == "insurer") {
+    error_log("Received AJAX request for insurer data.");
+    $insurers = new InsurerService;
+    $insurerData = $insurers->ShowInsurer1();
+
+    if (is_array($insurerData)) {
+        echo json_encode($insurerData);
+    } else {
+        echo json_encode([]);
+    }
+}
+
+
+
+
 
 
 if (isset($_POST['edit_id'])) {
