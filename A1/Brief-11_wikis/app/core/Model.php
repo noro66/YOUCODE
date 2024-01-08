@@ -54,9 +54,9 @@ trait Model
 
         $sql .= " LIMIT $this->limit OFFSET $this->offset";
         $data = array_merge($data, $not);
-        $result = $this->query($sql, $data);
+        $result = $this->getRow($sql, $data);
         if ($result)
-            return $result[0];
+            return $result;
         return false;
     }
 
