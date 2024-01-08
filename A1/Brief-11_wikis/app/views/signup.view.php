@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>LOGIN</title>
+    <title>SIGNUP</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
     <link href="<?= ROOT ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -160,9 +160,12 @@
 
 
     <main class="form-signin w-100 m-auto">
+        <?php if (!empty($errors)) : ?>
+            <div class="alert alert-danger"><?= $x = implode("<br>", $errors) ?></div>
+        <?php endif; ?>
         <form method="post">
             <!-- <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-            <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
+            <h1 class="h3 mb-3 fw-normal">SIGNUP</h1>
 
             <div class="form-floating">
                 <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
@@ -179,7 +182,7 @@
                     Remember me
                 </label>
             </div>
-            <button class="btn btn-primary w-100 py-2" name="submit" type="submit">LOGIN</button>
+            <button class="btn btn-primary w-100 py-2" type="submit">SIGNUP</button>
             <p class="mt-5 mb-3 text-body-secondary">&copy; ALL RIGHTS RESERVED</p>
         </form>
     </main>

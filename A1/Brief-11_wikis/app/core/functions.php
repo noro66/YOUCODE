@@ -13,3 +13,10 @@ function clean($input)
     $input = strip_tags($input);
     return $input;
 }
+
+
+function redirect($_path)
+{
+    header("location: " . ROOT . "/" . $_path);
+    die;
+}

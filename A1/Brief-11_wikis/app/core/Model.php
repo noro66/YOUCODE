@@ -7,6 +7,7 @@ trait Model
     protected $limit = '5';
     protected $offset = '0';
     protected $order_type = "DESC";
+    public $errors = [];
     // protected $order_by = "id";
 
     public function fitch_All()
