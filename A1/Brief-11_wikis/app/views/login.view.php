@@ -175,13 +175,6 @@
                 <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
-
-            <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Remember me
-                </label>
-            </div>
             <button class="btn btn-primary w-100 py-2" name="submit" type="submit">LOGIN</button>
             <p class="mt-5 mb-3 text-body-secondary">&copy; ALL RIGHTS RESERVED</p>
         </form>

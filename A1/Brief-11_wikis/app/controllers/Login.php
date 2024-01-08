@@ -15,13 +15,12 @@ class Login
                         $_SESSION['USER'] = $row;
                         redirect('home');
                     } else {
+                        $data['errors']['validate'] = "Incorrect Email or Password";
                     }
+                } else {
+                    $data['errors']['validate'] = "Incorrect Email or Password";
                 }
-            }
-            if (isset($user->errors['email']) || isset($user->errors['password'])) {
-                $data['errors'] = $user->errors;
             } else {
-                $user->errors['validate'] = "wrong Email or Pasword";
                 $data['errors'] = $user->errors;
             }
         }

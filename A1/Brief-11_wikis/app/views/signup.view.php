@@ -177,9 +177,9 @@
             </div>
 
             <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="terms" name="terms" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
-                    Remember me
+                    Accept Terms
                 </label>
             </div>
             <button class="btn btn-primary w-100 py-2" type="submit">SIGNUP</button>
