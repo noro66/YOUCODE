@@ -91,11 +91,12 @@
                     <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
                     <a class="nav-link fw-bold py-1 px-0" href="<?= ROOT . 'login' ?>">login</a>
                     <a class="nav-link fw-bold py-1 px-0" href="<?= ROOT . 'signup' ?>">signup</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="<?= ROOT . 'logout' ?>">logout</a>
                 </nav>
             </div>
         </header>
         <main class="px-3">
-            <h1><?= show($data['email']) ?></h1>
+            <h1> Hi, <?= $data['email'] ?? 'There' ?></h1>
             <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
             <p class="lead">
                 <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
