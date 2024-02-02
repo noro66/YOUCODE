@@ -10,6 +10,9 @@
 
 <h2 class="text-2xl font-bold mb-4">Receipts</h2>
 
+@if(session('success'))
+    <div class="bg-green-300 w-30 ">{{session('success')}}</div>
+@endif
 <!-- Search Input -->
 <div class="mb-4">
     <label for="search" class="block text-sm font-semibold text-gray-600">Search:</label>

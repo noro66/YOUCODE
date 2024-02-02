@@ -28,27 +28,27 @@ class RecetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+        public function store(Request $request)
+        {
 
-        // Validate the request data
-        $attributes = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
-        ]);
+            // Validate the request data
+            $attributes = $request->validate([
+                'name' => 'required|max:255',
+                'description' => 'required|max:255',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
+            ]);
 
-        // Process and store the image
-        $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-        $imagePath = $request->file('image')->storeAs('public/images', $imageName);
+            // Process and store the image
+            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $imagePath = $request->file('image')->storeAs('public/images', $imageName);
 
-        // Save the receipt with the image path in the database
-        $attributes['image'] = $imagePath;
-        Recet::create($attributes);
+            // Save the receipt with the image path in the database
+            $attributes['image'] = $imagePath;
+            Recet::create($attributes);
 
-        // Redirect to the create page with a success message
-        return redirect('recets')->with('success', 'Receipt created successfully.');
-    }
+            // Redirect to the create page with a success message
+            return redirect('recets')->with('success', 'Receipt created successfully.');
+        }
 
 
     /**
