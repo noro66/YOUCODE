@@ -9,5 +9,8 @@ use mysql_xdevapi\Table;
 class Recet extends Model
 {
     use HasFactory;
-    protected  $table = 'recet';
+    protected  $table = 'recets';
+    protected $fillable = ['name', 'description', 'image'];
+
+
 }

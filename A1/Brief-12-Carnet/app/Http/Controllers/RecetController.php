@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recet;
 use Illuminate\Http\Request;
 
 class RecetController extends Controller
@@ -12,6 +13,7 @@ class RecetController extends Controller
     public function index()
     {
         //
+        return view('Recet.index');
     }
 
     /**
@@ -19,7 +21,8 @@ class RecetController extends Controller
      */
     public function create()
     {
-        //
+        return view('Recet.create');
+
     }
 
     /**
@@ -27,8 +30,26 @@ class RecetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Validate the request data
+        $attributes = $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
+        ]);
+
+        // Process and store the image
+        $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+        $imagePath = $request->file('image')->storeAs('public/images', $imageName);
+
+        // Save the receipt with the image path in the database
+        $attributes['image'] = $imagePath;
+        Recet::create($attributes);
+
+        // Redirect to the create page with a success message
+        return redirect('recets')->with('success', 'Receipt created successfully.');
     }
+
 
     /**
      * Display the specified resource.
