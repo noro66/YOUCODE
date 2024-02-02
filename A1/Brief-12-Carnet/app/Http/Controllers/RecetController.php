@@ -103,4 +103,13 @@ class RecetController extends Controller
 
         //
     }
+
+    public  function search(Request $request)
+    {
+        $text = $request->input('search');
+        $receipts = Recet::where( 'name', 'LIKE', '%' . $text . '%')->get();
+
+        return view('Recet.index', compact('receipts'));
+
+    }
 }

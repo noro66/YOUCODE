@@ -20,6 +20,8 @@ Route::post('/recets/store', [\App\Http\Controllers\RecetController::class, 'sto
 Route::get('recets/edit/{id}', [\App\Http\Controllers\RecetController::class, 'edit']);
 Route::put('recets/edit/{id}', [\App\Http\Controllers\RecetController::class, 'update']);
 Route::get('recets/delete/{id}', [\App\Http\Controllers\RecetController::class, 'destroy']);
+Route::get('recets/search', [\App\Http\Controllers\RecetController::class, 'search']);
+
 
 
 
