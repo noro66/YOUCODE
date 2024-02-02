@@ -19,6 +19,8 @@ Route::get('recets/create', [\App\Http\Controllers\RecetController::class, 'crea
 Route::post('/recets/store', [\App\Http\Controllers\RecetController::class, 'store']);
 Route::get('recets/edit/{id}', [\App\Http\Controllers\RecetController::class, 'edit']);
 Route::put('recets/edit/{id}', [\App\Http\Controllers\RecetController::class, 'update']);
+Route::get('recets/delete/{id}', [\App\Http\Controllers\RecetController::class, 'destroy']);
+
 
 
 

@@ -96,8 +96,11 @@ class RecetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
+        Recet::find($id)->delete();
+        return redirect()->back()->with('success', 'Receipt created successfully.');
+
         //
     }
 }
