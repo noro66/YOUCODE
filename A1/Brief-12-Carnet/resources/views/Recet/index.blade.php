@@ -9,9 +9,12 @@
 <body class="bg-gray-100 p-8">
 
 <h2 class="text-2xl font-bold mb-4">Receipts</h2>
+<div class="mt-4">
+    <a href="{{ url('recets/create') }}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Receipt</a>
+</div>
 
 <!-- Search Input -->
-<form action="{{ url('recets/search') }}" method="get" class="max-w-xl mx-auto p-6 bg-white border rounded-md shadow-md">
+<form action="{{ url('recets/search') }}" method="get" class="max-w-xl mb-4 mx-auto p-6 bg-white border rounded-md shadow-md">
     <div class="mb-4">
         <label for="search" class="block text-sm font-semibold text-gray-600">Search:</label>
         <input type="text" id="search" name="search" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search receipts...">
@@ -34,9 +37,6 @@
     <!-- Repeat the above card structure for each receipt -->
 </div>
 <!-- Button to Add Receipt -->
-<div class="mt-4">
-    <a href="{{ url('recets/create') }}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Receipt</a>
-</div>
 
 </body>
 </html>
