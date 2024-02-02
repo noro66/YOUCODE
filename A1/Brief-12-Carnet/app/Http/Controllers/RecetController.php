@@ -47,7 +47,7 @@ class RecetController extends Controller
             Recet::create($attributes);
 
             // Redirect to the create page with a success message
-            return redirect('recets')->with('success', 'Receipt created successfully.');
+            return redirect()->back()->with('success', 'Receipt created successfully.');
         }
 
 
