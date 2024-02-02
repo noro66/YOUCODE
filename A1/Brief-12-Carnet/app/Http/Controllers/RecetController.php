@@ -12,8 +12,9 @@ class RecetController extends Controller
      */
     public function index()
     {
-        //
-        return view('Recet.index');
+        $receipts = Recet::get();
+
+        return view('Recet.index', compact('receipts'));
     }
 
     /**
