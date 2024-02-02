@@ -66,13 +66,13 @@ class RecetController extends Controller
     public function edit(int $id)
     {
         $recet = Recet::find($id);
-        return view('Recet.edit', compact($recet)) ;
+        return view('Recet.edit', compact('recet')) ;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         $attributes = $request->validate([
             'name' => 'required|max:255',
