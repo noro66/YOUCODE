@@ -41,7 +41,7 @@ class RecetController extends Controller
 
             // Process and store the image
             $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $imagePath = $request->file('image')->storeAs('public/images', $imageName);
+            $imagePath = $request->file('image')->storeAs('public/thumbnails', $imageName);
 
             // Save the receipt with the image path in the database
             $attributes['image'] = $imagePath;
