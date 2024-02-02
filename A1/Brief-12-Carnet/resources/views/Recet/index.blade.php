@@ -21,12 +21,12 @@
     <!-- Sample Receipt Card (Repeat this for each receipt) -->
     @foreach($receipts as $receipt)
     <div class="bg-white p-4 rounded-md shadow-md">
-        <img src="{{ asset('/storage/' . ltrim($receipt->image, 'public/')) }}" alt="receipt image">
+        <img class="min-h-12 min-w-15" src="{{ asset('/storage/' . ltrim($receipt->image, 'public/')) }}" alt="receipt image">
         <h3 class="text-lg font-semibold mb-2">Receit {{$receipt->id}}</h3>
         <p class="text-gray-600 mb-2">{{$receipt->name}}</p>
         <p class="text-gray-600 mb-2">{{$receipt->description}}</p>
-        <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-green-600">Update Details</button>
-        <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-red-600">Delete Details</button>
+        <a href="{{url('recets/edit/'. $receipt->id )}}" class="px-4  m-3 py-2 bg-blue-500 text-white rounded-md hover:bg-green-600">Update </a>
+        <a href="{{url('recets/delete/'. $receipt->id )}}"  class="px-4 py-2 m-3 bg-blue-500 text-white rounded-md hover:bg-red-600">Delete </a>
     </div>
     @endforeach
     <!-- Repeat the above card structure for each receipt -->

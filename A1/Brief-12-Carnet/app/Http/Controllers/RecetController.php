@@ -63,9 +63,10 @@ class RecetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        $recet = Recet::find($id);
+        return view('Recet.edit', compact($recet)) ;
     }
 
     /**
@@ -73,7 +74,23 @@ class RecetController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
+        ]);
+
+        // Process and store the image
+        $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+        $imagePath = $request->file('image')->storeAs('public/thumbnails', $imageName);
+
+        // Save the receipt with the image path in the database
+        $attributes['image'] = $imagePath;
+        Recet::find($id)->update($attributes);
+
+        // Redirect to the create page with a success message
+        return redirect()->back()->with('success', 'Receipt created successfully.');
+
     }
 
     /**

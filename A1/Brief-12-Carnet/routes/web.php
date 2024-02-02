@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('recets', [\App\Http\Controllers\RecetController::class, 'index']);
 Route::get('recets/create', [\App\Http\Controllers\RecetController::class, 'create']);
 Route::post('/recets/store', [\App\Http\Controllers\RecetController::class, 'store']);
+Route::get('recets/edit/{id}', [\App\Http\Controllers\RecetController::class, 'edit']);
+Route::put('recets/edit/{id}', [\App\Http\Controllers\RecetController::class, 'update']);
+
+
 
 
 
