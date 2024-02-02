@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Test;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [Test::class, 'index']);
+
+Route::get('/salam/{count}/{age}', function (Request $request){
+    return view('salam',['count' => $request->count]);
 });
