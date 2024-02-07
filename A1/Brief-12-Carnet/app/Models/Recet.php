@@ -11,6 +11,4 @@ class Recet extends Model
     use HasFactory;
     protected  $table = 'recets';
     protected $fillable = ['name', 'description', 'image'];
-
-
 }

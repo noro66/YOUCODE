@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Recet;
 use Illuminate\Http\Request;
 
-class RecetController extends Controller
+class  RecetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,15 @@ class RecetController extends Controller
     public function index()
     {
         $receipts = Recet::get();
-
         return view('Recet.index', compact('receipts'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {   $receipt = ['name' => 'mohajojm', 'image' => 'image', 'id' => '0', 'description' => 'discription'];
+        return view('Recet.show', compact('receipt'));
     }
 
     /**
@@ -50,15 +57,6 @@ class RecetController extends Controller
             // Redirect to the create page with a success message
             return redirect()->back()->with('success', 'Receipt created successfully.');
         }
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -108,7 +106,6 @@ class RecetController extends Controller
     {
         $text = $request->input('search');
         $receipts = Recet::where( 'name', 'LIKE', '%' . $text . '%')->get();
-
         return view('Recet.index', compact('receipts'));
 
     }
