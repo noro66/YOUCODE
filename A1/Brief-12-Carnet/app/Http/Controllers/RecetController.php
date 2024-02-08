@@ -12,15 +12,15 @@ class  RecetController extends Controller
      */
     public function index()
     {
-        $receipts = Recet::get();
+        $receipts = Recet::all();
         return view('Recet.index', compact('receipts'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {   $receipt = ['name' => 'mohajojm', 'image' => 'image', 'id' => '0', 'description' => 'discription'];
+        public function show(Recet $id)
+    {   $receipt = $id;
         return view('Recet.show', compact('receipt'));
     }
 
