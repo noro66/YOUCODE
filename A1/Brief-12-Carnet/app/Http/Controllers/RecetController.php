@@ -12,7 +12,7 @@ class  RecetController extends Controller
      */
     public function index()
     {
-        $receipts = Recet::all();
+        $receipts = Recet::paginate();
         return view('Recet.index', compact('receipts'));
     }
 
