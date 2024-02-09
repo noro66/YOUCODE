@@ -28,8 +28,6 @@ Route::get('recets/search', [RecetController::class, 'search'])->name('recets.se
 
 
 
-
-
 Route::get('/', [RecetController::class, 'index']);
 
 Route::get('/salam/{count}/{age}', function (Request $request){
