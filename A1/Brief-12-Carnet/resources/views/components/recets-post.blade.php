@@ -1,3 +1,4 @@
+@props(['recet'])
 <form action= "@yield('rout')" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
 
     @csrf
