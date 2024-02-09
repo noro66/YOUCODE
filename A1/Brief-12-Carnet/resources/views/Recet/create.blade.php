@@ -5,7 +5,9 @@
 <a href="{{url('recets')}}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Back</a>
 
 @if(session('success'))
-    <div class="bg-green-300 m-4 p-3 ">{{session('success')}}</div>
+<x-alert type="green">
+    <strong>{{session('success')}}</strong>
+</x-alert>
 @endif
 @section('rout') {{route("recets.store")}} @endsection
 <x-recets-post/>
