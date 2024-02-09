@@ -3,7 +3,7 @@
 <form action= "@yield('rout')" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
 
     @csrf
-    @method('post')
+   @yield('type')
     <!-- Name -->
     <div class="mb-4">
         <label for="name" class="block text-sm font-semibold text-gray-600">Name:</label>

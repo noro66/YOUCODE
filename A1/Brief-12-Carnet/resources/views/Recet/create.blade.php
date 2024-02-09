@@ -10,5 +10,6 @@
 </x-alert>
 @endif
 @section('rout') {{route("recets.store")}} @endsection
+@section('type')  @method('post') @endsection
 <x-recets-post/>
 @endsection
