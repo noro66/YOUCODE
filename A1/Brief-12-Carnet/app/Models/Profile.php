@@ -10,4 +10,9 @@ class Profile extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['name', 'email', 'password', 'bio', 'image'];
+
+    public  function getImageAttribute($val): string
+    {
+        return  'profile/aIzhedqBwztawlQ6oUUzIXageI7QscdUMrI1zpKS.png';
+    }
 }

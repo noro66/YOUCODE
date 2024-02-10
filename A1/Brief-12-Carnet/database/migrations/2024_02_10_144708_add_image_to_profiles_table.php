@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->string('image', 150)->after('bio')->default('profile/KcFeFm0dOEqsLCvaI86CfZz4SCQn1qacrZyEpntt.jpg');
+            $table->string('image', 150)->after('bio')->nullable();
         });
     }
 

@@ -22,12 +22,12 @@ Route::get('recets/edit/{recet}', [RecetController::class, 'edit'])->name('recet
 Route::put('recets/edit/{recet}', [RecetController::class, 'update'])->name('recets.update');
 Route::get('/', [RecetController::class, 'index'])->name('recets.index');
 Route::get('recets/create', [RecetController::class, 'create'])->name('recets.create');
-Route::post('/recets/store', [RecetController::class, 'store'])->name('recets.store');
+Route::post('/recets', [RecetController::class, 'store'])->name('recets.store');
 Route::get('recets/search', [RecetController::class, 'search'])->name('recets.search');
 
 Route::get('profile/create', [ProfileController::class, 'create'])->name('profile.create');
 Route::post('profile/store', [ProfileController::class, 'store'])->name('profile.store');
-Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
 
 

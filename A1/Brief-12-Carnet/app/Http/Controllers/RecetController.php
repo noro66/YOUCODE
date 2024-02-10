@@ -47,11 +47,10 @@ class  RecetController extends Controller
             ]);
 
             // Process and store the image
-            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $imagePath = $request->file('image')->storeAs('public/thumbnails', $imageName);
+            $imagePath = $request->file('image')->store('thumbnails', 'public');
+            $attributes['image'] = $imagePath;
 
             // Save the receipt with the image path in the database
-            $attributes['image'] = $imagePath;
             Recet::create($attributes);
 
             // Redirect to the create page with a success message
@@ -78,11 +77,11 @@ class  RecetController extends Controller
         ]);
 
         // Process and store the image
-        $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-        $imagePath = $request->file('image')->storeAs('public/thumbnails', $imageName);
-
+        if ($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('thumbnails', 'public');
+            $attributes['image'] = $imagePath;
+        }
         // Save the receipt with the image path in the database
-        $attributes['image'] = $imagePath;
         $recet->fill($attributes)->save();
 
         // Redirect to the create page with a success message

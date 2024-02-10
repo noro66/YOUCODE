@@ -30,7 +30,7 @@
         <!-- Sample Receipt Card (Repeat this for each receipt) -->
         @foreach($receipts as $receipt)
             <div class="bg-white p-4 rounded-md shadow-md">
-                <img class="w-full h-64" src="{{ asset('/storage/' . ltrim($receipt->image, 'public/')) }}"
+                <img class="w-full h-64" src="{{ asset('storage/' . $receipt->image ) }}"
                      alt="receipt image">
                 <h3 class="text-l font-semibold mb-2">Receit {{$receipt->id}}</h3>
                 <p class="text-black-600 mb-2 text-xl ">{{$receipt->name}}</p>

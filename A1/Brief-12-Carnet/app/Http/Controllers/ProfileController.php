@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $profileForm['password']  = Hash::make($request->password);
         $profileForm['image']  = $request->file('image')->store('profile', 'public');
         Profile::create($profileForm);
-        return to_route('profile');
+        return to_route('profile.index');
     }
 
     /**
