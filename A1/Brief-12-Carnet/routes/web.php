@@ -27,6 +27,8 @@ Route::get('recets/search', [RecetController::class, 'search'])->name('recets.se
 
 Route::get('profile/create', [ProfileController::class, 'create'])->name('profile.create');
 Route::post('profile/store', [ProfileController::class, 'store'])->name('profile.store');
+Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+
 
 
 
