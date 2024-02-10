@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecetController;
 use App\Http\Controllers\Test;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ Route::post('profile/store', [ProfileController::class, 'store'])->name('profile
 
 
 Route::get('/', [RecetController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('/salam/{count}/{age}', function (Request $request){
     return view('salam',['count' => $request->count]);
