@@ -17,7 +17,7 @@ use App\Http\Controllers\ProfileController;
 |
 */
 Route::get('recets/show/{recet}', [RecetController::class, 'show'])->name('recets.show');
-Route::get('recets/delete/{recet}', [RecetController::class, 'destroy'])->name('recets.destroy');
+Route::delete('recets/delete/{recet}', [RecetController::class, 'destroy'])->name('recets.destroy');
 Route::get('recets/edit/{recet}', [RecetController::class, 'edit'])->name('recets.edit');
 Route::put('recets/edit/{recet}', [RecetController::class, 'update'])->name('recets.update');
 Route::get('/recets', [RecetController::class, 'index'])->name('recets.index');
