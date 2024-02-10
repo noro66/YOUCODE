@@ -25,7 +25,8 @@ class ProfileRequest extends FormRequest
             'name' => 'required|min:5|unique:profiles',
             'email' => 'required|email|unique:profiles',
             'password' => 'required|between: 5, 50|confirmed',
-            'bio' => 'required|'
+            'bio' => 'required|',
+            'image' => 'required|image',
         ];
     }
 }

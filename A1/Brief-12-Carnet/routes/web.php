@@ -20,7 +20,7 @@ Route::get('recets/show/{recet}', [RecetController::class, 'show'])->name('recet
 Route::delete('recets/delete/{recet}', [RecetController::class, 'destroy'])->name('recets.destroy');
 Route::get('recets/edit/{recet}', [RecetController::class, 'edit'])->name('recets.edit');
 Route::put('recets/edit/{recet}', [RecetController::class, 'update'])->name('recets.update');
-Route::get('/recets', [RecetController::class, 'index'])->name('recets.index');
+Route::get('/', [RecetController::class, 'index'])->name('recets.index');
 Route::get('recets/create', [RecetController::class, 'create'])->name('recets.create');
 Route::post('/recets/store', [RecetController::class, 'store'])->name('recets.store');
 Route::get('recets/search', [RecetController::class, 'search'])->name('recets.search');

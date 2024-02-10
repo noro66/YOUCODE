@@ -61,16 +61,15 @@ class  RecetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(int $recet)
+    public function edit(Recet $recet)
     {
-        $recet = Recet::find($recet);
         return view('Recet.edit', compact('recet')) ;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $recet)
+    public function update(Request $request, Recet $recet)
     {
         $attributes = $request->validate([
             'name' => 'required|max:255',
@@ -84,10 +83,10 @@ class  RecetController extends Controller
 
         // Save the receipt with the image path in the database
         $attributes['image'] = $imagePath;
-        Recet::find($recet)->update($attributes);
+        $recet->fill($attributes)->save();
 
         // Redirect to the create page with a success message
-        return redirect()->back()->with('success', 'Receipt created successfully.');
+        return to_route('recets.show', $recet->id)->with('success', 'Receipt created successfully.');
 
     }
 

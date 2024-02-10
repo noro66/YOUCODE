@@ -32,6 +32,7 @@ class ProfileController extends Controller
     {
         $profileForm = $request->validated();
         $profileForm['password']  = Hash::make($request->password);
+        $profileForm['image']  = $request->file('image')->store('profile', 'public');
         Profile::create($profileForm);
         return to_route('recets.index');
     }

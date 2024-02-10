@@ -7,14 +7,14 @@
     <!-- Name -->
     <div class="mb-4">
         <label for="name" class="block text-sm font-semibold text-gray-600">Name:</label>
-        <input type="text" id="name" name="name" value="{{ $recet->name ?? old('name')}}" class="mt-1 p-2 w-full border rounded-md">
+        <input type="text" id="name" name="name" value="{{ old('name', $recet->name)}}" class="mt-1 p-2 w-full border rounded-md">
         @error('name') <span class="text-red-500">{{$message}}</span>@enderror
     </div>
 
     <!-- Description -->
     <div class="mb-4">
         <label for="description" class="block text-sm font-semibold text-gray-600">Description:</label>
-        <textarea id="description" name="description" rows="4"  class="mt-1 p-2 w-full border rounded-md">{{$recet->description ?? old('description')}}</textarea>
+        <textarea id="description" name="description" rows="4"  class="mt-1 p-2 w-full border rounded-md">{{ old('description', $recet->description) }}</textarea>
         @error('description') <span class="text-red-500">{{$message}}</span>@enderror
     </div>
 
