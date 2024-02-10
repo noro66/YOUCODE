@@ -16,14 +16,18 @@ use App\Http\Controllers\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('recets/show/{recet}', [RecetController::class, 'show'])->name('recets.show');
-Route::delete('recets/delete/{recet}', [RecetController::class, 'destroy'])->name('recets.destroy');
-Route::get('recets/edit/{recet}', [RecetController::class, 'edit'])->name('recets.edit');
-Route::put('recets/edit/{recet}', [RecetController::class, 'update'])->name('recets.update');
-Route::get('/', [RecetController::class, 'index'])->name('recets.index');
-Route::get('recets/create', [RecetController::class, 'create'])->name('recets.create');
-Route::post('/recets', [RecetController::class, 'store'])->name('recets.store');
-Route::get('recets/search', [RecetController::class, 'search'])->name('recets.search');
+Route::prefix('recets')->name('recets.')->group(function (){
+    Route::controller('RecetController::class')->group(function (){
+        Route::get('/','index')->name('index');
+        Route::get('/show/{recet}','show')->name('show');
+        Route::delete('/delete/{recet}','destroy')->name('destroy');
+        Route::get('/edit/{recet}','edit')->name('edit');
+        Route::put('/edit/{recet}','update')->name('update');
+        Route::get('/create','create')->name('create');
+        Route::post('/','store')->name('store');
+        Route::get('/search','search')->name('search');
+    });
+});
 
 Route::get('profile/create', [ProfileController::class, 'create'])->name('profile.create');
 Route::post('profile/store', [ProfileController::class, 'store'])->name('profile.store');
