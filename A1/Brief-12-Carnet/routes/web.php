@@ -30,8 +30,9 @@ Route::post('profile/store', [ProfileController::class, 'store'])->name('profile
 
 
 
-Route::get('/', [RecetController::class, 'index']);
+//Route::get('/', [RecetController::class, 'index'])->name('recet.index');
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::get('/logout', [LoginController::class, 'destroy'])->name('logout.index');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('/salam/{count}/{age}', function (Request $request){

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Facades\Session;
+
 
 class LoginController extends \App\Http\Controllers\Controller
 {
@@ -36,11 +38,13 @@ class LoginController extends \App\Http\Controllers\Controller
 
         if(Auth::attempt($cridibelse)){
             $request->session()->regenerate();
-            to_route('recets');
+           return to_route('recets.index');
         }else{
             return  back()->withErrors(['email' =>  'email or password incorrect '])->onlyInput('email');
         }
     }
+
+
 
     /**
      * Display the specified resource.
@@ -69,8 +73,11 @@ class LoginController extends \App\Http\Controllers\Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //
+        Session::flush();
+        Auth::logout();
+        return to_route('recets.index');
+
     }
 }
