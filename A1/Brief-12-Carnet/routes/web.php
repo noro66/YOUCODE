@@ -4,7 +4,7 @@ use App\Http\Controllers\RecetController;
 use App\Http\Controllers\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +24,8 @@ Route::get('recets/create', [RecetController::class, 'create'])->name('recets.cr
 Route::post('/recets/store', [RecetController::class, 'store'])->name('recets.store');
 Route::get('recets/search', [RecetController::class, 'search'])->name('recets.search');
 
-
+Route::get('profile/create', [ProfileController::class, 'create'])->name('profile.create');
+Route::post('profile/store', [ProfileController::class, 'store'])->name('profile.store');
 
 
 
