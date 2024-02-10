@@ -41,7 +41,7 @@
                    class="px-4 py-2 m-3 bg-blue-500 text-white rounded-md hover:bg-red-600">Delete </a>
             </div>
         @endforeach
-        {{$receipts->links()}}
+{{--        {{$receipts->links() ?: ''}}--}}
         <!-- Repeat the above card structure for each receipt -->
     </div>
     <!-- Button to Add Receipt -->

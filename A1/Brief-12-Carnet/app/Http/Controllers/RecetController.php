@@ -19,9 +19,9 @@ class  RecetController extends Controller
     /**
      * Display the specified resource.
      */
-        public function show(Recet $id)
-    {   $receipt = $id;
-        return view('Recet.show', compact('receipt'));
+        public function show(Recet $recet)
+    {
+        return view('Recet.show', compact('recet'));
     }
 
     /**
@@ -61,16 +61,16 @@ class  RecetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(int $id)
+    public function edit(int $recet)
     {
-        $recet = Recet::find($id);
+        $recet = Recet::find($recet);
         return view('Recet.edit', compact('recet')) ;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $recet)
     {
         $attributes = $request->validate([
             'name' => 'required|max:255',
@@ -84,7 +84,7 @@ class  RecetController extends Controller
 
         // Save the receipt with the image path in the database
         $attributes['image'] = $imagePath;
-        Recet::find($id)->update($attributes);
+        Recet::find($recet)->update($attributes);
 
         // Redirect to the create page with a success message
         return redirect()->back()->with('success', 'Receipt created successfully.');
@@ -94,9 +94,9 @@ class  RecetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(int $recet)
     {
-        Recet::find($id)->delete();
+        Recet::find($recet)->delete();
         return redirect()->back()->with('success', 'Receipt created successfully.');
 
         //
