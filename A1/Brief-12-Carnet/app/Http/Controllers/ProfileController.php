@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,16 +28,11 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
-        $atrr  = $request->validate([
-            'name' => 'required|min:5|unique:profiles',
-            'email' => 'required|email|unique:profiles',
-            'password' => 'required|between: 5, 50|confirmed',
-            'bio' => 'required|'
-        ]);
-        $atrr['password']  = Hash::make($request->password);
-        Profile::create($atrr);
+        $profileForm = $request->validated();
+        $profileForm['password']  = Hash::make($request->password);
+        Profile::create($profileForm);
         return to_route('recets.index');
     }
 
