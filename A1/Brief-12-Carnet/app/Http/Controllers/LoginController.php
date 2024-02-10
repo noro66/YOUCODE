@@ -34,7 +34,12 @@ class LoginController extends \App\Http\Controllers\Controller
 
 
 
-        dd(Auth::attempt($cridibelse));
+        if(Auth::attempt($cridibelse)){
+            $request->session()->regenerate();
+            to_route('recets');
+        }else{
+            return  back()->withErrors(['email' =>  'email or password incorrect '])->onlyInput('email');
+        }
     }
 
     /**
