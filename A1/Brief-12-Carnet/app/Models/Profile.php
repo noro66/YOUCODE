@@ -13,6 +13,6 @@ class Profile extends Model
 
     public  function getImageAttribute($val): string
     {
-        return  'profile/aIzhedqBwztawlQ6oUUzIXageI7QscdUMrI1zpKS.png';
+        return  $val ??'profile/aIzhedqBwztawlQ6oUUzIXageI7QscdUMrI1zpKS.png';
     }
 }

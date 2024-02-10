@@ -20,7 +20,7 @@ class RecetFactory extends Factory
         return [
             'name' => fake()->name,
             'description' => fake()->text(50),
-            'image' => 'public/thumbnails/1707475853.jpeg'
+//            'image' => 'thumbnails/1707475853.jpeg'
         ];
     }
 }

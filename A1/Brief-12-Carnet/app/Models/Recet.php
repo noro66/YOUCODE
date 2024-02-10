@@ -18,4 +18,8 @@ class Recet extends Model
         return $this->belongsTo(User::class);
 
     }
+    public  function getImageAttribute($val): string
+    {
+        return  $val ??'thumbnails/1707579605.jpeg';
+    }
 }
