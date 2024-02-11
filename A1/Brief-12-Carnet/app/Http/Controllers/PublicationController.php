@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PublicationRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use JetBrains\PhpStorm\NoReturn;
 
 class PublicationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -35,6 +41,7 @@ class PublicationController extends Controller
 
         $publicationForm = $request->validated();
         $publicationForm['image']  = $request->file('image')->store('publications', 'public');
+        $publicationForm['profile_id'] = Auth::id();
         Publication::create($publicationForm);
         return to_route('publication.index');
     }
@@ -72,7 +79,7 @@ class PublicationController extends Controller
         }
 
         $publication->fill($publicationForm)->save();
-        return to_route('publication.create');
+        return to_route('publication.index');
     }
 
     /**
