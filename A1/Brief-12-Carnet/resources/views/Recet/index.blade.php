@@ -14,6 +14,7 @@
     <!-- Search Input -->
     <form action="{{ route('recets.search') }}" method="get"
           class="max-w-xl mb-4 mx-auto p-6 bg-white border rounded-md shadow-md">
+        @csrf
         <div class="mb-4">
             <label for="search" class="block text-sm font-semibold text-gray-600">Search:</label>
             <input type="text" id="search" name="search"

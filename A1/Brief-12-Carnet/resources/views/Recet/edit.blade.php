@@ -11,7 +11,7 @@
         </x-alert>
     @endif
     @section('rout')
-        {{route('recets.edit', $recet->id) }}
+        {{route('recets.update', $recet->id) }}
     @endsection
     @section('type')
         @method('PUT')

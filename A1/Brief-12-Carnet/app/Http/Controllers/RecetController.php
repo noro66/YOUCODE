@@ -10,6 +10,12 @@ class  RecetController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        //  we can use only('some method') or exept('some method') to defind .
+        $this->middleware('auth');
+
+    }
     public function index()
     {
         $receipts = Recet::paginate();
@@ -73,13 +79,15 @@ class  RecetController extends Controller
         $attributes = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
         ]);
 
         // Process and store the image
         if ($request->hasFile('image')){
             $imagePath = $request->file('image')->store('thumbnails', 'public');
             $attributes['image'] = $imagePath;
+        }else{
+            unset($attributes['image']);
         }
         // Save the receipt with the image path in the database
         $recet->fill($attributes)->save();
@@ -101,7 +109,10 @@ class  RecetController extends Controller
     public  function search(Request $request)
     {
         $text = $request->input('search');
-        $receipts = Recet::where( 'name', 'LIKE', '%' . $text . '%')->get();
+        dd($text);
+        $receipts = Recet::where( 'name', 'LIKE', '%' . $text . '%')
+            ->orWhere('description', 'LIKE', '%' . $text . '%')
+            ->paginate(10);
         return view('Recet.index', compact('receipts'));
 
     }
