@@ -16,7 +16,7 @@ class Profile extends Model
         return  $val ??'profile/aIzhedqBwztawlQ6oUUzIXageI7QscdUMrI1zpKS.png';
     }
 
-    public function publication()
+    public function publications()
     {
         return $this->hasMany(Publication::class);
     }
