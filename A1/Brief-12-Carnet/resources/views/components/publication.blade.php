@@ -3,7 +3,7 @@
 
     <img class="w-full h-64" src="{{ asset('storage/' . $publication->image ) }}" alt="receipt image">
     <h3 class="text-l font-semibold mb-2">Publicaton : {{$publication->id}}</h3>
-    <img class="w-20 h-30 rounded" src="{{ asset('storage/' . $publication->profile->image ) }}" alt="Profile image">
+    <img class="w-20 h-30 rounded-full" src="{{ asset('storage/' . $publication->profile->image ) }}" alt="Profile image">
     <h3 class="text-l font-semibold mb-2">Autor : {{$publication->profile->name}}</h3>
     <p class="text-black-600 mb-2 text-xl"> Title : {{$publication->title}}</p>
     <p class="text-gray-600 mb-2"><strong>Description  :</strong> {{$publication->body}}</p>

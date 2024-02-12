@@ -50,17 +50,28 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Profile $profile)
     {
-        //
+
+        return view('profile.edit', compact('profile'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProfileRequest $request, Profile $profile)
     {
-        //
+        $profileForm  = $request->validated();
+        if ($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('thumbnails', 'public');
+            $profileForm['image'] = $imagePath;
+        }else{
+            unset($profileForm['image']);
+        }
+
+        $profile->fill($profileForm)->save();
+        return to_route('profile.show', $profile->id);
+
     }
 
     /**

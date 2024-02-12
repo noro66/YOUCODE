@@ -6,6 +6,7 @@ use App\Http\Requests\PublicationRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use JetBrains\PhpStorm\NoReturn;
 
 class PublicationController extends Controller
@@ -61,7 +62,7 @@ class PublicationController extends Controller
     {
 
 
-//         dd(compact('publication'));
+         dd(Gate::allows('update-publication', $publication));
         return view('publication.edit', compact('publication'));
     }
 

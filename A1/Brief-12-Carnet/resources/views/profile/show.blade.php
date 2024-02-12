@@ -16,9 +16,9 @@
             <p class="text-gray-600 mb-2">{{$profile->name}}</p>
             <p class="text-gray-600 mb-2">{{$profile->email}}</p>
             <p class="text-gray-600 mb-2">{{$profile->bio}}</p>
-            <a href="{{route('recets.edit', $profile->id )}}"
+            <a href="{{route('profile.edit', $profile->id )}}"
                class="px-4  m-3 py-2 bg-blue-500 text-white rounded-md hover:bg-green-600">Update </a>
-            <a href="{{url('recets/delete/'. $profile->id )}}" onclick="return confirm('Are you sure ?')"
+            <a href="{{route('profile.destroy', $profile->id )}}" onclick="return confirm('Are you sure ?')"
                class="px-4 py-2 m-3 bg-blue-500 text-white rounded-md hover:bg-red-600">Delete </a>
         </div><!-- Repeat the above card structure for each recei   pt -->
     </div>

@@ -22,11 +22,11 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:5|unique:profiles',
-            'email' => 'required|email|unique:profiles',
-            'password' => 'required|between: 5, 50|confirmed',
+            'name' => 'required|min:5',
+            'email' => 'required|email',
+//            'password' => 'between: 5, 50|confirmed',
             'bio' => 'required|',
-            'image' => 'required|image|mimes:png,jpg,jpeg,svg|max:10240',
+            'image' => 'image|mimes:png,jpg,jpeg,svg|max:10240',
         ];
     }
 }

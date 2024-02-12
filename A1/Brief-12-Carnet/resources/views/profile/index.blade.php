@@ -32,13 +32,13 @@
             <div class="bg-white p-4 rounded-md shadow-md">
                 <img class="w-full h-64" src="{{ asset('/storage/'. $profile->image ) }}"
                      alt="Profile image">
-                <h3 class="text-l font-semibold mb-2">Receit {{$profile->id}}</h3>
+                <h3 class="text-l font-semibold mb-2">Profile {{$profile->id}}</h3>
                 <p class="text-black-600 mb-2 text-xl ">{{$profile->name}}</p>
                 <p class="text-gray-600 mb-2">{{$profile->description}}</p>
                 <p class="text-gray-600 mb-2">Profile Created at : {{$profile->created_at->format('Y-m-d')}}</p>
-                <a href="{{route('recets.edit', $profile->id )}}"
+                <a href="{{route('profile.edit', $profile->id )}}"
                    class="px-4  m-3 py-2 bg-blue-500 text-white rounded-md hover:bg-green-600">Update </a>
-                <form action="{{ route('recets.destroy', $profile->id )}}" method="post">
+                <form action="{{ route('profile.destroy', $profile->id )}}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" onclick="return confirm('Are you sure ?')"
