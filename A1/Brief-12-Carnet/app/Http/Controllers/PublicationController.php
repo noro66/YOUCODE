@@ -61,8 +61,10 @@ class PublicationController extends Controller
     public function edit(Publication $publication)
     {
 
-
-         dd(Gate::allows('update-publication', $publication));
+        Gate::authorize('update-publication', $publication);
+//         if (Gate::allows('update-publication', $publication)){
+//            abort(403);
+//         }
         return view('publication.edit', compact('publication'));
     }
 
@@ -71,6 +73,7 @@ class PublicationController extends Controller
      */
     public function update(PublicationRequest $request, Publication $publication)
     {
+        Gate::authorize('update-publication', $publication);
             $publicationForm  = $request->validated();
         if ($request->hasFile('image')){
             $imagePath = $request->file('image')->store('thumbnails', 'public');
@@ -88,6 +91,7 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
+        Gate::authorize('update-publication', $publication);
         $publication->delete();
         return to_route('publication.index');
     }
