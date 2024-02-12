@@ -58,13 +58,18 @@ class PublicationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Publication $publication)
+    public function edit(Publication $publication, Request $request)
     {
-
-        Gate::authorize('update-publication', $publication);
 //         if (Gate::allows('update-publication', $publication)){
 //            abort(403);
 //         }
+//        Gate::authorize('update-publication', $publication);
+////        Gate::authorize('update', $publication);
+//            if($request->user()->canNot('update', $publication)){
+//                abort(403);
+//            };
+        // Best Way is this by using  policies
+        $this->authorize('update', $publication);
         return view('publication.edit', compact('publication'));
     }
 

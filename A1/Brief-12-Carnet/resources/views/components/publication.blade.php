@@ -8,16 +8,15 @@
     <p class="text-black-600 mb-2 text-xl"> Title : {{$publication->title}}</p>
     <p class="text-gray-600 mb-2"><strong>Description  :</strong> {{$publication->body}}</p>
 
-    @auth
-        @if(auth()->user()->id === $publication->profile_id)
+    @can('update', $publication)
             <a href="{{route('publication.edit', $publication->id)}}" class="px-4 m-3 py-2 bg-blue-500 text-white rounded-md hover:bg-green-600">Update</a>
-
+    @endcan
+    @can('delete', $publication)
             <form action="{{ route('publication.destroy', $publication->id )}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button type="submit" onclick="return confirm('Are you sure?')" class="px-4 py-2 m-3 bg-blue-500 text-white rounded-md hover:bg-red-600">Delete</button>
             </form>
-        @endif
-    @endauth
+    @endcan
 </div>
 <br>
