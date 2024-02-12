@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -43,7 +44,16 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-
+    //        $cachPrefex = 'profile_' . $profile->id;
+    ////        dd($cachPrefex);
+    //        if (Cache::has($cachPrefex)){
+    //            $profile  = Cache::get($cachPrefex);
+    //        }else{
+    //            Cache::put($cachPrefex , $profile, 100);
+    //        }
+        $profile = Cache::remember('profile_' . $profile->id, 100, function ($profile){
+            return $profile;
+        });
         return view('profile.show', compact('profile'));
     }
 
