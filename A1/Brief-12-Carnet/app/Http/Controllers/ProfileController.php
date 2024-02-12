@@ -15,7 +15,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::paginate();
+         $profiles = Cache::remember('profiles', 100, function (){
+           return Profile::paginate();
+        });
         return view('profile.index', compact('profiles'));
     }
 
@@ -51,7 +53,7 @@ class ProfileController extends Controller
     //        }else{
     //            Cache::put($cachPrefex , $profile, 100);
     //        }
-        $profile = Cache::remember('profile_' . $profile->id, 100, function ($profile){
+        $profile = Cache::remember('profile_' . $profile->id, 100, function () use ($profile){
             return $profile;
         });
         return view('profile.show', compact('profile'));
