@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Resources\ProfileResource;
 use App\Models\Profile;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -20,7 +21,9 @@ class ProfileController extends Controller
 //        return response()->json(Profile::all());
 //          return (Profile::all());
 //            return  (Profile::withTrashed()->get());
-        return (Profile::paginate(10));
+          $profile = Profile::all();
+//        return new ProfileResource($profile);
+        return ProfileResource::collection(Profile::all());
     }
 
     /**
@@ -31,7 +34,8 @@ class ProfileController extends Controller
         $profileForm = $request->all();
         $profileForm['password'] =  Hash::make($request->password);
 //        dd($profileForm);
-        return Profile::create($profileForm);
+        $profile = Profile::create($profileForm);
+      return new ProfileResource($profile);
     }
 
     /**
@@ -39,7 +43,7 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        return $profile;
+        return new ProfileResource($profile);
     }
 
     /**
@@ -50,8 +54,8 @@ class ProfileController extends Controller
         $profileform = $request->all();
         $profileform['password'] = Hash::make($request->password);
 //        dd($profileform);
-        $profile->fill($profileform)->save();
-        return $profile;
+         $profile->fill($profileform)->save();
+        return new  ProfileResource($profile);
     }
 
     /**
@@ -63,6 +67,6 @@ class ProfileController extends Controller
         return response()->json([
            'message' => 'the profile is deleted successfully',
            'id' => $profile->id
-        ]);
+        ], 201);
     }
 }
