@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
+use App\Mail\ProfileMail;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
@@ -15,9 +18,11 @@ class ProfileController extends Controller
      */
     public function index()
     {
-         $profiles = Cache::remember('profiles', 100, function (){
-           return Profile::paginate();
-        });
+//         $profiles = Cache::remember('profiles', 100, function (){
+//           return Profile::paginate();
+//        });
+        dd(DB::table('profiles')->join('publications', 'profiles.id' , '=', 'publications.profile_id')->get());
+
         return view('profile.index', compact('profiles'));
     }
 
@@ -37,7 +42,8 @@ class ProfileController extends Controller
         $profileForm = $request->validated();
         $profileForm['password']  = Hash::make($request->password);
         $profileForm['image']  = $request->file('image')->store('profile', 'public');
-        Profile::create($profileForm);
+       $profile =  Profile::create($profileForm);
+        Mail::to('jamilljamili@gmail.com')->send(new  ProfileMail($profile));
         return to_route('profile.index');
     }
 
@@ -53,9 +59,9 @@ class ProfileController extends Controller
     //        }else{
     //            Cache::put($cachPrefex , $profile, 100);
     //        }
-        $profile = Cache::remember('profile_' . $profile->id, 100, function () use ($profile){
-            return $profile;
-        });
+//        $profile = Cache::remember('profile_' . $profile->id, 100, function () use ($profile){
+//            return $profile;
+//        });
         return view('profile.show', compact('profile'));
     }
 
