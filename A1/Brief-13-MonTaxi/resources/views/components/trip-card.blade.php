@@ -4,11 +4,11 @@
     <img class="max-w-24 h-[80%]" src="./storage/{{$trip->trip_image}}" alt="Order A Trip Now">
     <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">
-            Driver Name
+            {{$trip->departure . ' To ' . $trip->destination }}
         </div>
-        <div class="font-bold text-xl mb-2">Trip Destination</div>
-        <p class="text-gray-700 text-base">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        <div class="font-bold text-xl mb-2"></div>
+        <p class="text-gray-700 text-base"> <span class="block font-bold text-xl ">Description :</span>
+            {{ Str::words($trip->trip_description, 10, '...') }}
         </p>
     </div>
 {{--    <div class="px-6 pt-4 pb-2">--}}
