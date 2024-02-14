@@ -1,5 +1,6 @@
-<div class=" flex items-center flex-col  my-20 w-80 rounded overflow-hidden shadow-lg">
-    <img class="w-full" src="./storage/images/undraw_order_ride_re_372k.svg" alt="Order A Trip Now">
+@props(['trip'])
+<div class="md:w-1/5 flex items-center flex-col space-x-12 my-20 w-80 rounded overflow-hidden shadow-lg">
+    <img class="max-w-24 h-[80%]" src="./storage/{{$trip->trip_image}}" alt="Order A Trip Now">
     <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">
             Driver Name

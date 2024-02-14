@@ -13,7 +13,7 @@ class TripController extends Controller
      */
     public function index()
     {
-        $trips = Trip::query()->paginate(1);
+        $trips = Trip::query()->paginate(6);
         return view('trip.index', compact('trips'));
     }
 
@@ -30,7 +30,13 @@ class TripController extends Controller
      */
     public function store(TripRequest $request)
     {
-        dd($request->validated());
+        $formField = $request->validated();
+        $formField['departure_time'] = $formField['departure_time'] . ' '. $formField['time'];
+        if ($request->hasFile('trip_image')){
+            $formField['trip_image'] = $request->file('trip_image')->store('TripImages', 'public');
+        }
+       Trip::create($formField);
+        return to_route('trip.index');
     }
 
     /**
