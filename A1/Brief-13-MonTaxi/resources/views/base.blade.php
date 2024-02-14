@@ -9,9 +9,9 @@
     <title>{{config('app.name')}} | @yield('title')</title>
 </head>
 
-<body class="h-auto">
+<body class="h-auto >
 
-<div class="container mx-auto ">
+<div class=" container mx-auto ">
     @yield('content')
 </div>
 
