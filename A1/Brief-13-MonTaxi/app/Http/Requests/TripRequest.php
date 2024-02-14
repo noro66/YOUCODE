@@ -24,10 +24,10 @@ class TripRequest extends FormRequest
         return [
             'departure' => 'required|min:3|max:100',
             'destination' => 'required|min:5|max:100',
-            'departure_time' => 'date',
+            'departure_time' => 'required|date',
             'time' => 'required',
             'Trip_duration' => 'required|numeric|max:24',
-            'trip_image' => 'required|image',
+            'trip_image' => 'image',
             'trip_description' => 'required|min:50',
             'price' => 'required|numeric',
         ];

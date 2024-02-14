@@ -12,5 +12,6 @@
     @empty
         <h2 class="font-bold text-3xl text-center  my-40">There Is No Trips</h2>
     @endforelse
+    {{$trips->links()}}
 </div>
 @endsection

@@ -34,6 +34,7 @@
             <input type="time" name="time">
         </div>
         @error('departure_time') <span class="text-red-500">{{$message}}</span>@enderror
+        @error('time') <span class="text-red-500">{{$message}}</span>@enderror
     </div>
 
 
@@ -52,7 +53,10 @@
     </div>
     <!-- Image -->
     <div class="mb-4">
-        <label for="trip_image" class="block text-sm font-semibold text-gray-600">Image :</label>
+        <label for="trip_image" class="block my-2 text-sm font-semibold text-gray-600">Image :</label>
+        @if($trip->trip_image)
+            <img src="{{asset('storage/' . $trip->trip_image)}}" class="w-20" alt="">
+        @endif
         <input type="file" id="trip_image" name="trip_image" accept="image/*" class="mt-1 p-2 w-full border rounded-md">
         @error('trip_image') <span class="text-red-500">{{$message}}</span>@enderror
     </div>
