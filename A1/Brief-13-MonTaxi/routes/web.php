@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PassengerController;
+use App\Http\Controllers\TripController;
 use App\Models\Passenger;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('trip', TripController::class);
 
-Route::get('/passenger', [PassengerController::class, 'show']);
+//Route::get('/passenger', [PassengerController::class, 'show']);
