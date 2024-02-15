@@ -12,8 +12,10 @@
             {{ Str::words($driver->description, 10, '...') }}
         </p>
     </div>
+    <a </a>
     <div class="my-6">
-        <a href="#" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900 hover:text-white">See More Details</a>
+        <a  class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900 hover:text-white"
+            href="{{ route('driver.show', $driver->id) }}">View Profile</a>
     </div>
     <div class="my-6 flex items-center justify-between space-x-12">
         <a href="{{ route('driver.edit', $driver) }}" class="px-4 py-1 rounded text-white bg-blue-700 hover:bg-green-900">Update</a>

@@ -45,7 +45,9 @@ class DriverController extends Controller
      */
     public function show(Driver $driver)
     {
-        //
+
+             $trips = $driver->trips()->get();
+        return view('driver.show', compact('driver', 'trips'));
     }
 
     /**

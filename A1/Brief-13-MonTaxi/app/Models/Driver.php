@@ -19,7 +19,7 @@ class Driver extends Model
         'v_type'
     ];
 
-    public function trip(): HasMany
+    public function trips(): HasMany
     {
         return $this->hasMany(Trip::class);
     }
