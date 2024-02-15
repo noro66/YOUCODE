@@ -14,7 +14,7 @@ class TripController extends Controller
      */
     public function index()
     {
-        $trips = Trip::query()->paginate(6);
+        $trips = Trip::query()->with('driver')->paginate(6);
         return view('trip.index', compact('trips'));
     }
 

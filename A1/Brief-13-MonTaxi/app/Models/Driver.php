@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Driver extends Model
@@ -17,4 +18,9 @@ class Driver extends Model
         'matriculate',
         'v_type'
     ];
+
+    public function trip(): HasMany
+    {
+        return $this->hasMany(Trip::class);
+    }
 }
