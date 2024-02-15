@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TripRequest;
+use App\Models\Driver;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class TripController extends Controller
      */
     public function create()
     {
-        return view('trip.create');
+        $drivers = Driver::all();
+        return view('trip.create', compact('drivers'));
     }
 
     /**
@@ -52,7 +54,8 @@ class TripController extends Controller
      */
     public function edit(Trip $trip)
     {
-        return view('trip.edit', compact('trip'));
+        $drivers = Driver::all();
+        return view('trip.edit', compact('trip', 'drivers'));
     }
 
     /**

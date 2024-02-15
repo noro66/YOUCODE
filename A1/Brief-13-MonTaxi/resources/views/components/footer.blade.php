@@ -3,7 +3,7 @@
         class="container mx-auto text-white px-5 py-10 flex flex-col-reverse md:flex-row justify-between space-y-8 md:space-y-0">
         <div class="flex flex-col items-center justify-between space-y-12 md:space-x-2 md:items-start">
             <div>
-                <img src="../images/undraw_cat_epte.svg" class="h-14 rounded-full" alt="Taxi image" width="120px" />
+                <img src="storage/images/undraw_cat_epte.svg" class="h-14 rounded-full" alt="Taxi image" width="120px" />
             </div>
             <div class="flex space-x-2">
                 <a href="#"><i class="ri-facebook-circle-fill text-3xl"></i></a>

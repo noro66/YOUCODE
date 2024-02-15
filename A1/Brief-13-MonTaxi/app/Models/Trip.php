@@ -17,6 +17,7 @@ class Trip extends Model
         'Trip_duration',
         'trip_image',
         'trip_description',
-        'price'
+        'price',
+        'driver_id'
     ];
 }

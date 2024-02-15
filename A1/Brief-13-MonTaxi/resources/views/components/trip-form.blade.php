@@ -1,9 +1,8 @@
-@props(['trip'])
+@props(['trip', 'drivers'])
 
 <a href="{{ route('trip.index') }}" class=" px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Back</a>
 
 <form action="@yield('rout')"  method="POST" enctype="multipart/form-data"  class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
-
     @csrf
     @yield('type')
     <!-- departure -->
@@ -34,7 +33,6 @@
             <input type="time" name="time">
         </div>
         @error('departure_time') <span class="text-red-500">{{$message}}</span>@enderror
-        @error('time') <span class="text-red-500">{{$message}}</span>@enderror
     </div>
 
 
@@ -53,13 +51,22 @@
     </div>
     <!-- Image -->
     <div class="mb-4">
-        <label for="trip_image" class="block my-2 text-sm font-semibold text-gray-600">Image :</label>
-        @if(isset($trip->trip_image) )
-            <img src="{{asset('storage/' . $trip->trip_image)}}" class="w-20" alt="">
-        @endif
+        <label for="trip_image" class="block text-sm font-semibold text-gray-600">Image :</label>
         <input type="file" id="trip_image" name="trip_image" accept="image/*" class="mt-1 p-2 w-full border rounded-md">
         @error('trip_image') <span class="text-red-500">{{$message}}</span>@enderror
     </div>
+    <!-- Select Driver -->
+    <div class="mb-4">
+        <label for="driver_id" class="block text-sm font-semibold text-gray-600">Select Driver :</label>
+        <select id="driver_id" name="driver_id" class="mt-1 p-2 w-full border rounded-md">
+            <option value="" selected>select driver</option>
+            @foreach($drivers as $driver)
+                <option @selected( old('driver_id', $trip->driver_id ) == $driver->id) value="{{ $driver->id }}">{{ $driver->name }}</option>
+            @endforeach
+        </select>
+        @error('driver_id') <span class="text-red-500">{{$message}}</span>@enderror
+    </div>
+
     <div class="mt-4">
         <button type="submit" class="px-4 py-2 bg-orange-700 text-white rounded-md hover:bg-orange-600">Submit</button>
     </div>

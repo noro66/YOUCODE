@@ -1,7 +1,7 @@
 <nav class="container bg-white-900 mx-auto p-4">
     <div class="flex items-center justify-between">
         <div>
-        <h2 class="font-bold text-5xl">MyTaxi</h2>
+            <img src="storage/images/undraw_cat_epte.svg" class="h-14 rounded-full" alt="Taxi image" width="120px" />
         </div>
         <div class="hidden md:flex md:items-center space-x-6">
             <a href="#" class="text-slate-700 hover:text-red-600">Trips</a>

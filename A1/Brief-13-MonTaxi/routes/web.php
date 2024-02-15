@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\TripController;
 use App\Models\Passenger;
@@ -21,5 +22,6 @@ Route::get('/', function () {
 });
 
 Route::resource('trip', TripController::class);
+Route::resource('driver', DriverController::class);
 
 //Route::get('/passenger', [PassengerController::class, 'show']);

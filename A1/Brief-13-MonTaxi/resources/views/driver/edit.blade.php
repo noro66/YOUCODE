@@ -1,15 +1,16 @@
 @extends('base')
-@section('title', 'Create Trips')
+@section('title', 'Create Driver')
 @section('content')
 {{--    <x-nav-bar />--}}
+
     @section('rout')
-    {{route("trip.store")}}
+    {{route("driver.store")}}
     @endsection
     @section('type')
-    @method('post')
+    @method('put')
     @endsection
     <div class="container my-20 mx-auto">
-    <x-trip-form :drivers="$drivers" />
+    <x-driver-form  :driver="$driver" />
     </div>
 
 @endsection
