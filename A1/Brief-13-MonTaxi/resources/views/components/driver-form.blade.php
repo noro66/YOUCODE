@@ -11,6 +11,18 @@
         <input type="text" id="name" name="name" value="{{ old('name', $driver->name ?? '') }}" class="mt-1 p-2 w-full border rounded-md">
         @error('name') <span class="text-red-500">{{$message}}</span>@enderror
     </div>
+    {{--email--}}
+    <div class="mb-4">
+        <label for="email" class="block text-sm font-semibold text-gray-600">Email :</label>
+        <input type="text" id="email" name="email" value="{{ old('email', $driver->users->email ?? '') }}" class="mt-1 p-2 w-full border rounded-md">
+        @error('email') <span class="text-red-500">{{$message}}</span>@enderror
+    </div>
+    {{--password--}}
+    <div class="mb-4">
+        <label for="password" class="block text-sm font-semibold text-gray-600">Email :</label>
+        <input type="text" id="password" name="password" value="{{ old('password', $driver->user->password ?? '') }}" class="mt-1 p-2 w-full border rounded-md">
+        @error('password') <span class="text-red-500">{{$message}}</span>@enderror
+    </div>
     <!-- Description -->
     <div class="mb-4">
         <label for="description" class="block text-sm font-semibold text-gray-600">Description :</label>

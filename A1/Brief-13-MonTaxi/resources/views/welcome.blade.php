@@ -59,5 +59,8 @@
             </div>
         </div>
     </section>
+    <div class="flex items-center justify-center mb-6">
+        <a href="{{route('driver.create')}}" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Sign Up As A Driver</a>
+    </div>
     <x-footer />
 @endsection

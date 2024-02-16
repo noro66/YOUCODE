@@ -13,12 +13,16 @@ class Driver extends Model
     protected  $fillable = [
         'name',
         'description',
-        'avatar',
-        'phone',
         'matriculate',
-        'v_type'
+        'v_type',
+        'available',
+        'matriculate'
     ];
 
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     public function trips(): HasMany
     {
         return $this->hasMany(Trip::class);

@@ -21,8 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'userable_type',
-        'userable_id'
+        'picture'
     ];
 
     /**
@@ -49,5 +48,10 @@ class User extends Authenticatable
     {
         return $this->morphTo();
 
+    }
+
+    public function driverProfile(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Driver::class);
     }
 }

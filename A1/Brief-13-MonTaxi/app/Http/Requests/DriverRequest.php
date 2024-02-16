@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DriverRequest extends FormRequest
 {
@@ -27,7 +28,10 @@ class DriverRequest extends FormRequest
             'avatar' => 'image',
             'phone' => 'required|max:10',
             'matriculate' => 'required|max:8',
-            'v_type' => 'required',
+            'v_type' => 'required|max:12',
+            'payment_type'  => 'required',
+            'password' => 'required|min:8',
+            'email' => ['required', Rule::unique('users', 'email')],
         ];
     }
 }
