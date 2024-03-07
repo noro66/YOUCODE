@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth-session-status class="mb-4" :status="session('success')" />
     <h1 class="mb-4 text-xl font-bold leading-tight tracking-tight text-white md:text-2xl white:text-white">
         Welcome Back Admin
     </h1>

@@ -22,7 +22,11 @@
                 <div class="bg-red-500 p-4 rounded-lg mb-6 text-white text-center">
                     {{session('error')}}
                 </div>
-
+            @endif
+            @if(session('success'))
+                <div class="bg-gray-100-500 p-4 rounded-lg mb-6 text-green-700 text-center">
+                    {{session('success')}}
+                </div>
             @endif
             <form class="space-y-4 md:space-y-6" method="post" action="{{route('admin.forget_password_submit')}}">
                 @csrf

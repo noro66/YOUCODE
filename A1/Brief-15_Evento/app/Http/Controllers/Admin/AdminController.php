@@ -9,6 +9,8 @@ use App\Mail\WebsiteMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
@@ -46,19 +48,44 @@ class AdminController extends Controller
         return view('admin.forget-password');
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function forgetPasswordSubmit(Request $request)
     {
         $this->validate($request, [
             'email' => 'required|email|max:30',
         ]);
        $admin = Admin::where('email', $request->input('email'))->first();
-       $token = Hash::make(time());
-       $admin->token = $token;
+        $token = hash('sha256', Str::random(32));
+        $admin->token = $token;
        $admin->save();
-       $resetPasswordLink = url('admin/reset_password/'. $token . '/' . $request->input('email'));
+       $link = url('admin/reset_password/'. $token . '/' . $request->input('email'));
         $subject = 'Reset Password';
         $body = 'Please Click on the button below to reset your  password';
-        Mail::to($request->input('email'))->send( new WebsiteMail($subject, $body, $resetPasswordLink));
+        Mail::to($request->input('email'))->send( new WebsiteMail($subject, $body, $link));
         return back()->with('success', 'Reset password Sent successfully');
+    }
+
+    public function  resetPassword($token, $email)
+    {
+        if (!Admin::where('token', $token)->where('email', $email)->first()){
+            return to_route('admin.login')->with('error', 'Invalid token or email');
+        }
+        return  view('admin.reset-password', compact('token', 'email'));
+    }
+
+    public function resetPasswordSubmit(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|confirmed'
+        ]);
+        $admin = Admin::where('email', $request->input('email'))
+            ->where('token', $request->input('token'))->first();
+        $admin->password = Hash::make($request->input('password'));
+        $admin->token = '';
+        $admin->update();
+
+        return to_route('admin.login')->with('success', 'Password reset successfully ');
     }
 }
