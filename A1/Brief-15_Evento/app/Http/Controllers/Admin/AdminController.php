@@ -32,4 +32,11 @@ class AdminController extends Controller
         session()->regenerate();
         return to_route('admin.dashboard');
     }
+
+    public function logoutAdmin()
+    {
+        Auth::guard('admin')->logout();
+
+        return to_route('home');
+    }
 }
