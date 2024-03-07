@@ -7,6 +7,8 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Mail\WebsiteMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -38,5 +40,25 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
 
         return to_route('home');
+    }
+    public function forgetPassword()
+    {
+        return view('admin.forget-password');
+    }
+
+    public function forgetPasswordSubmit(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email|max:30',
+        ]);
+       $admin = Admin::where('email', $request->input('email'))->first();
+       $token = Hash::make(time());
+       $admin->token = $token;
+       $admin->save();
+       $resetPasswordLink = url('admin/reset_password/'. $token . '/' . $request->input('email'));
+        $subject = 'Reset Password';
+        $body = 'Please Click on the button below to reset your  password';
+        Mail::to($request->input('email'))->send( new WebsiteMail($subject, $body, $resetPasswordLink));
+        return back()->with('success', 'Reset password Sent successfully');
     }
 }

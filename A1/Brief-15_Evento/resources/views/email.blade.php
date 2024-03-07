@@ -1,10 +1,9 @@
 <x-mail::message>
-# Introduction
+# $subject
+    <h3>$body</h3>
 
-The body of your message.
-
-<x-mail::button :url="''">
-Button Text
+<x-mail::button :url="$link">
+$subject
 </x-mail::button>
 
 Thanks,<br>

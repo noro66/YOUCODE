@@ -32,6 +32,15 @@ Route::middleware('auth')->group(function () {
 Route::get('admin/login', [AdminController::class, 'login'])
     ->name('admin.login');
 
+Route::get('admin/forget-password', [AdminController::class, 'forgetPassword'])
+    ->name('admin.forget_password');
+
+Route::get('admin/forget-password_submit', [AdminController::class, 'forgetPasswordSubmit'])
+    ->name('admin.forget_password_submit');
+
+Route::get('admin/reset_password/{token}/{email}', [AdminController::class, 'resetPasswordSubmit'])
+    ->name('admin.reset_password');
+
 Route::post('admin/login', [AdminController::class, 'loginStore'])
     ->name('admin.login');
 
