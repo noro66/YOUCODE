@@ -4,6 +4,7 @@ namespace App\Http\Controllers\organizer;
 
 use App\Http\Controllers\Controller;
 use App\Mail\WebsiteMail;
+use App\Models\Category;
 use App\Models\Organizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -120,5 +121,10 @@ class OrganizerController extends Controller
         return to_route('organizer.login')->with('success', 'Password reset successfully ');
     }
 
+    public function events()
+    {
+        $categories = Category::all();
+        return view('organizer.events', compact('categories'));
 
+    }
 }

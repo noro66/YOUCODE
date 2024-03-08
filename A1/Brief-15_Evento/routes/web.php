@@ -106,8 +106,10 @@ Route::middleware('organizer')->group(function (){
     Route::get('organizer/events', [OrganizerController::class, 'events'])
         ->name('organizer.events');
 
-    ;Route::get('organizer/settings', [OrganizerController::class, 'settings'])
+    Route::get('organizer/settings', [OrganizerController::class, 'settings'])
         ->name('organizer.settings');
+
+
 //    Route::resource('event', CategoryController::class);
 });
 
