@@ -2,9 +2,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('success')" />
     <h1 class="mb-4 text-xl font-bold leading-tight tracking-tight text-white md:text-2xl white:text-white">
-        Welcome Back Organizer
+        Welcome
     </h1>
-    <form method="POST" action="{{ route('admin.login') }}">
+    <form method="POST" action="{{ route('organizer.register') }}">
         @csrf
         <!-- Name -->
         <div>

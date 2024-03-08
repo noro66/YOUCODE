@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Organizer extends Model
+class Organizer extends Authenticatable
 {
-    use HasFactory;
-    protected string $guard = 'organizer';
 
     use HasApiTokens, HasFactory, Notifiable;
+    protected $guard = 'organizer';
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +23,7 @@ class Organizer extends Model
         'name',
         'email',
         'password',
+        'token'
     ];
 
     /**

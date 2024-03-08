@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/dash', function () {
+    return view('TestDashboard');
+})->name('dash');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -83,6 +87,9 @@ Route::middleware(['guestCheck:admin', 'guest', 'guestCheck:organizer'])->group(
 
     Route::post('organizer/login', [OrganizerController::class, 'loginStore'])
         ->name('organizer.login');
+
+    Route::get('organizer/register',[OrganizerController::class, 'registerIndex'])->name('organizer.register');
+    Route::post('organizer/register',[OrganizerController::class, 'registerStore'])->name('organizer.register.store');
 });
 
 
@@ -92,6 +99,15 @@ Route::middleware('organizer')->group(function (){
 
     Route::post('organizer/logout', [OrganizerController::class, 'logoutOrganizer'])
         ->name('organizer.logout');
+
+    Route::get('organizer/profile', [OrganizerController::class, 'profile'])
+        ->name('organizer.profile');
+
+    Route::get('organizer/events', [OrganizerController::class, 'events'])
+        ->name('organizer.events');
+
+    ;Route::get('organizer/settings', [OrganizerController::class, 'settings'])
+        ->name('organizer.settings');
 //    Route::resource('event', CategoryController::class);
 });
 

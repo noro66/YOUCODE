@@ -19,6 +19,34 @@ class OrganizerController extends Controller
         return view('organizer.dashboard');
     }
 
+    public function registerIndex()
+    {
+        return view('organizer.register');
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function  registerStore(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'email|required|max:255',
+            'password' => 'required|confirmed'
+        ]);
+        $user = Organizer::create([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password'))
+        ]);
+
+        Auth::guard('organizer')->attempt($request->only(['email', 'password']), $request->input('remember_me'));
+
+        return to_route('organizer.dashboard');
+
+    }
+
     public function login()
     {
         return view('organizer.login');
@@ -88,4 +116,6 @@ class OrganizerController extends Controller
 
         return to_route('organizer.login')->with('success', 'Password reset successfully ');
     }
+
+
 }

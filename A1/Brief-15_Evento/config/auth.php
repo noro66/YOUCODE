@@ -76,7 +76,7 @@ return [
             'driver' => 'eloquent',
             'model' => User::class,
         ],
-        'organizers' => [
+        'organizer' => [
             'driver' => 'eloquent',
             'model' => Organizer::class,
         ],
