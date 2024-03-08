@@ -12,30 +12,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="antialiased bg-gray-200 ">
-<section class="w-full h-screen flex justify-between items-center">
-    <div class="w-[20vw] h-screen bg-gray-900 py-[30px] px-8">
+<section class="w-full  h-screen flex justify-between items-center">
+    <div class="w-[20vw] h-screen  bg-gray-900 py-[30px] px-8">
         <ul class="space-y-[10px]" >
 
-            <li class="flex items-center gap-x-4 rounded mb-[40px]" >
+            <li class="flex sm:bg-black items-center gap-x-4  rounded mb-[40px]" >
                 <img src="{{asset('storage/Publicimages/logo.svg')}}" alt="Dashboard img" class="w-[200px]" >
             </li>
 
-            <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
+            <li class="flex sm:bg-black items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
                 <img src="{{asset('storage/Publicimages/dashboardImage.svg')}}" alt="Dashboard img" class="w-[40px]" >
                 <a href="{{route('organizer.dashboard')}}" class="hidden lg:flex font-[500] text-lg text-white" >Dashboard</a>
             </li>
 
-            <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
+            <li class="flex sm:bg-black items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
                 <img src="{{asset('storage/Publicimages/events.svg')}}" alt="Reservation img" class="w-[40px]" >
                 <a href="{{route('organizer.events')}}" class="hidden lg:flex font-[500] text-lg text-white" >Events</a>
             </li>
 
-            <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
+            <li class="flex sm:bg-black items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
                 <img src="{{asset('storage/Publicimages/profile.svg')}}" alt="Profile Img" class="w-[40px]" >
                 <a href="{{route('organizer.profile')}}" class="hidden lg:flex font-[500] text-lg text-white" >Profile</a>
             </li>
 
-            <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
+            <li class="flex sm:bg-black items-center gap-x-4 bg-gray-100/10 rounded py-[8px] px-2 lg:px-6 hover:bg-gray-100/30" >
                 <img src="{{asset('storage/Publicimages/settings.svg')}}" alt="Settings Img" class="w-[40px]" >
                 <a href="{{route('organizer.settings')}}" class="hidden lg:flex font-[500] text-lg text-white" >Settings</a>
             </li>
@@ -56,9 +56,9 @@
                 </div>
             @endif
             <!-- Modal backdrop -->
-            <div id="modalBackdrop" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div id="modalBackdrop" class="fixed  inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
                 <!-- Modal container -->
-                <div class="bg-white p-8 rounded shadow-md w-1/3">
+                <div class="bg-white p-8 sm:w-full  rounded shadow-md ">
                     <div class="flex justify-between items-baseline">
                         <!-- Modal content -->
                         <h2 class="text-lg  mb-1">Add Event</h2>
@@ -113,6 +113,29 @@
                         <button type="submit"  class="w-full bg-gray-900 px-4 ml-2 py-2 rounded m-4 text-gray-300 hover:text-slate-50">Submit</button>
                     </form>
                 </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                @foreach ($events as $event)
+                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <a href="#">
+                            <img class="rounded-t-lg m-auto p-1" src="{{asset('storage/'. $event->poster_image)}}" alt="" />
+                        </a>
+                        <div class="p-5">
+                            <a href="#">
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100"> Title : {{$event->title}}</h5>
+                            </a>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <span class="dark:text-gray-100 font-bold">Description :</span> {{Str::limit($event->description, 15)}}</p>
+                            <a href="{{route('event.show', $event->id)}}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Read more
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                @endforeach
+                {{$events->links()}}
             </div>
         </div>
     </div>

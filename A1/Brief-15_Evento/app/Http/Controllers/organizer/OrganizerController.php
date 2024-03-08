@@ -124,7 +124,8 @@ class OrganizerController extends Controller
     public function events()
     {
         $categories = Category::all();
-        return view('organizer.events', compact('categories'));
+        $events = Auth::guard('organizer')->user()->event()->paginate(8);
+        return view('organizer.events', compact('categories', 'events'));
 
     }
 }
