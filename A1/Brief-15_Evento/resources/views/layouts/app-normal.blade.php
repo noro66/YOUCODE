@@ -21,7 +21,7 @@
             <a href="" >Dashboard</a>
         </li>
         <li>
-            <a href="{{route('category.index')}}" >Categories</a>
+            <a href="{{route('events.index')}}" >Categories</a>
         </li>
     </ul>
 

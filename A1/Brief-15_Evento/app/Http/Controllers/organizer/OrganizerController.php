@@ -52,6 +52,9 @@ class OrganizerController extends Controller
         return view('organizer.login');
     }
 
+    /**
+     * @throws ValidationException
+     */
     public  function loginStore(Request $request)
     {
         $this->validate($request, [

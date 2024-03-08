@@ -65,7 +65,7 @@ Route::middleware(['guestCheck:admin', 'guestCheck:organizer', 'guest'])->group(
     Route::post('admin/logout', [AdminController::class, 'logoutAdmin'])
         ->name('admin.logout');
 
-    Route::resource('category', CategoryController::class)->middleware('admin');
+    Route::resource('events', CategoryController::class)->middleware('admin');
 
 
 /*========================= Organizer ================================= */

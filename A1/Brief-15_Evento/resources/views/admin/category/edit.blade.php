@@ -3,9 +3,9 @@
 @section('content')
     <div class="flex  items-center justify-evenly">
         <h1 class="text-2xl font-bold mb-4">Create Category :   </h1>
-        <a href="{{route('category.index')}}" class=" block  px-8 rounded bg-blue-600 text-white py-2 s" >Back</a>
+        <a href="{{route('events.index')}}" class=" block  px-8 rounded bg-blue-600 text-white py-2 s" >Back</a>
     </div>    <div class="w-lg flex flex-col items-center justify-center">
-        <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('events.update', $category->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="mb-4">

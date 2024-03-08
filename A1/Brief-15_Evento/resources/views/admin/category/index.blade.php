@@ -4,7 +4,7 @@
 
     <div class="container m-auto p-4 bg-gray-100">
 
-{{--            <form action="{{ route('category.search') }}" method="GET" class="flex items-center justify-center">--}}
+{{--            <form action="{{ route('events.search') }}" method="GET" class="flex items-center justify-center">--}}
 {{--                @csrf--}}
 {{--                <label>--}}
 {{--                    <input type="text" name="query" placeholder="Search Category" class="px-4 py-2 border-2 border-gray-200 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">--}}
@@ -14,7 +14,7 @@
 {{--        </div>--}}
 
     <div class="flex flex-col justify-center w-4/12 m-auto">
-        <a  href="{{route('category.create')}}">
+        <a  href="{{route('events.create')}}">
         <div class="mb-4 hover:bg-slate-900  border text-white rounded text-center block w-4/12 cursor-pointer  bg-blue-950 py-2 px-1.5 ">
             Create Category
         </div>
@@ -27,13 +27,13 @@
 
                     <h3 class="text-xl font-semibold mb-2"><span class="font-medium">Category Name :</span>  <span class="underline">{{ $category->name }}</span></h3>
                 <div class="p-6 flex items-center justify-between">
-                    <form action="{{route('category.destroy', $category->id)}}" method="POST">
+                    <form action="{{route('events.destroy', $category->id)}}" method="POST">
                         @csrf
                         @method('delete')
                         <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded">Delete Category</button>
                     </form>
                     <div>
-                    <a href="{{route('category.edit', $category->id)}}" class="bg-gray-900 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Update Category</a>
+                    <a href="{{route('events.edit', $category->id)}}" class="bg-gray-900 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Update Category</a>
                     </div>
 
                 </div>

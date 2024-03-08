@@ -1,10 +1,11 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('success')" />
+    <x-auth-session-status class="mb-4 text-red-600" :status="session('status')" />
     <h1 class="mb-4 text-xl font-bold leading-tight tracking-tight text-white md:text-2xl white:text-white">
         Welcome Back Organizer
     </h1>
-    <form method="POST" action="{{ route('admin.login') }}">
+    <form method="POST" action="{{ route('organizer.login') }}">
         @csrf
 
         <!-- Email Address -->

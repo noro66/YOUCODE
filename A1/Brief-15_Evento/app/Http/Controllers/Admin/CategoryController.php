@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.category.index', compact('categories') );
+        return view('admin.events.index', compact('categories') );
     }
 
     /**
@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.events.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoryController extends Controller
         ]);
 
         Category::create($categoryForm);
-        return to_route('category.index');
+        return to_route('events.index');
 
     }
 
@@ -45,7 +45,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.category.edit', compact('category'));
+        return view('admin.events.edit', compact('category'));
     }
 
     /**
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         ]);
 
         $category->fill($categoryForm)->update();
-        return to_route('category.index');
+        return to_route('events.index');
     }
 
     /**
@@ -67,6 +67,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return to_route('category.index');
+        return to_route('events.index');
     }
 }
