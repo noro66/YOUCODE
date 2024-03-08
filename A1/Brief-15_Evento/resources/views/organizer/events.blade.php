@@ -100,10 +100,7 @@
                                     <option class="manually">manually</option>
                                 </select>
                         </div>
-
-
-
-                        <button type="submit" class=" bg-gray-900 px-4 py-1 rounded m-4 text-gray-300 hover:text-slate-50">Submit</button>
+                        <button type="submit" class="w-full bg-gray-900 px-4 ml-2 py-2 rounded m-4 text-gray-300 hover:text-slate-50">Submit</button>
                     </form>
 
                 </div>
