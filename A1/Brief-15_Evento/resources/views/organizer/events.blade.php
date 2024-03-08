@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,13 +7,13 @@
     <title>Posty | dash</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="preconnect" href="https://fonts.bunny.net"/>
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="antialiased bg-gray-200 ">
-<section class="w-full  h-screen flex justify-between items-center">
-    <div class="w-[20vw] h-screen  bg-gray-900 py-[30px] px-8">
+<body class="antialiased bg-gray-200">
+<section class="flex flex-col sm:flex-row h-screen">
+    <div class="sm:w-1/5 bg-gray-900 py-8 px-4">
         <ul class="space-y-[10px]" >
 
             <li class="flex sm:bg-black items-center gap-x-4  rounded mb-[40px]" >
@@ -41,7 +41,7 @@
             </li>
         </ul>
     </div>
-    <div class="w-[80%] h-[100vh] bg-gray-600" >
+    <div class="w-full sm:w-4/5 bg-gray-600 p-4" >
         <div class="bg-gray-600">
 
             <!-- Button to open the modal -->
@@ -58,7 +58,7 @@
             <!-- Modal backdrop -->
             <div id="modalBackdrop" class="fixed  inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
                 <!-- Modal container -->
-                <div class="bg-white p-8 sm:w-full  rounded shadow-md ">
+                <div class="bg-white p-8 s  rounded shadow-md ">
                     <div class="flex justify-between items-baseline">
                         <!-- Modal content -->
                         <h2 class="text-lg  mb-1">Add Event</h2>
@@ -116,26 +116,46 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
                 @foreach ($events as $event)
-                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <a href="#">
-                            <img class="rounded-t-lg m-auto p-1" src="{{asset('storage/'. $event->poster_image)}}" alt="" />
-                        </a>
-                        <div class="p-5">
-                            <a href="#">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100"> Title : {{$event->title}}</h5>
-                            </a>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <span class="dark:text-gray-100 font-bold">Description :</span> {{Str::limit($event->description, 15)}}</p>
-                            <a href="{{route('event.show', $event->id)}}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                Read more
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+
+
+                    <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="flex justify-end px-4 pt-4">
+                            <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                                <span class="sr-only">Open dropdown</span>
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                                 </svg>
-                            </a>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                <ul class="py-2" aria-labelledby="dropdownButton">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center pb-10">
+                            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
+                            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                            <div class="flex mt-4 md:mt-6">
+                                <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add friend</a>
+                                <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Message</a>
+                            </div>
                         </div>
                     </div>
 
                 @endforeach
+                <div class="fixed right-24    bottom-1">
                 {{$events->links()}}
+                </div>
             </div>
         </div>
     </div>
