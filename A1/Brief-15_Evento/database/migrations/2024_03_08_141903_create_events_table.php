@@ -21,8 +21,8 @@ return new class extends Migration
                 $table->string('Address');
                 $table->string('poster_image');
                 $table->integer('seats');
-                $table->string('available_seats');
-                $table->string('seat_price')->nullable();
+                $table->integer('available_seats');
+                $table->unsignedFloat('seat_price')->nullable();
                 $table->enum('status', ['Pending', 'Approved'])->default('Pending');
                 $table->enum('confirmation_type', ['automatic', 'manually'])->default('automatic');
                 $table->softDeletes();

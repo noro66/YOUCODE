@@ -43,9 +43,18 @@
     </div>
     <div class="w-[80%] h-[100vh] bg-gray-600" >
         <div class="bg-gray-600">
+
             <!-- Button to open the modal -->
             <button id="openModalButton" onclick="toggleModal()" class=" bg-gray-900 px-4 py-1 rounded m-4 text-gray-300 hover:text-slate-50-100">Create Event</button>
-
+            @if($errors->any())
+                <div class="bg-red-100  w-6/12 m-auto border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <!-- Modal backdrop -->
             <div id="modalBackdrop" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
                 <!-- Modal container -->
@@ -60,23 +69,24 @@
                     </div>
 
                     <!-- Form -->
-                    <form>
+                    <form action="{{route('event.store')}}" method="post" enctype="multipart/form-data" >
+                        @csrf
                         <div class="mb-1">
-                           <input type="text" id="title" name="title"  placeholder="Event Title" class="mt-1 p-2 block w-full text-black border rounded-md">
+                           <input value="{{old('title')}}" type="text" id="title" name="title"  placeholder="Event Title" class="mt-1 p-2 block w-full text-black border rounded-md @error('title')  border-red-500 @enderror">
                         </div>
 
                         <div class="mb-1">
-                             <textarea id="description" name="description" placeholder="Event Description" class="mt-1 p-2 block w-full border rounded-md"></textarea>
+                             <textarea id="description" name="description" placeholder="Event Description" class="mt-1 p-2 block w-full border rounded-md @error('description')  border-red-500 @enderror">{{old('description')}}</textarea>
                         </div>
 
                         <div class="mb-1">
-                          <input type="date" id="date" name="date" placeholder="Event Date" class="mt-1 p-2 block w-full border rounded-md">
+                          <input value="{{old('date')}}" type="date" id="date" name="date" placeholder="Event Date" class="mt-1 p-2 block w-full border rounded-md @error('date')  border-red-500 @enderror">
                         </div>
                         <div class="mb-1">
-                            <input type="time" id="time" name="time" placeholder="Event Time" class="mt-1 p-2 block w-full border rounded-md">
+                            <input value="{{old('time')}}" type="time" id="time" name="time" placeholder="Event Time" class="mt-1 p-2 block w-full border rounded-md @error('time')  border-red-500 @enderror">
                         </div>
                         <div class="mb-1">
-                              <input class="p-2  rounded w-full border-2  border" type="text" list="categoryList" name="category_id" id="category_id" placeholder="Search for a category">
+                              <input value="{{old('category')}}" class="p-2  rounded w-full border-2 @error('category') border-red-500 @enderror" type="text" list="categoryList" name="category" id="category_id" placeholder="Search for a category ">
                             <datalist id="categoryList">
                                 @foreach($categories as $category)
                                 <option value="{{$category->name}}">
@@ -84,43 +94,35 @@
                             </datalist>
                         </div>
                         <div class="mb-1">
-                           <input type="text" id="Address" placeholder="Event Address" name="Address" class="mt-1 p-2 block w-full border rounded-md">
+                           <input value="{{old('Address')}}" type="text" id="Address" placeholder="Event Address" name="Address" class="mt-1 p-2 block w-full border rounded-md @error('Address')  border-red-500 @enderror">
                         </div>
                         <div class="mb-1">
-                            <input type="file" id="poster_image" placeholder="Event poster image" name="poster_image" class="mt-1 p-2 block w-full border rounded-md">
+                            <input value="{{old('poster_image')}}" type="file" id="poster_image" placeholder="Event poster image" name="poster_image" class="mt-1 p-2 block w-full border rounded-md @error('poster_image') border-red-500 @enderror">
                         </div>
                         <div class="mb-1">
-                    <input type="number" id="seats" placeholder="Event poster seats" name="seats" class="mt-1 p-2 block w-full border rounded-md">
+                            <input value="{{old('seats')}}" type="number" id="seats" placeholder="Event poster seats" name="seats" class="mt-1 p-2 block w-full border rounded-md @error('seats') border-red-500 @enderror">
                         </div>
 
                         <div class="mb-1">
-                                <select class="p-2">
-                                    <option selected >Select Confirmation Type</option>
-                                    <option class="automatic">automatic</option>
-                                    <option class="manually">manually</option>
+                                <select name="confirmation_type"  class="p-2 @error('confirmation_type') border border-red-500 @enderror">
+                                    <option selected   >Select Confirmation Type</option>
+                                    <option @if(old('confirmation_type') === 'automatic') selected @endif class="automatic">automatic</option>
+                                    <option @if(old('confirmation_type') === 'manually') selected @endif class="manually">manually</option>
                                 </select>
                         </div>
-                        <button type="submit" class="w-full bg-gray-900 px-4 ml-2 py-2 rounded m-4 text-gray-300 hover:text-slate-50">Submit</button>
+                        <button type="submit"  class="w-full bg-gray-900 px-4 ml-2 py-2 rounded m-4 text-gray-300 hover:text-slate-50">Submit</button>
                     </form>
-
                 </div>
             </div>
-
-            <script>
-                function toggleModal() {
-                    let modalBackdrop = document.getElementById('modalBackdrop');
-                    modalBackdrop.classList.toggle('hidden');
-                }
-            </script>
-
         </div>
     </div>
 </section>
 
 <script>
-    function toogleModal() {
-        let  modal =  document.getElementById('modalBackdrop');
-        modal.classList.toggle('hidden');
+    let modalBackdrop = document.getElementById('modalBackdrop');
+    function toggleModal() {
+        modalBackdrop.classList.toggle('hidden');
+        return 0;
     }
 </script>
 </body>

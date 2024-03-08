@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\organizer\EventController;
 use App\Http\Controllers\organizer\OrganizerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -110,7 +111,7 @@ Route::middleware('organizer')->group(function (){
         ->name('organizer.settings');
 
 
-//    Route::resource('event', CategoryController::class);
+    Route::resource('event', EventController::class);
 });
 
 require __DIR__.'/auth.php';
