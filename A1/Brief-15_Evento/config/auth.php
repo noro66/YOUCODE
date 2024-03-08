@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Admin;
+use App\Models\Organizer;
+use App\Models\User;
+
 return [
 
     /*
@@ -70,15 +74,15 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
-//        'organizers' => [
-//            'driver' => 'eloquent',
-//            'model' => App\Models\Organizer::class,
-//        ],
+        'organizers' => [
+            'driver' => 'eloquent',
+            'model' => Organizer::class,
+        ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => Admin::class,
         ],
     ],
 

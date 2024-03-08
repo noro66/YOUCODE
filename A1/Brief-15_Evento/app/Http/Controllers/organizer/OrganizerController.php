@@ -1,32 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\organizer;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
-use Illuminate\Http\Request;
 use App\Mail\WebsiteMail;
+use App\Models\Organizer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-class AdminController extends Controller
+class OrganizerController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin')->only(['dashboard', 'logoutAdmin', ]);
-    }
-
     public function dashboard()
     {
-        return view('admin.dashboard');
+        return view('organizer.dashboard');
     }
 
     public function login()
     {
-        return view('admin.login');
+        return view('organizer.login');
     }
 
     public  function loginStore(Request $request)
@@ -35,22 +30,22 @@ class AdminController extends Controller
             'email' => 'required|max:255',
             'password' => 'required'
         ]);
-        if(!Auth::guard('admin')->attempt($request->only(['email', 'password']), $request->input('remember_me'))){
+        if(!Auth::guard('organizer')->attempt($request->only(['email', 'password']), $request->input('remember_me'))){
             return  back()->with('status', 'Invalid login details');
         }
         session()->regenerate();
-        return to_route('admin.dashboard');
+        return to_route('organizer.dashboard');
     }
 
-    public function logoutAdmin()
+    public function logoutOrganizer()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('organizer')->logout();
 
-        return to_route('admin.login');
+        return to_route('organizer.login');
     }
     public function forgetPassword()
     {
-        return view('admin.forget-password');
+        return view('organizer.forget-password');
     }
 
     /**
@@ -61,11 +56,11 @@ class AdminController extends Controller
         $this->validate($request, [
             'email' => 'required|email|max:30',
         ]);
-       $admin = Admin::where('email', $request->input('email'))->first();
+        $organizer = Organizer::where('email', $request->input('email'))->first();
         $token = hash('sha256', Str::random(32));
-        $admin->token = $token;
-       $admin->save();
-       $link = url('admin/reset_password/'. $token . '/' . $request->input('email'));
+        $organizer->token = $token;
+        $organizer->save();
+        $link = url('organizer/reset_password/'. $token . '/' . $request->input('email'));
         $subject = 'Reset Password';
         $body = 'Please Click on the button below to reset your  password';
         Mail::to($request->input('email'))->send( new WebsiteMail($subject, $body, $link));
@@ -74,10 +69,10 @@ class AdminController extends Controller
 
     public function  resetPassword($token, $email)
     {
-        if (!Admin::where('token', $token)->where('email', $email)->first()){
-            return to_route('admin.login')->with('error', 'Invalid token or email');
+        if (!Organizer::where('token', $token)->where('email', $email)->first()){
+            return to_route('organizer.login')->with('error', 'Invalid token or email');
         }
-        return  view('admin.reset-password', compact('token', 'email'));
+        return  view('organizer.reset-password', compact('token', 'email'));
     }
 
     public function resetPasswordSubmit(Request $request)
@@ -85,12 +80,12 @@ class AdminController extends Controller
         $this->validate($request, [
             'password' => 'required|confirmed'
         ]);
-        $admin = Admin::where('email', $request->input('email'))
+        $organizer = Organizer::where('email', $request->input('email'))
             ->where('token', $request->input('token'))->first();
-        $admin->password = Hash::make($request->input('password'));
-        $admin->token = '';
-        $admin->update();
+        $organizer->password = Hash::make($request->input('password'));
+        $organizer->token = '';
+        $organizer->update();
 
-        return to_route('admin.login')->with('success', 'Password reset successfully ');
+        return to_route('organizer.login')->with('success', 'Password reset successfully ');
     }
 }

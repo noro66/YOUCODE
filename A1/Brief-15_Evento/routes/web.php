@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\organizer\OrganizerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,10 +32,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
-/* Admin reset password */
+/*================================ Admin ================================*/
 
-
-Route::middleware('guest')->group(function (){
+Route::middleware(['guestCheck:admin', 'guestCheck:organizer', 'guest'])->group(function () {
     Route::get('admin/login', [AdminController::class, 'login'])
         ->name('admin.login');
 
@@ -55,14 +55,44 @@ Route::middleware('guest')->group(function (){
 });
 
 
-Route::middleware('admin')->group(function (){
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');
 
     Route::post('admin/logout', [AdminController::class, 'logoutAdmin'])
         ->name('admin.logout');
-    Route::resource('category', CategoryController::class);
 
+    Route::resource('category', CategoryController::class)->middleware('admin');
+
+
+/*========================= Organizer ================================= */
+Route::middleware(['guestCheck:admin', 'guest', 'guestCheck:organizer'])->group(function (){
+    Route::get('organizer/login', [OrganizerController::class, 'login'])
+        ->name('organizer.login');
+
+    Route::get('organizer/forget-password', [OrganizerController::class, 'forgetPassword'])
+        ->name('organizer.forget_password');
+
+    Route::post('organizer/forget-password_submit', [OrganizerController::class, 'forgetPasswordSubmit'])
+        ->name('organizer.forget_password_submit');
+
+    Route::get('organizer/reset_password/{token}/{email}', [OrganizerController::class, 'resetPassword'])
+        ->name('organizer.reset_password');
+
+    Route::post('organizer/reset_password_submit', [OrganizerController::class, 'resetPasswordSubmit'])
+        ->name('organizer.reset_password_submit');
+
+    Route::post('organizer/login', [OrganizerController::class, 'loginStore'])
+        ->name('organizer.login');
+});
+
+
+Route::middleware('organizer')->group(function (){
+    Route::get('organizer/dashboard', [OrganizerController::class, 'dashboard'])
+        ->name('organizer.dashboard');
+
+    Route::post('organizer/logout', [OrganizerController::class, 'logoutOrganizer'])
+        ->name('organizer.logout');
+//    Route::resource('event', CategoryController::class);
 });
 
 require __DIR__.'/auth.php';
