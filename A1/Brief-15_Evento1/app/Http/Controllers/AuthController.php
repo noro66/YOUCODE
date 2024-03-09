@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\WebsiteMail;
 use App\Models\Organizer;
 use App\Models\Participant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -58,7 +61,7 @@ class AuthController extends Controller
 
     public function login()
     {
-        return view('Auth.login');
+        return view('auth.login');
     }
 
     /**
@@ -85,5 +88,48 @@ class AuthController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         return to_route('login');
+    }
+
+    public function forgetPassword()
+    {
+        return view('auth.forget-password');
+    }
+
+    public function forgetPasswordSubmit(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email|max:30',
+        ]);
+        $user = User::where('email', $request->input('email'))->first();
+        $token = hash('sha256', Str::random(32));
+        $user->token = $token;
+        $user->save();
+        $link = url('auth.reset_password/'. $token . '/' . $request->input('email'));
+        $subject = 'Reset Password';
+        $body = 'Please Click on the button below to reset your  password';
+        Mail::to($request->input('email'))->send( new WebsiteMail($subject, $body, $link));
+        return back()->with('success', 'Reset password Sent successfully');
+    }
+
+    public function  resetPassword($token, $email)
+    {
+        if (!User::where('token', $token)->where('email', $email)->first()){
+            return to_route('auth.login')->with('error', 'Invalid token or email');
+        }
+        return  view('auth.reset-password', compact('token', 'email'));
+    }
+
+    public function resetPasswordSubmit(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|confirmed'
+        ]);
+        $user = User::where('email', $request->input('email'))
+            ->where('token', $request->input('token'))->first();
+        $user->password = Hash::make($request->input('password'));
+        $user->token = '';
+        $user->update();
+
+        return to_route('auth.login')->with('success', 'Password reset successfully ');
     }
 }
