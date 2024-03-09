@@ -19,6 +19,6 @@ class UserAccess
         if (Auth::check() && Auth::user()->type === $userAccess){
             return $next($request);
         }
-        return abort(403, 'You dont Have the permission to access this page');
+        return abort(403 );
     }
 }

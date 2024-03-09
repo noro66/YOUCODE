@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Organizer\OrganizerController;
+use App\Http\Controllers\Participant\ParticipantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +19,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 /*=========== Guest ============*/
-Route::middleware('guest')
-    ->group( function (){
         Route::get('organizer/register', [AuthController::class, 'registerAsOrganizer'])
             ->name('organizer.register');
 
         Route::get('participant/register', [AuthController::class, 'registerAsParticipant'])
             ->name('participant.register');
+
+        Route::post('auth/register', [AuthController::class, 'registerSave'])
+            ->name('auth.register');
+
 
         Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 
@@ -38,31 +42,33 @@ Route::middleware('guest')
         Route::post('auth/forget-password_submit', [AuthController::class, 'forgetPasswordSubmit'])
             ->name('auth.forget_password_submit');
 
-        Route::get('auth/reset_password/{token}/{email}', [AuthController::class, 'resetPassword'])
+        Route::get('/auth.reset_password/{token}/{email}', [AuthController::class, 'resetPassword'])
             ->name('auth.reset_password');
 
         Route::post('auth/reset_password_submit', [AuthController::class, 'resetPasswordSubmit'])
             ->name('auth.reset_password_submit');
-});
+
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
 
 /*=========== Organizer ============*/
-Route::middleware('$userAccess:organizer')
+Route::middleware(['auth', 'user-access:organizer'])
     ->group( function (){
         Route::get('organizer/dashboard', [OrganizerController::class, 'dashboard'])
             ->name('organizer.dashboard');
 });
 
 /*=========== Participant ============*/
-Route::middleware('$userAccess:participant')
+Route::middleware(['auth', 'user-access:participant'])
     ->group( function (){
-        Route::get('participant/dashboard', [AuthController::class, 'dashboard'])
+        Route::get('participant/dashboard', [ParticipantController::class, 'dashboard'])
             ->name('participant.dashboard');
 
 });
 
 /*=========== Admin ============*/
-Route::middleware('$userAccess:admin')
+Route::middleware(['auth', 'user-access:admin'])
     ->group( function (){
-        Route::get('admin/dashboard', [AuthController::class, 'dashboard'])
+        Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
             ->name('admin.dashboard');
 });

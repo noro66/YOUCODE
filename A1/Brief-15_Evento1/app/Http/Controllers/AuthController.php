@@ -23,7 +23,7 @@ class AuthController extends Controller
     }
     public function registerAsOrganizer()
     {
-        return view('auth.registerAsOrganizer');
+        return view('auth.registerAsOrganiser');
     }
     public function registerAsParticipant()
     {
@@ -33,7 +33,7 @@ class AuthController extends Controller
     /**
      * @throws ValidationException
      */
-    public function registerSave(Request $request): \Illuminate\Http\RedirectResponse
+    public function registerSave(Request $request)
     {
         Validator::make($request->all(),[
             'name' => 'required',
@@ -41,17 +41,19 @@ class AuthController extends Controller
             'password' => 'required|confirmed',
             'type' => 'required| in:organizer,participant'
         ])->validate();
+//        dd($request->all());
 
        $user =  User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
+           'type' => $request->input('type')
         ]);
-        if ($request->input('type') === 'organizer'){
+        if ($user->type === 'organizer'){
             Organizer::create([
                 'user_id' => $user->id,
             ]);
-        }elseif ($request->input('type') === 'participant'){
+        }elseif ($user->type === 'participant'){
             Participant::create([
                 'user_id' => $user->id,
             ]);
@@ -67,7 +69,7 @@ class AuthController extends Controller
     /**
      * @throws ValidationException
      */
-    public function loginAction(Request $request): \Illuminate\Http\RedirectResponse
+    public function loginAction(Request $request)
     {
         Validator::make($request->all(),[
             'email' => 'required|email',
@@ -83,11 +85,12 @@ class AuthController extends Controller
         return to_route(Auth::user()->type . '.dashboard');
     }
 
-    public function logout(Request $request): \Illuminate\Http\RedirectResponse
+    public function logout(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::logout();
         $request->session()->invalidate();
-        return to_route('login');
+        $request->session()->regenerateToken();
+        return to_route('home');
     }
 
     public function forgetPassword()
@@ -119,16 +122,27 @@ class AuthController extends Controller
         return  view('auth.reset-password', compact('token', 'email'));
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function resetPasswordSubmit(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'email' => 'required|email',
+            'token' => 'required'
         ]);
         $user = User::where('email', $request->input('email'))
             ->where('token', $request->input('token'))->first();
-        $user->password = Hash::make($request->input('password'));
-        $user->token = '';
-        $user->update();
+        if ($user){
+            $user->password = Hash::make($request->input('password'));
+            $user->token = '';
+            $user->update();
+        }else {
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
 
         return to_route('auth.login')->with('success', 'Password reset successfully ');
     }

@@ -13,7 +13,7 @@
                 </div>
 
             @endif
-            <form class="space-y-4 md:space-y-6" method="post" action="{{route('admin.reset_password_submit')}}">
+            <form class="space-y-4 md:space-y-6" method="post" action="{{route('auth.reset_password_submit')}}">
                 @csrf
                 <input type="hidden" name="token" value="{{$token}}"/>
                 <input type="hidden" name="email" value="{{$email}}"/>
