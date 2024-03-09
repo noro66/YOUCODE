@@ -28,4 +28,9 @@ class EventController extends Controller
         Event::create($eventForm);
         return Auth::guard('organizer')->user()->event->count();
     }
+
+    public function show(Event $event)
+    {
+        return view('organizer.events.show', compact('event'));
+    }
 }

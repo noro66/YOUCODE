@@ -11,34 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="antialiased bg-gray-200 ">
-<nav class="p-6 bg-white flex items-center justify-between mb-4">
-    <ul class="flex justify-between gap-6">
-        <li>
-            <a href="/" >Home</a>
-        </li>
-        <li>
-            <a href="" >Dashboard</a>
-        </li>
-        <li>
-            <a href="{{route('events.index')}}" >Categories</a>
-        </li>
-    </ul>
-
-    <ul class="flex justify-between gap-6">
-
-        <li>
-            <a href="" >{{auth()->guard('admin')->user()->name}}</a>
-        </li>
-        <li>
-            <form action="{{ route('admin.logout')}}" method="post">
-                @csrf
-                <button type="submit" >Logout</button>
-            </form>
-        </li>
-
-    </ul>
-</nav>
+<body class="antialiased dark:bg-gray-800 dark:text-white">
 
 @yield('content')
 </body>
