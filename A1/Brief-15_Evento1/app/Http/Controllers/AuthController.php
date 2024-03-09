@@ -20,17 +20,17 @@ class AuthController extends Controller
     }
     public function registerAsOrganizer()
     {
-        return view('Auth.organizer.register');
+        return view('auth.registerAsOrganizer');
     }
     public function registerAsParticipant()
     {
-        return view('Auth.participant.register');
+        return view('auth.registerAsParticipant');
     }
 
     /**
      * @throws ValidationException
      */
-    public function registerSave(Request $request)
+    public function registerSave(Request $request): \Illuminate\Http\RedirectResponse
     {
         Validator::make($request->all(),[
             'name' => 'required',
@@ -61,7 +61,10 @@ class AuthController extends Controller
         return view('Auth.login');
     }
 
-    public function loginAction(Request $request)
+    /**
+     * @throws ValidationException
+     */
+    public function loginAction(Request $request): \Illuminate\Http\RedirectResponse
     {
         Validator::make($request->all(),[
             'email' => 'required|email',
@@ -73,17 +76,11 @@ class AuthController extends Controller
                 'email' => trans('auth.failed')
             ]);
         };
-
         $request->session()->regenerate();
-        if (auth()->user()->type === 'participant'){
-            return to_route('appropriate.dashboard');
-        }else{
-            return to_route('home');
-        }
-
+        return to_route(Auth::user()->type . '.dashboard');
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): \Illuminate\Http\RedirectResponse
     {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
