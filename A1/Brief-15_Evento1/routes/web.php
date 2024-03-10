@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Organizer\OrganizerController;
 use App\Http\Controllers\Participant\ParticipantController;
@@ -71,4 +72,6 @@ Route::middleware(['auth', 'user-access:admin'])
     ->group( function (){
         Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
             ->name('admin.dashboard');
+
+        Route::resource('category', CategoryController::class);
 });
