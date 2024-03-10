@@ -60,7 +60,7 @@
                 </ul>
             </div>
 
-            <div class="w-4/5 bg-gray-600 p-6">
+            <div class="w-4/5 bg-gray-600">
                 @yield('content')
             </div>
         </section>

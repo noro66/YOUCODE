@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->dateTime('date');
-            $table->foreignId('added_by')->references('id')->on('organizers');
-            $table->foreignId('category_id')->references('id')->on('categories');
+            $table->foreignId('added_by')->references('id')->on('organizers')
+                ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('category_id')->references('id')->on('categories')
+                ->cascadeOnUpdate();
             $table->string('Address');
             $table->string('poster_image');
             $table->integer('seats');

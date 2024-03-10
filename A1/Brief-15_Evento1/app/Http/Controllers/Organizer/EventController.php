@@ -31,8 +31,7 @@ class EventController extends Controller
         unset($eventForm['time'], $eventForm['_token']);
         $eventForm['category_id'] =  Category::where('name', $eventForm['category'])->first()->id;
         $eventForm['available_seats'] = $eventForm['seats'];
-        dd($eventForm);
         Event::create($eventForm);
-        return Auth::guard('organizer')->user()->event->count();
+        return to_route('event.index');
     }
 }

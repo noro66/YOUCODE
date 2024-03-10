@@ -1,28 +1,37 @@
 @extends('layouts.organizer-dashboard')
 
 @section('content')
-    <div class="max-w-xl mx-auto px-4 py-8">
-        <a href="{{ route('event.create') }}" class="block bg-gray-900  hover:bg-gray-700  text-white font-semibold py-2 px-4 rounded-md text-center mb-4">
-            Create Event
-        </a>
-
-        @if($events->count())
-            @foreach($events as $event)
-                <div class="bg-white shadow rounded-md p-4 mb-4">
-                    <h3 class="text-xl font-semibold mb-2">Category Name: <span class="underline">{{ $event->name }}</span></h3>
-                    <div class="flex justify-between items-center">
-                        <form action="{{ route('event.destroy', $event->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded-md">Delete</button>
-                        </form>
-                        <a href="{{ route('event.edit', $event->id) }}" class="bg-gray-900 hover:bg-gray-700 text-white font-bold py-1 px-4 rounded-md">Edit</a>
+    <section class="flex flex-col sm:flex-row h-screen">
+        <div class="w-full sm:w-4/4  bg-gray-600 p-4">
+            <a href="{{route('event.create')}}" class="block w-32 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
+                Add Event
+            </a>
+            <!-- Event cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+                @foreach ($events as $event)
+                    <div class="bg-white border border-gray-200 flex flex-col items-center   rounded-lg shadow">
+                        <a href="{{route('event.show', $event->id)}}" title="Show the Event"><img src="{{asset('storage/'. $event->poster_image)}}"></a>
+                        <hr class="text-black">
+                        <div class="p-4">
+                            <h2 class="text-gray-700 mb-1"><span class="font-bold text-black">Title</span> {{ $event->title }}</h2>
+                            <p class="text-gray-700 mb-1"><span class="font-bold text-black">Date :</span> {{ Carbon\Carbon::parse($event->date)->format('D-M-Y H:i')}}</p>
+                            <p class="text-gray-600"> <span class="font-bold text-black">Description : </span> {{ $event->description }}</p>
+                        </div>
+                        <div class="flex items-center justify-around px-2 w-full ">
+                            <a href="{{route('event.create')}}" class="block w-24 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
+                                Delete
+                            </a>
+                            <a href="{{route('event.create')}}" class="block w-24 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
+                                Update
+                            </a>
+                        </div>
                     </div>
-                </div>
-            @endforeach
-            {{$events->links()}}
-        @else
-            <p class="bg-gray-100 text-xl text-center py-2 rounded-md">There are no events</p>
-        @endif
-    </div>
+                @endforeach
+            </div>
+            <!-- Pagination -->
+            <div class="fixed right-4 bottom-4">
+                {{ $events->links() }}
+            </div>
+        </div>
+    </section>
 @endsection

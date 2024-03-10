@@ -5,5 +5,5 @@
         <h2 class="text-lg font-semibold mb-1">Add Event</h2>
     </div>
     <!-- Form -->
-    <x-event-card :categories="$categories" :route="'event.store'" />
+    <x-event-card :categories="$categories" :route="'event.store'" :method="'post'" />
 @endsection
