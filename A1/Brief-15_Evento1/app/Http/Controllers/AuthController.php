@@ -36,10 +36,10 @@ class AuthController extends Controller
     public function registerSave(Request $request)
     {
         Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
+            'name' => 'required|max:255||unique:users,name',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
-            'type' => 'required| in:organizer,participant'
+            'type' => 'required|in:organizer,participant'
         ])->validate();
 //        dd($request->all());
 
