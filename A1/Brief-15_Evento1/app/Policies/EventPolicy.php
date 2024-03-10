@@ -21,7 +21,7 @@ class EventPolicy
      */
     public function view(User $user, Event $event): bool
     {
-        //
+        return  $user->organizer->id === $event->added_by;
     }
 
     /**
@@ -43,6 +43,7 @@ class EventPolicy
     /**
      * Determine whether the user can delete the model.
      */
+
     public function delete(User $user, Event $event): bool
     {
         return  ($user->organizer->id === $event->added_by && $event->status === 'Pending' );
@@ -51,9 +52,12 @@ class EventPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Event $event): bool
+    public function reserve(User $user, Event $event): bool
     {
-        //
+        if ($user->participant) {
+            return (!($event->bookings->contains('booked_by', $user->participant->id)) && $event->status === 'Approved');
+        }
+        return false;
     }
 
     /**

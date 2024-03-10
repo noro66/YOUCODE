@@ -53,7 +53,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Admin::class);
     }
-    public function participan()
+    public function participant()
     {
         return $this->hasOne(Participant::class);
     }

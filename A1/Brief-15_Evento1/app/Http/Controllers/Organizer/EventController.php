@@ -17,6 +17,11 @@ class EventController extends Controller
        $events =  Event::latest()->paginate(4);
         return view('organizer.event.index', compact('events'));
     }
+
+    public function show(Event $event)
+    {
+        return view('organizer.event.show', compact('event'));
+    }
     public function create()
     {
         $categories = Category::all();
