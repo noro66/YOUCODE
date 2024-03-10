@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Show Category')
+@section('title', 'Show Event')
 
 @section('content')
     <div class="container mx-auto px-4 py-8">
         <div class="flex  items-center justify-between">
-            <h1 class="text-2xl font-bold mb-4">Detail Category</h1>
+            <h1 class="text-2xl font-bold mb-4">Detail Event</h1>
             <a href="{{route('event.index')}}" class=" block  px-8 rounded bg-blue-600 text-white py-2 s" >Back</a>
         </div>
         <hr class="border-b border-gray-300 mb-8">

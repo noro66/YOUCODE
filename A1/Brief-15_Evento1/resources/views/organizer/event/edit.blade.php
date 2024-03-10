@@ -1,4 +1,4 @@
-@extends('layouts.admin-dashboard')
+@extends('layouts.organizer-dashboard')
 
 @section('content')
     <div class="max-w-lg mx-auto">

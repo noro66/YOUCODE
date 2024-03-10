@@ -10,4 +10,9 @@ class OrganizerController extends Controller
     {
         return view('organizer.dashboard');
     }
+
+    public function profile()
+    {
+        return view('organizer.profile');
+    }
 }

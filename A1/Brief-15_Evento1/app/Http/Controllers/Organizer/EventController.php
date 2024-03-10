@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+
+    public function index()
+    {
+       $events =  Event::latest()->paginate(4);
+        return view('organizer.event.index', compact('events'));
+    }
     public function create()
     {
         $categories = Category::all();

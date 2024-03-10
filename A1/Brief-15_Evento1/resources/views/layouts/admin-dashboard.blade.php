@@ -22,7 +22,7 @@
                 <li class="flex items-center gap-x-4 mb-8">
                     <img src="{{ asset('storage/publicImages/logo.svg') }}" alt="Dashboard img" class="w-8">
                 </li>
-                <a href="/organizer/dashboard" class="ml-4 font-semibold text-lg text-white">
+                <a href="/admin/dashboard" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                         <img src="{{ asset('storage/publicImages/dashboard.svg') }}" alt="Dashboard img" class="w-10">
                         <span class="hidden md:inline">Dashboard</span>
@@ -34,26 +34,26 @@
                         <span class="hidden md:inline">Categories</span>
                     </li>
                 </a>
-                <a href="/organizer/events" class="ml-4 font-semibold text-lg text-white">
+                <a href="/admin/events" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                         <img src="{{ asset('storage/publicImages/undraw_dashboard_re_3b76.svg') }}" alt="Events img" class="w-10">
                         <span class="hidden md:inline">Events</span>
                     </li>
                 </a>
-                <a href="/organizer/events" class="ml-4 font-semibold text-lg text-white">
+                <a href="/admin/events" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                         <img src="{{ asset('storage/publicImages/users.svg') }}" alt="Users img" class="w-10">
                         <span class="hidden md:inline">Users</span>
                     </li>
                 </a>
-                <a href="/organizer/profile" class="ml-4 font-semibold text-lg text-white">
+                <a href="/admin/profile" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                         <img src="{{ asset('storage/publicImages/profile.svg') }}" alt="Profile Img" class="w-10">
                         <span class="hidden md:inline">Profile</span>
                     </li>
                 </a>
 
-                <a href="/organizer/settings" class="ml-4 font-semibold text-lg text-white">
+                <a href="/admin/settings" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                         <img src="{{ asset('storage/publicImages/setting.svg') }}" alt="Settings Img" class="w-10">
                         <span class="hidden md:inline">Settings</span>

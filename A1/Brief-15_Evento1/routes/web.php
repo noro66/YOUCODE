@@ -58,6 +58,8 @@ Route::middleware(['auth', 'user-access:organizer'])
     ->group( function (){
         Route::get('organizer/dashboard', [OrganizerController::class, 'dashboard'])
             ->name('organizer.dashboard');
+        Route::get('organizer/profile', [OrganizerController::class, 'profile'])
+            ->name('organizer.profile');
             Route::resource('event', EventController::class);
 });
 
@@ -66,7 +68,6 @@ Route::middleware(['auth', 'user-access:participant'])
     ->group( function (){
         Route::get('participant/dashboard', [ParticipantController::class, 'dashboard'])
             ->name('participant.dashboard');
-
 });
 
 /*=========== Admin ============*/
