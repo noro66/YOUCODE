@@ -25,7 +25,7 @@
                     <button type="submit" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Logout</button>
                 </form>
             @else
-                <a href="#" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Log In</a>
+                <a href="{{route('auth.login')}}" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Log In</a>
             @endauth
         </div>
         <button id="mobile-button" class=" md:hidden">
@@ -116,10 +116,20 @@
                                 </div>
                             @endcan
                             @can('reserve', $event)
-                                <form action="#" method="POST">
+                                <form action="{{route('booking.store')}}" method="POST">
                                     @csrf
+                                    <input type="hidden" name="event_id" value="{{$event->id}}">
                                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Reserve Now
+                                        Book Now
+                                    </button>
+                                </form>
+                            @endcan
+                            @can('canselReservation', $event )
+                                <form action="{{route('booking.destroy', [$event->id, auth()->partic])}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="event_id" value="{{$event->id}}">
+                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                        Book Now
                                     </button>
                                 </form>
                             @endcan

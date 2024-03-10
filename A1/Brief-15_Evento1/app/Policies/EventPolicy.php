@@ -69,6 +69,14 @@ class EventPolicy
         return false;
     }
 
+    public function canselReservation(User $user, Event $event): bool
+    {
+        if ($user->participant ) {
+            return ($event->bookings->contains('booked_by', $user->participant->id));
+        }
+        return false;
+    }
+
     /**
      * Determine whether the user can permanently delete the model.
      */

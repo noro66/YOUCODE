@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Organizer\EventController;
 use App\Http\Controllers\Organizer\OrganizerController;
 use App\Http\Controllers\Participant\ParticipantController;
@@ -69,6 +70,8 @@ Route::middleware(['auth', 'user-access:participant'])
     ->group( function (){
         Route::get('participant/dashboard', [ParticipantController::class, 'dashboard'])
             ->name('participant.dashboard');
+
+        Route::resource('booking', BookingController::class);
 });
 
 /*=========== Admin ============*/
