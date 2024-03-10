@@ -1,17 +1,22 @@
-@extends('layouts.app')
-@section('title', 'Category')
+@extends('layouts.admin-dashboard')
+
 @section('content')
-    <h3 class="my-10 text-center text-3xl text-gray-900">Edit  Category</h3>
-    <div class="w-lg flex flex-col items-center justify-center">
-        <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+    <div class="max-w-lg mx-auto">
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-2xl font-bold">Edit Category</h1>
+            <a href="{{ route('category.index') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Back</a>
+        </div>
+
+        <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
-            @method('put')
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Category Name:</label>
-                <input type="text" id="name" name="name" placeholder="Category Name" value="{{$category->name  ?? old('name')  }}" class="mt-1 px-6 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Category Name:</label>
+                <input type="text" id="name" name="name" placeholder="Category Name" value="{{ $category->name ??  old('name') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                @error('name')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
             </div>
-            <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50">Submit</button>
+            <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded focus:outline-none focus:shadow-outline">Submit</button>
         </form>
     </div>
 @endsection
