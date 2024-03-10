@@ -30,7 +30,7 @@
                 </a>
                 <a href="{{route('event.create')}}" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
-                        <img src="{{ asset('storage/publicImages/event.svg') }}" alt="Categories img" class="w-10">
+                            <img src="{{ asset('storage/publicImages/event.svg') }}" alt="Categories img" class="w-10">
                         <span class="hidden md:inline">Categories</span>
                     </li>
                 </a>
