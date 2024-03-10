@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Organizer\EventController;
 use App\Http\Controllers\Organizer\OrganizerController;
 use App\Http\Controllers\Participant\ParticipantController;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +58,7 @@ Route::middleware(['auth', 'user-access:organizer'])
     ->group( function (){
         Route::get('organizer/dashboard', [OrganizerController::class, 'dashboard'])
             ->name('organizer.dashboard');
+            Route::resource('event', EventController::class);
 });
 
 /*=========== Participant ============*/
