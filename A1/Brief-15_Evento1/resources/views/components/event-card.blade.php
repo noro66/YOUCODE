@@ -15,12 +15,13 @@
     </div>
 
     <div class="mb-1">
-        <input value="{{ Carbon\Carbon::parse($event->date)->format('Y-m-d')  ?? old('date') }}" type="date" id="date" name="date" placeholder="Event Date"
-               class="mt-1 p-2 block w-full border rounded-md focus:outline-none focus:border-indigo-300 @error('date') border-red-600 @enderror  ">
+        <input value="{{ $event !== null ? Carbon\Carbon::parse($event->date)->format('Y-m-d') : old('date')  }}" type="date" id="date" name="date" placeholder="Event Date"
+               class="mt-1 p-2 block w-full border rounded-md focus:outline-none focus:border-indigo-300 @error('date') border-red-600 @enderror">
     </div>
 
+
     <div class="mb-1">
-        <input value="{{ Carbon\Carbon::parse($event->date)->format('H:i')  ?? old('time') }}" type="time" id="time" name="time" placeholder="Event Time"
+        <input value="{{ $event !== null ? Carbon\Carbon::parse($event->date)->format('H:i') :  old('time') }}" type="time" id="time" name="time" placeholder="Event Time"
                class="mt-1  p-2 block w-full border rounded-md focus:outline-none focus:border-indigo-300 @error('time') border-red-600 @enderror ">
     </div>
 

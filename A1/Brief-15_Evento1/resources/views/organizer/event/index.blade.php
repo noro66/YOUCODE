@@ -15,15 +15,17 @@
                         <div class="p-4">
                             <h2 class="text-gray-700 mb-1"><span class="font-bold text-black">Title</span> {{ $event->title }}</h2>
                             <p class="text-gray-700 mb-1"><span class="font-bold text-black">Date :</span> {{ Carbon\Carbon::parse($event->date)->format('D-M-Y H:i')}}</p>
-                            <p class="text-gray-600"> <span class="font-bold text-black">Description : </span> {{ $event->description }}</p>
+                            <p class="text-gray-600"> <span class="font-bold text-black">Description : </span> {{ \Illuminate\Support\Str::limit($event->description , 15)}}</p>
                         </div>
                         <div class="flex items-center justify-around px-2 w-full ">
-                            <a href="{{route('event.destroy', $event->id)}}" class="block w-24 cursor-pointer  bg-red-900 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
-                                Delete
-                            </a>
                             <a href="{{route('event.edit', $event->id)}}" class="block w-24 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
                                 Update
                             </a>
+                            <form action="{{route('event.destroy', $event->id)}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="block w-24 cursor-pointer  bg-red-900 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md mb-4">Delete</button>
+                            </form>
                         </div>
                     </div>
                 @endforeach

@@ -55,4 +55,9 @@ class EventController extends Controller
         $event->fill($eventForm)->update();
         return to_route('event.index');
     }
+
+    public function destroy()
+    {
+
+    }
 }
