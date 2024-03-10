@@ -18,10 +18,10 @@
                             <p class="text-gray-600"> <span class="font-bold text-black">Description : </span> {{ $event->description }}</p>
                         </div>
                         <div class="flex items-center justify-around px-2 w-full ">
-                            <a href="{{route('event.create')}}" class="block w-24 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
+                            <a href="{{route('event.destroy', $event->id)}}" class="block w-24 cursor-pointer  bg-red-900 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
                                 Delete
                             </a>
-                            <a href="{{route('event.create')}}" class="block w-24 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
+                            <a href="{{route('event.edit', $event->id)}}" class="block w-24 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
                                 Update
                             </a>
                         </div>

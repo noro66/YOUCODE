@@ -34,4 +34,25 @@ class EventController extends Controller
         Event::create($eventForm);
         return to_route('event.index');
     }
+    public function edit(Event $event)
+    {
+        $categories = Category::all();
+        return view('organizer.event.edit', compact('event', 'categories'));
+    }
+
+    public function update(EventRequest $request, Event $event)
+    {
+        $eventForm = $request->validated();
+        if ($request->hasFile('poster_image')){
+        $eventForm['poster_image']  = $request->file('poster_image')->store('eventImages', 'public');
+        }else{
+            unset($eventForm['poster_image']);
+        }
+        $eventForm['date'] .= ' ' . $eventForm['time'];
+        unset($eventForm['time'], $eventForm['_token']);
+        $eventForm['category_id'] =  Category::where('name', $eventForm['category'])->first()->id;
+        $eventForm['available_seats'] = $eventForm['seats'];
+        $event->fill($eventForm)->update();
+        return to_route('event.index');
+    }
 }

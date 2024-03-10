@@ -24,4 +24,8 @@ class Event extends Model
         'confirmation_type',
     ];
 
+    public function category()
+    {
+       return $this->belongsTo(Category::class);
+    }
 }

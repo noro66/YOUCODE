@@ -1,6 +1,6 @@
-@props(['categories', 'event', 'route', 'method'])
+@props(['categories', 'event', 'route', 'method', 'id'])
 
-<form action="{{route($route)}}" method="POST" enctype="multipart/form-data"
+<form action="{{route($route, $id ?? null)}}" method="POST" enctype="multipart/form-data"
       class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-1">
     @csrf
     @method($method)
@@ -15,18 +15,18 @@
     </div>
 
     <div class="mb-1">
-        <input value="{{ $event->date  ?? old('date') }}" type="date" id="date" name="date" placeholder="Event Date"
+        <input value="{{ Carbon\Carbon::parse($event->date)->format('Y-m-d')  ?? old('date') }}" type="date" id="date" name="date" placeholder="Event Date"
                class="mt-1 p-2 block w-full border rounded-md focus:outline-none focus:border-indigo-300 @error('date') border-red-600 @enderror  ">
     </div>
 
     <div class="mb-1">
-        <input value="{{ $event->time  ?? old('time') }}" type="time" id="time" name="time" placeholder="Event Time"
+        <input value="{{ Carbon\Carbon::parse($event->date)->format('H:i')  ?? old('time') }}" type="time" id="time" name="time" placeholder="Event Time"
                class="mt-1  p-2 block w-full border rounded-md focus:outline-none focus:border-indigo-300 @error('time') border-red-600 @enderror ">
     </div>
 
     <div class="mb-1">
         <input class="p-2 rounded w-full border border-gray-300 @error('category') border-red-600 @enderror "
-               value="{{ $event->category  ?? old('category') }}" type="text" list="categoryList" name="category"
+               value="{{ $event->category->name  ?? old('category') }}" type="text" list="categoryList" name="category"
                id="category_id" placeholder="Search for a category">
         <datalist id="categoryList">
             @foreach($categories as $category)
