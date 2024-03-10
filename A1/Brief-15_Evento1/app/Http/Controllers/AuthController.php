@@ -58,7 +58,7 @@ class AuthController extends Controller
                 'user_id' => $user->id,
             ]);
         }
-        return to_route('login');
+        return to_route('auth.login');
     }
 
     public function login()
@@ -82,7 +82,8 @@ class AuthController extends Controller
             ]);
         };
         $request->session()->regenerate();
-        return to_route(Auth::user()->type . '.dashboard');
+        return  Auth::user()->type === 'participant' ? to_route('home') :
+            to_route(Auth::user()->type . '.dashboard');
     }
 
     public function logout(Request $request)

@@ -9,8 +9,9 @@
             <!-- Event cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
                 @foreach ($events as $event)
-                    <div class="bg-white border border-gray-200 flex flex-col items-center   rounded-lg shadow">
-                        <a href="{{route('event.show', $event->id)}}" title="Show the Event"><img src="{{asset('storage/'. $event->poster_image)}}"></a>
+                    <div class="bg-white border  border-gray-200 flex flex-col items-center pt-2   rounded-lg shadow">
+                        <a href="{{route('event.show', $event->id)}}" title="Show the Event"><img  class="h-32 w-full" src="{{ asset('storage/' . $event->poster_image) }}">
+                        </a>
                         <hr class="text-black">
                         <div class="p-4">
                             <h2 class="text-gray-700 mb-1"><span class="font-bold text-black">Title</span> {{ $event->title }}</h2>

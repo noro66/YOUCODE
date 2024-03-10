@@ -25,7 +25,7 @@ class EventRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
+            'date' => 'required|date|not_passed',
             'time' => 'required|date_format:H:i',
             'category' => 'required|exists:categories,name',
             'Address' => 'required|string|max:255',
