@@ -18,14 +18,20 @@
                             <p class="text-gray-600"> <span class="font-bold text-black">Description : </span> {{ \Illuminate\Support\Str::limit($event->description , 15)}}</p>
                         </div>
                         <div class="flex items-center justify-around px-2 w-full ">
+                            @can('delete', $event)
                             <a href="{{route('event.edit', $event->id)}}" class="block w-24 cursor-pointer  bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md mb-4">
                                 Update
                             </a>
+                            @endcan
+                            @can('delete', $event)
                             <form action="{{route('event.destroy', $event->id)}}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="block w-24 cursor-pointer  bg-red-900 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md mb-4">Delete</button>
                             </form>
+                                @else
+                                    <button class="block w-24 cursor-pointer  bg-green-900 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md mb-4" disabled>Aprroved</button>
+                            @endcan
                         </div>
                     </div>
                 @endforeach
