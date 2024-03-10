@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
 use App\Models\Category;
 use App\Models\Event;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -36,12 +37,17 @@ class EventController extends Controller
     }
     public function edit(Event $event)
     {
+        $this->authorize('update', $event);
         $categories = Category::all();
         return view('organizer.event.edit', compact('event', 'categories'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(EventRequest $request, Event $event)
     {
+        $this->authorize('update', $event);
         $eventForm = $request->validated();
         if ($request->hasFile('poster_image')){
         $eventForm['poster_image']  = $request->file('poster_image')->store('eventImages', 'public');
@@ -56,8 +62,12 @@ class EventController extends Controller
         return to_route('event.index');
     }
 
-    public function destroy()
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(Event $event)
     {
+        $this->authorize('delete', $event);
 
     }
 }
