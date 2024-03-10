@@ -33,4 +33,9 @@ class Event extends Model
     {
         return $this->hasMany(Booking::class, 'event_id');
     }
+
+    public function organizers()
+    {
+        return $this->belongsTo(Organizer::class);
+    }
 }

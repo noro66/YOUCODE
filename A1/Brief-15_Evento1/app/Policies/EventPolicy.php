@@ -21,7 +21,10 @@ class EventPolicy
      */
     public function view(User $user, Event $event): bool
     {
+        if($user->organizer){
         return  $user->organizer->id === $event->added_by;
+        }
+        return  false;
     }
 
     /**
@@ -37,7 +40,10 @@ class EventPolicy
      */
     public function update(User $user, Event $event): bool
     {
+        if ($user->organizer) {
         return  ($user->organizer->id === $event->added_by && $event->seats === $event->available_sats);
+        }
+        return false;
     }
 
     /**
@@ -46,7 +52,10 @@ class EventPolicy
 
     public function delete(User $user, Event $event): bool
     {
+        if ($user->organizer) {
         return  ($user->organizer->id === $event->added_by && $event->status === 'Pending' );
+        }
+        return  false;
     }
 
     /**

@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+   $events =  \App\Models\Event::with('organizers')->where('status' , '=', 'Approved')->paginate(6);
+    return view('home', compact('events'));
 })->name('home');
 
 /*=========== Guest ============*/
