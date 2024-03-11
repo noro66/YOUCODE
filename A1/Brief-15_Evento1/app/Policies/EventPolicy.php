@@ -41,7 +41,7 @@ class EventPolicy
     public function update(User $user, Event $event): bool
     {
         if ($user->organizer) {
-        return  ($user->organizer->id === $event->added_by && $event->seats === $event->available_sats);
+        return  ($user->organizer->id === $event->added_by && $event->seats === $event->available_sats && $event->status === 'Pending');
         }
         return false;
     }

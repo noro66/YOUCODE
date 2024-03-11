@@ -17,15 +17,15 @@
                             </div>
                         </div>
                         @can('canselReservation', $booking->event)
-                        <div class="w-full p-4">
-                            <form action="{{ route('event.booking', $booking->event->id) }}" method="post" class="mr-1">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Are you sure you want to cancel this Booking?')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                    Cancel Reservation
-                                </button>
-                            </form>
-                        </div>
+                            <div class="w-full p-4">
+                                <form action="{{ route('event.booking', $booking->event->id) }}" method="post" class="mr-1">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Are you sure you want to cancel this Booking?')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                        Cancel Reservation
+                                    </button>
+                                </form>
+                            </div>
                         @endcan
                     </div>
                 @endforeach

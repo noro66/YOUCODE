@@ -52,8 +52,6 @@
                         Already have an account? <a href="{{ route('register') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">register here</a>
                     </p>
                 </div>
-
-
             </div>
         </div>
     </section>

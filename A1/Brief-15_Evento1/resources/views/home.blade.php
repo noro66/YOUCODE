@@ -18,8 +18,8 @@
         <div class="hidden md:flex md:items-center space-x-6">
             <a href="#" class="text-slate-700 hover:text-red-600">Events</a>
             <a href="#" class="text-slate-700 hover:text-red-600">Organizations</a>
-            <a href="#" class="text-slate-700 hover:text-red-600">Dashboard</a>
             @auth()
+            <a href="{{route( auth()->user()->type . '.dashboard')}}" class="text-slate-700 hover:text-red-600">Dashboard</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf
                     <button type="submit" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Logout</button>
@@ -37,8 +37,15 @@
              class="absolute flex hidden flex-col items-center space-y-4 font-bold drop-shadow-lg border border-gray-300 bg-gray-50 py-8 left-6 right-6">
             <a href="#" class="">Events</a>
             <a href="#" class="">Organizations</a>
-            <a href="#" class="">Socials</a>
-            <a href="#" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Log In</a>
+            @auth()
+                <a href="{{route( auth()->user()->type . '.dashboard')}}" class="text-slate-700 hover:text-red-600">Dashboard</a>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <button type="submit" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Logout</button>
+                </form>
+            @else
+                <a href="{{route('auth.login')}}" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Log In</a>
+            @endauth
         </div>
     </div>
 </nav>
