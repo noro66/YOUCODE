@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\UserRequest;
 use App\Mail\WebsiteMail;
 use App\Models\Organizer;
 use App\Models\Participant;
@@ -19,7 +20,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except(['logout', 'updateProfile' ]);
     }
     public function register()
     {
@@ -143,4 +144,22 @@ class AuthController extends Controller
 
         return to_route('auth.login')->with('success', 'Password reset successfully ');
     }
+
+    public function updateProfile(UserRequest $request)
+    {
+        $userForm = $request->validated();
+
+        $user = Auth::user();
+        $user->email = $userForm['email'];
+        $user->name = $userForm['name'];
+
+        if ($request->hasFile('profile_image')) {
+            $user->profile_image = $request->file('profile_image')->store('userImages', 'public');
+        }
+
+        $user->save();
+
+        return  back()->with('success', 'Profile updated successfully!');
+    }
+
 }

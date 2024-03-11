@@ -27,18 +27,26 @@
             </div>
             <!-- Participants awaiting approval -->
             @can('view', $event)
-            <div class="p-6 border-t border-gray-200">
-                <h2 class="text-xl font-semibold text-gray-800">Participants Awaiting Approval : </h2>
-                @if($pendingBookings->count())
-                <ul class="mt-2">
-                    @foreach ($pendingBookings as $pendingBooking)
-                        <li class="text-gray-600">{{ $pendingBookings->participant->user->name }}</li>
-                    @endforeach
-                </ul>
-                @else
-                    <h3 class="text-center mt-4 text-amber-200">There is no pending Booking for this Event</h3>
-                @endif
-            </div>
+                <div class="p-6 border-t border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Participants Awaiting Approval:</h2>
+                    @if($pendingBookings->count())
+                        <ul class="mt-2">
+                            @foreach ($pendingBookings as $pendingBooking)
+                                <li class="flex items-center justify-between text-gray-600">
+                                    <span>{{ $pendingBooking->participant->user->name }}</span>
+                                    <form action="{{ route('booking.approve', $pendingBooking->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="ml-2 px-3 py-1 text-sm bg-green-500 text-white font-semibold rounded hover:bg-green-600 focus:outline-none focus:bg-green-600">Approve</button>
+                                    </form>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <h3 class="text-center mt-4 text-amber-200">There are no pending bookings for this event.</h3>
+                    @endif
+                </div>
+
             @endcan
         </div>
     </div>

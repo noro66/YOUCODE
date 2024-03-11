@@ -25,6 +25,7 @@ Route::get('/', function () {
     return view('home', compact('events'));
 })->name('home');
 
+Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
 /*=========== Guest ============*/
         Route::get('register', [AuthController::class, 'register'])
             ->name('register');
@@ -60,7 +61,9 @@ Route::middleware(['auth', 'user-access:organizer'])
             ->name('organizer.dashboard');
         Route::get('organizer/profile', [OrganizerController::class, 'profile'])
             ->name('organizer.profile');
-            Route::resource('event', EventController::class);
+        Route::resource('event', EventController::class);
+        Route::put('booking/{booking}/approve', [BookingController::class, 'approve'])->name('booking.approve');
+
 });
 
 /*=========== Participant ============*/
@@ -68,6 +71,9 @@ Route::middleware(['auth', 'user-access:participant'])
     ->group( function (){
         Route::get('participant/dashboard', [ParticipantController::class, 'dashboard'])
             ->name('participant.dashboard');
+
+        Route::get('participant/profile', [ParticipantController::class, 'profile'])
+            ->name('participant.profile');
 
         Route::post('event/{event}/booking', [BookingController::class, 'store'])->name('event.booking');
         Route::delete('event/{event}/booking', [BookingController::class, 'destroy'])->name('event.booking');

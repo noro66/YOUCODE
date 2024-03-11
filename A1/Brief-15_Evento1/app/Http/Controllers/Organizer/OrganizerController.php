@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OrganizerController extends Controller
 {
@@ -13,6 +14,7 @@ class OrganizerController extends Controller
 
     public function profile()
     {
-        return view('organizer.profile');
+        $user = Auth::user();
+        return view('organizer.profile', compact('user'));
     }
 }

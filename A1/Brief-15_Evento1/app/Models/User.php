@@ -58,4 +58,9 @@ class User extends Authenticatable
         return $this->hasOne(Participant::class);
     }
 
+    public function getprofileImageAttribute($value): string
+    {
+        return $value ?? 'publicImages/defaultProfileImage.svg';
+    }
+
 }

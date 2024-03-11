@@ -55,4 +55,11 @@ class BookingController extends Controller
         }
         return back();
     }
+
+    public function approve(Booking $booking)
+    {
+        $booking->is_approved = true;
+        $booking->update();
+        return back();
+    }
 }

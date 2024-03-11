@@ -17,4 +17,9 @@ class Participant extends Model
     {
         return $this->hasMany(Booking::class, 'booked_by');
     }
+
+    public function user()
+    {
+            return $this->belongsTo(User::class);
+    }
 }
