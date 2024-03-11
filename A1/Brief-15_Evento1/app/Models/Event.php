@@ -36,7 +36,7 @@ class Event extends Model
 
     public function organizers()
     {
-        return $this->belongsTo(Organizer::class);
+        return $this->belongsTo(Organizer::class, 'added_by');
     }
 
     public function reservedBy(User $user)

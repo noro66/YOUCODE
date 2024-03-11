@@ -16,7 +16,6 @@
             <img src="{{asset('storage/publicImages/undraw_cat_epte.svg')}}" class="h-14 rounded-full" alt="Taxi image" width="120px" />
         </div>
         <div class="hidden md:flex md:items-center space-x-6">
-            <a href="#" class="text-slate-700 hover:text-red-600"> {{ auth()->user()->participant->id }} </a>
             <a href="#" class="text-slate-700 hover:text-red-600">Events</a>
             <a href="#" class="text-slate-700 hover:text-red-600">Organizations</a>
             <a href="#" class="text-slate-700 hover:text-red-600">Dashboard</a>
@@ -36,7 +35,6 @@
     <div class="md:hidden">
         <div id="mobile-menu"
              class="absolute flex hidden flex-col items-center space-y-4 font-bold drop-shadow-lg border border-gray-300 bg-gray-50 py-8 left-6 right-6">
-            <a href="#" class="text-slate-700 hover:text-red-600"> {{ auth()->user()->participant->id }} </a>
             <a href="#" class="">Events</a>
             <a href="#" class="">Organizations</a>
             <a href="#" class="">Socials</a>
@@ -55,8 +53,8 @@
                 lorem ipsum dolor sit, amet consectetur adipisicing elit. At
                 corporis eum impedit unde iure eius? Qui
             </p>
-            <a href="#"
-               class="bg-orange-700 hover:bg-slate-900 self-center md:self-start px-6 py-2 rounded-full">Regester
+            <a href="{{route('register')}}"
+               class="bg-orange-700 hover:bg-slate-900 self-center md:self-start px-6 py-2 rounded-full">Register
                 Now</a>
         </div>
 
@@ -129,8 +127,8 @@
                             <form action="{{route('event.booking', $event->id)}}" method="post" class="mr-1">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                   Cancel Reservation
+                                <button type="submit" onclick="return confirm('Are you sure you want to cancel this Booking ?')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                    Cancel Reservation
                                 </button>
                             </form>
                             @endcan

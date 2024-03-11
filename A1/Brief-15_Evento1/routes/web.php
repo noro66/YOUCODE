@@ -26,11 +26,9 @@ Route::get('/', function () {
 })->name('home');
 
 /*=========== Guest ============*/
-        Route::get('organizer/register', [AuthController::class, 'registerAsOrganizer'])
-            ->name('organizer.register');
+        Route::get('register', [AuthController::class, 'register'])
+            ->name('register');
 
-        Route::get('participant/register', [AuthController::class, 'registerAsParticipant'])
-            ->name('participant.register');
 
         Route::post('auth/register', [AuthController::class, 'registerSave'])
             ->name('auth.register');
@@ -52,7 +50,7 @@ Route::get('/', function () {
         Route::post('auth/reset_password_submit', [AuthController::class, 'resetPasswordSubmit'])
             ->name('auth.reset_password_submit');
 
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
 /*=========== Organizer ============*/
@@ -73,6 +71,7 @@ Route::middleware(['auth', 'user-access:participant'])
 
         Route::post('event/{event}/booking', [BookingController::class, 'store'])->name('event.booking');
         Route::delete('event/{event}/booking', [BookingController::class, 'destroy'])->name('event.booking');
+        Route::get('bookings', [BookingController::class, 'index'])->name('booking.index');
 });
 
 /*=========== Admin ============*/

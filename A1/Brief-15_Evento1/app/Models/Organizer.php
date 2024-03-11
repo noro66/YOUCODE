@@ -11,4 +11,14 @@ class Organizer extends Model
     protected $fillable = [
         'user_id',
     ];
+
+    public function event()
+    {
+        return $this->hasMany(Event::class, 'added_by');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

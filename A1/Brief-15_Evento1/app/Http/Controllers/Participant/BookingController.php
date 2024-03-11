@@ -15,6 +15,13 @@ class BookingController extends Controller
     /**
      * @throws AuthorizationException
      */
+
+    public  function index()
+    {
+        $bookings = Auth::user()->participant->booking()->paginate(4);
+        return view('participant.booking.index', compact('bookings'));
+
+    }
     public function store(Event $event)
     {
         $this->authorize('reserve', $event);
@@ -26,7 +33,7 @@ class BookingController extends Controller
             $booking->is_approved = true;
             $booking->update();
         }
-        return back();
+        return to_route('booking.index');
     }
 
     /**
@@ -39,14 +46,12 @@ class BookingController extends Controller
         $bookings = $event->bookings->where('booked_by', Auth::user()->participant->id);
 
         foreach ($bookings as $booking) {
-            $booking->delete();
             if ($booking->is_approved = true){
-                $event = $booking->event; // Retrieve the related Event model instance
+                $event = $booking->event;
                 ++$event->available_seats;
                 $event->update();
-                $booking->is_approved = true;
-                $booking->update();
             }
+            $booking->delete();
         }
         return back();
     }

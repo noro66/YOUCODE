@@ -12,4 +12,9 @@ class Participant extends Model
     protected $fillable = [
         'user_id',
     ];
+
+    public function booking()
+    {
+        return $this->hasMany(Booking::class, 'booked_by');
+    }
 }

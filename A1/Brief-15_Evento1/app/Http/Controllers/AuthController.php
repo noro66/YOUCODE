@@ -21,13 +21,9 @@ class AuthController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function registerAsOrganizer()
+    public function register()
     {
-        return view('auth.registerAsOrganiser');
-    }
-    public function registerAsParticipant()
-    {
-        return view('auth.registerAsParticipant');
+        return view('auth.register');
     }
 
     /**
