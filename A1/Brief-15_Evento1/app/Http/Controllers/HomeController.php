@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $eventQuery = Event::query();
+        $title = $request->input('title');
+        if ($title){
+            $eventQuery->where('title',  'like', "%{$title}%");
+        }
+
 //        dd('ok');
 //        $title = $request->validate([
 //            'title' => 'required'
@@ -16,7 +22,7 @@ class HomeController extends Controller
 //
 ////        ->where('status' , '=', 'Approved')->paginate(6)
 
-        $events =  Event::latest()->paginate(3);
+        $events =  $eventQuery->get();
         return view('home', compact('events'));
     }
 }

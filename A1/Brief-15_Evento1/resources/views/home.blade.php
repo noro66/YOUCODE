@@ -81,9 +81,8 @@
         </h1>
         <div class="sm:flex sm:wrap justify-around ">
             <form>
-
                 <div class="mb-4">
-                    <input  type="text" name="title" placeholder="Title or description" class="form-input p-1 mt-4  w-44 rounded border border-slate-900">
+                    <input  type="text" name="title" value="{{Request::input('title')}}" placeholder="Title or description" class="form-input p-1 mt-4  w-44 rounded border border-slate-900">
                     <button  type="submit"  class="form-input bg-gray-900 text-gray-50 cursor-pointer p-1 mt-4  w-44 rounded border border-slate-900">Filter</button>
                 </div>
             </form>
@@ -156,7 +155,7 @@
                 @endforeach
             </div>
             <div class="mt-4">
-                {{ $events->links() }}
+{{--                {{ $events->links() }}--}}
             </div>
         @else
             <p>No events available.</p>
