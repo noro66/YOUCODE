@@ -1,63 +1,45 @@
 @extends('layouts.app')
-
-@section('title', 'Show Event')
+@section('title', 'show Event')
 
 @section('content')
-    <section class="pt-24 bg-gray-100 py-12">
-        <div class="container mx-auto px-4">
-            <div class="max-w-lg mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-                <img src="{{ asset('storage/' . $event->poster_image) }}" alt="Event Image" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h1 class="text-2xl font-bold mb-2">{{ $event->title }}</h1>
-                    <p class="mb-4 text-gray-600">{{ $event->description }}</p>
-                    <div class="flex items-center mb-2">
-                        <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        <span>{{ Carbon\Carbon::parse($event->date)->format('d M Y') }}</span>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M3 21v-2a4 4 0 014-4h10a4 4 0 014 4v2m-3-10a4 4 0 11-8 0 4 4 0 018 0zM3 7h18M4 11v-6a1 1 0 011-1h14a1 1 0 011 1v6m-5 4h3"></path>
-                        </svg>
-                        <span>{{ $event->Address }}</span>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        <span>{{ $event->category->name  }}</span>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        <span>{{ $event->available_seats }} / {{ $event->seats }} seats available</span>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        <span>{{ $event->seat_price ?? 'Free' }}</span>
-                    </div>
-                    @can('view', $event)
-                    <div class="flex items-center mb-4">
-                        <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        <span>{{ ucfirst($event->status) }}</span>
-                    </div>
-                    @endcan
-                    @can('reserve', $event)
-                    <form action="#" method="POST">
-                        @csrf
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Reserve Now
-                        </button>
-                    </form>
-                    @endcan
-                </div>
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+            <!-- Event details -->
+            <div class="p-6">
+                <img src="{{asset('storage/'.  $event->poster_image )}}" alt="Event Poster" class="mt-4 rounded-lg">
+                <h2 class="text-xl font-semibold text-gray-800 mt-1"> <spna class="text-3xl" >Title : </spna>{{ $event->title }}</h2>
+                <p class="text-gray-600 mt-1 "><span class="font-semibold">Date:</span> </p>
+                <p class="text-gray-600 mt-1"><span class="font-semibold">Location:</span> {{ $event->Address }}</p>
+                <p class="text-gray-600 mt-1 "><span class="font-semibold" >Description : </span>{{ $event->description }}</p>
+                <p class="text-gray-600 mt-1 "><span class="font-semibold" >Available Seats : </span>{{ $event->available_seats . '/'.  $event->seats }}</p>
+                <p class="text-gray-600 mt-1 "><span class="font-semibold" >Seat Price : </span>{{ $event->seat_price ?? 'Free' }}</p>
+                <p class="text-gray-600 mt-1 "><span class="font-semibold" >Creation Date : </span>{{ $event->created_at->diffForHumans() }}</p>
+                @can('view', $event)
+                <p class="text-gray-600 mt-1 "><span class="font-semibold" >Confirmation Type : </span>{{ $event->confirmation_type }}</p>
+                <p class="text-gray-600 mt-1 "><span class="font-semibold" >Last Update : </span>{{ $event->updated_at->diffForHumans() }}</p>
+                @endcan
             </div>
+            <!-- Organizer details -->
+            <div class="p-6 border-t border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-800">Organizer Details</h2>
+                <p class="text-gray-600 mt-2"><span class="font-semibold">Name:</span> {{ $event->organizer->user->name }}</p>
+                <p class="text-gray-600"><span class="font-semibold">Email:</span> {{ $event->organizer->user->email }}</p>
+            </div>
+            <!-- Participants awaiting approval -->
+            @can('view', $event)
+            <div class="p-6 border-t border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-800">Participants Awaiting Approval : </h2>
+                @if($pendingBookings->count())
+                <ul class="mt-2">
+                    @foreach ($pendingBookings as $pendingBooking)
+                        <li class="text-gray-600">{{ $pendingBookings->participant->user->name }}</li>
+                    @endforeach
+                </ul>
+                @else
+                    <h3 class="text-center mt-4 text-amber-200">There is no pending Booking for this Event</h3>
+                @endif
+            </div>
+            @endcan
         </div>
-    </section>
+    </div>
 @endsection

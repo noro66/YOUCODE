@@ -12,13 +12,18 @@ class Organizer extends Model
         'user_id',
     ];
 
-    public function event()
-    {
-        return $this->hasMany(Event::class, 'added_by');
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'added_by');
+    }
+    public function bookings()
+    {
+        return $this->hasManyThrough(Booking::class, Event::class, 'added_by', 'event_id', 'id', 'id');
+    }
+
 }

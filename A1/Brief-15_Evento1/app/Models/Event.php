@@ -29,12 +29,12 @@ class Event extends Model
        return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function bookings()
+    public function booking()
     {
         return $this->hasMany(Booking::class);
     }
 
-    public function organizers()
+    public function organizer()
     {
         return $this->belongsTo(Organizer::class, 'added_by');
     }

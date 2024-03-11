@@ -20,7 +20,8 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
-        return view('organizer.event.show', compact('event'));
+        $pendingBookings = $event->booking()->where('is_approved', false)->get(); // Retrieve pending bookings
+        return view('organizer.event.show', compact('event', 'pendingBookings'));
     }
     public function create()
     {
@@ -73,9 +74,6 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         $this->authorize('delete', $event);
-        $event->delete();
-        return back();
 
     }
-
 }
