@@ -28,13 +28,13 @@
                         <span class="hidden md:inline">Dashboard</span>
                     </li>
                 </a>
-                <a href="{{route('category.create')}}" class="ml-4 font-semibold text-lg text-white">
+                <a href="{{route('category.index')}}" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
-                            <img src="{{ asset('storage/publicImages/event.svg') }}" alt="Categories img" class="w-10">
+                            <img src="{{ asset('storage/publicImages/category.svg') }}" alt="Categories img" class="w-10">
                         <span class="hidden md:inline">Categories</span>
                     </li>
                 </a>
-                <a href="/admin/events" class="ml-4 font-semibold text-lg text-white">
+                <a href="{{route('admin.events')}}" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                         <img src="{{ asset('storage/publicImages/undraw_dashboard_re_3b76.svg') }}" alt="Events img" class="w-10">
                         <span class="hidden md:inline">Events</span>

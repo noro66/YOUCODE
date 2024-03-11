@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Category')
+@extends('layouts.admin-dashboard')
+
 @section('content')
     <h3 class="my-10 text-center text-3xl text-gray-900">Edit  Category</h3>
     <div class="w-lg flex flex-col items-center justify-center">

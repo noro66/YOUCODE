@@ -85,6 +85,8 @@ Route::middleware(['auth', 'user-access:admin'])
     ->group( function (){
         Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
             ->name('admin.dashboard');
+        Route::get('admin/events', [AdminController::class, 'events'])->name('admin.events');
+        Route::post('admin/events', [AdminController::class, 'approve'])->name('event.approve');
 
         Route::resource('category', CategoryController::class);
 });
