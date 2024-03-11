@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -11,18 +12,24 @@ class HomeController extends Controller
     {
         $eventQuery = Event::query();
         $title = $request->input('title');
-        if ($title){
-            $eventQuery->where('title',  'like', "%{$title}%");
+        $categoryId = $request->input('category');
+
+        if ($title) {
+            $eventQuery->where('title', 'like', "%{$title}%");
         }
 
-//        dd('ok');
-//        $title = $request->validate([
-//            'title' => 'required'
-//        ]);
-//
-////        ->where('status' , '=', 'Approved')->paginate(6)
+        if ($categoryId) {
+            $eventQuery->whereIn('category_id', [$categoryId]);
+        }
 
-        $events =  $eventQuery->get();
-        return view('home', compact('events'));
+
+        $categories = Category::whereHas('events', function ($query) {
+            $query->where('status', 'Approved');
+        })->get();
+
+        $events = $eventQuery->where('status' , '=', 'Approved')->get();
+
+        return view('home', compact('events', 'categories'));
     }
+
 }

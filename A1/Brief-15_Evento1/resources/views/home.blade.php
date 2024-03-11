@@ -81,8 +81,15 @@
         </h1>
         <div class="sm:flex sm:wrap justify-around ">
             <form>
-                <div class="mb-4">
-                    <input  type="text" name="title" value="{{Request::input('title')}}" placeholder="Title or description" class="form-input p-1 mt-4  w-44 rounded border border-slate-900">
+                <div class="m-4">
+                    <select class="p-2 rounded w-full block border border-gray-300" name="category">
+                        <option name="category"  selected disabled>Select a category</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <input  type="text" name="title" value="{{Request::input('title')}}" placeholder="Title or description" class="form-input p-1 mt-4  w-44 rounded border border-slate-900">
                     <button  type="submit"  class="form-input bg-gray-900 text-gray-50 cursor-pointer p-1 mt-4  w-44 rounded border border-slate-900">Filter</button>
                 </div>
             </form>
