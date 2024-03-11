@@ -12,4 +12,9 @@ class Booking extends Model
         'event_id',
         'booked_by'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

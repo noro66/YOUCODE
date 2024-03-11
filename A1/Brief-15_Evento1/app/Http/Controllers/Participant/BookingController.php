@@ -19,20 +19,35 @@ class BookingController extends Controller
     {
         $this->authorize('reserve', $event);
         $bookingForm['booked_by'] = Auth::user()->participant->id;
-        $event->bookings()->create($bookingForm);
-
+        $booking = $event->bookings()->create($bookingForm);
+        if ($event->confirmation_type === 'automatic'){
+            $event->available_seats -= 1;
+            $event->update();
+            $booking->is_approved = true;
+            $booking->update();
+        }
         return back();
     }
 
     /**
      * @throws AuthorizationException
      */
-    public function cancelBooking(Event $event)
+    public function destroy(Event $event)
     {
 
-//        $this->authorize('canselReservation', $event);
-        return $event->bookings;
+        $this->authorize('canselReservation', $event);
+        $bookings = $event->bookings->where('booked_by', Auth::user()->participant->id);
 
-
+        foreach ($bookings as $booking) {
+            $booking->delete();
+            if ($booking->is_approved = true){
+                $event = $booking->event; // Retrieve the related Event model instance
+                ++$event->available_seats;
+                $event->update();
+                $booking->is_approved = true;
+                $booking->update();
+            }
+        }
+        return back();
     }
 }

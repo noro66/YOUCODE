@@ -125,13 +125,15 @@
                                     </button>
                                 </form>
                             @endcan
-{{--                            <form action="{{route('event.booking', $event->id)}}" method="post" class="mr-1">--}}
-{{--                                @csrf--}}
-{{--                                @method('DELETE')--}}
-{{--                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">--}}
-{{--                                   Cancel Reservation--}}
-{{--                                </button>--}}
-{{--                            </form>--}}
+                            @can('canselReservation', $event)
+                            <form action="{{route('event.booking', $event->id)}}" method="post" class="mr-1">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                   Cancel Reservation
+                                </button>
+                            </form>
+                            @endcan
                         </div>
                     </div>
                 @endforeach
