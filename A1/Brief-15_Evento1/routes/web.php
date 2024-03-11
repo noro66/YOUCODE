@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-   $events =  \App\Models\Event::with('organizers')->where('status' , '=', 'Approved')->paginate(6);
+   $events =  \App\Models\Event::with('organizer')->where('status' , '=', 'Approved')->paginate(6);
     return view('home', compact('events'));
 })->name('home');
 

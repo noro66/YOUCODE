@@ -13,11 +13,25 @@
                                 <p class="mb-2"><span class="font-semibold">Event:</span> <a href="{{route('event.show',$booking->event->id)}}">{{ $booking->event->title }}</a> </p>
                                 <p class="mb-2"><span class="font-semibold">Date:</span> {{ Carbon\Carbon::parse($booking->event->date)->format('d M Y H:i') }}</p>
                                 <p class="mb-2"><span class="font-semibold">Location:</span> {{ $booking->event->Address }}</p>
-                                <p class="mb-2"><span class="font-semibold">Organizer:</span> {{ $booking->event->organizers->user->name }}</p>
+                                <p class="mb-2"><span class="font-semibold">Organizer:</span> {{ $booking->event->organizer->user->name }}</p>
+
+                                @if(!$booking->is_approved)
+                                    <div
+                                        class="mb-2 md:mb-0 bg-gray-200 px-4 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full  inline-flex items-center space-x-2 ">
+
+                                        <span>status: pending</span>
+                                    </div>
+                                @else
+                                    <div
+                                        class="mb-2 md:mb-0 bg-green-200 px-4 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full  inline-flex items-center space-x-2 ">
+
+                                        <span>status: accepted</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         @can('canselReservation', $booking->event)
-                            <div class="w-full p-4">
+                            <div class="w-full p-2">
                                 <form action="{{ route('event.booking', $booking->event->id) }}" method="post" class="mr-1">
                                     @csrf
                                     @method('DELETE')

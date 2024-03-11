@@ -41,6 +41,6 @@ class Event extends Model
 
     public function reservedBy(User $user)
     {
-      return  $this->bookings->contains('booked_by', $user->participant->id);
+      return  $this->booking->contains('booked_by', $user->participant->id);
     }
 }

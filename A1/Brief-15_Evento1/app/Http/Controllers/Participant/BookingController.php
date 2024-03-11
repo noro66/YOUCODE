@@ -26,7 +26,7 @@ class BookingController extends Controller
     {
         $this->authorize('reserve', $event);
         $bookingForm['booked_by'] = Auth::user()->participant->id;
-        $booking = $event->bookings()->create($bookingForm);
+        $booking = $event->booking()->create($bookingForm);
         if ($event->confirmation_type === 'automatic'){
             $event->available_seats -= 1;
             $event->update();
@@ -43,7 +43,7 @@ class BookingController extends Controller
     {
 
         $this->authorize('canselReservation', $event);
-        $bookings = $event->bookings->where('booked_by', Auth::user()->participant->id);
+        $bookings = $event->booking->where('booked_by', Auth::user()->participant->id);
 
         foreach ($bookings as $booking) {
             if ($booking->is_approved = true){
