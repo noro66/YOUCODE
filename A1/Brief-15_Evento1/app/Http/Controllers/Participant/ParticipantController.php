@@ -10,12 +10,13 @@ class ParticipantController extends Controller
 {
     public function dashboard()
     {
-        return view('participant.dashboard');
+        $user = Auth::user();
+        return view('participant.dashboard', compact('user'));
     }
 
     public  function profile()
     {
         $user = Auth::user();
-        return view('participant.profile', compact('user'));
+        return view('participant.dashboard', compact('user'));
     }
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
-    <title>Tailwind Css</title>
+    <title>Evento</title>
 </head>
 
 <body>
@@ -60,9 +60,11 @@
                 lorem ipsum dolor sit, amet consectetur adipisicing elit. At
                 corporis eum impedit unde iure eius? Qui
             </p>
+            @guest()
             <a href="{{route('register')}}"
                class="bg-orange-700 hover:bg-slate-900 self-center md:self-start px-6 py-2 rounded-full">Register
                 Now</a>
+            @endguest
         </div>
 
         <div class="md:w-1/2">
@@ -73,9 +75,19 @@
 
 <section id="Events">
     <div class="container px-5 mx-auto my-32 text-center">
+
         <h1 class="font-bold text-5xl underline">
             Latest Events
         </h1>
+        <div class="sm:flex sm:wrap justify-around ">
+            <form>
+
+                <div class="mb-4">
+                    <input  type="text" name="title" placeholder="Title or description" class="form-input p-1 mt-4  w-44 rounded border border-slate-900">
+                    <button  type="submit"  class="form-input bg-gray-900 text-gray-50 cursor-pointer p-1 mt-4  w-44 rounded border border-slate-900">Filter</button>
+                </div>
+            </form>
+        </div>
         @isset($events)
             <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach($events as $event)
