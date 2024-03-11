@@ -16,6 +16,7 @@
             <img src="{{asset('storage/publicImages/undraw_cat_epte.svg')}}" class="h-14 rounded-full" alt="Taxi image" width="120px" />
         </div>
         <div class="hidden md:flex md:items-center space-x-6">
+            <a href="#" class="text-slate-700 hover:text-red-600"> {{ auth()->user()->participant->id }} </a>
             <a href="#" class="text-slate-700 hover:text-red-600">Events</a>
             <a href="#" class="text-slate-700 hover:text-red-600">Organizations</a>
             <a href="#" class="text-slate-700 hover:text-red-600">Dashboard</a>
@@ -35,6 +36,7 @@
     <div class="md:hidden">
         <div id="mobile-menu"
              class="absolute flex hidden flex-col items-center space-y-4 font-bold drop-shadow-lg border border-gray-300 bg-gray-50 py-8 left-6 right-6">
+            <a href="#" class="text-slate-700 hover:text-red-600"> {{ auth()->user()->participant->id }} </a>
             <a href="#" class="">Events</a>
             <a href="#" class="">Organizations</a>
             <a href="#" class="">Socials</a>
@@ -116,23 +118,20 @@
                                 </div>
                             @endcan
                             @can('reserve', $event)
-                                <form action="{{route('booking.store')}}" method="POST">
+                                <form action="{{route('event.booking', $event->id)}}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="event_id" value="{{$event->id}}">
                                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                         Book Now
                                     </button>
                                 </form>
                             @endcan
-                            @can('canselReservation', $event )
-                                <form action="{{route('booking.destroy', [$event->id, auth()->partic])}}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="event_id" value="{{$event->id}}">
-                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Book Now
-                                    </button>
-                                </form>
-                            @endcan
+{{--                            <form action="{{route('event.booking', $event->id)}}" method="post" class="mr-1">--}}
+{{--                                @csrf--}}
+{{--                                @method('DELETE')--}}
+{{--                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">--}}
+{{--                                   Cancel Reservation--}}
+{{--                                </button>--}}
+{{--                            </form>--}}
                         </div>
                     </div>
                 @endforeach

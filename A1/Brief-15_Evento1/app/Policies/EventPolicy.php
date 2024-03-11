@@ -64,15 +64,15 @@ class EventPolicy
     public function reserve(User $user, Event $event): bool
     {
         if ($user->participant) {
-            return (!($event->bookings->contains('booked_by', $user->participant->id)) && $event->status === 'Approved');
+            return (!($event->reservedBy($user)) && $event->status === 'Approved');
         }
         return false;
     }
 
     public function canselReservation(User $user, Event $event): bool
     {
-        if ($user->participant ) {
-            return ($event->bookings->contains('booked_by', $user->participant->id));
+        if ($user->participant) {
+            return ($event->reservedBy($user));
         }
         return false;
     }

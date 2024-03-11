@@ -31,11 +31,16 @@ class Event extends Model
 
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'event_id');
+        return $this->hasMany(Booking::class);
     }
 
     public function organizers()
     {
         return $this->belongsTo(Organizer::class);
+    }
+
+    public function reservedBy(User $user)
+    {
+      return  $this->bookings->contains('booked_by', $user->participant->id);
     }
 }

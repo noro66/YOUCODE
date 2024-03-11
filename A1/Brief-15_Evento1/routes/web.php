@@ -3,9 +3,9 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Organizer\EventController;
 use App\Http\Controllers\Organizer\OrganizerController;
+use App\Http\Controllers\Participant\BookingController;
 use App\Http\Controllers\Participant\ParticipantController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,7 +71,8 @@ Route::middleware(['auth', 'user-access:participant'])
         Route::get('participant/dashboard', [ParticipantController::class, 'dashboard'])
             ->name('participant.dashboard');
 
-        Route::resource('booking', BookingController::class);
+        Route::post('event/{event}/booking', [BookingController::class, 'store'])->name('event.booking');
+        Route::delete('event/{event}/booking', [BookingController::class, 'destroy'])->name('event.booking');
 });
 
 /*=========== Admin ============*/

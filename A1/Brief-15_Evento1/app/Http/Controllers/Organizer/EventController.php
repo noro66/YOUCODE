@@ -75,4 +75,5 @@ class EventController extends Controller
         $this->authorize('delete', $event);
 
     }
+
 }
