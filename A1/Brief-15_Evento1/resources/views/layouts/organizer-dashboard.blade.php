@@ -19,9 +19,11 @@
         <section class="flex justify-between h-screen">
             <div class="w-1/5 bg-gray-900 py-6 md:px-6">
                 <ul>
+                    <a href="{{route('home')}}"></a>
                     <li class="flex items-center gap-x-4 mb-8">
                         <img src="{{ asset('storage/publicImages/logo.svg') }}" alt="Dashboard img" class="w-8">
                     </li>
+                    <a/>
                     <a href="{{route('organizer.dashboard')}}" class="ml-4 font-semibold text-lg text-white">
                         <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                             <img src="{{ asset('storage/publicImages/dashboard.svg') }}" alt="Dashboard img" class="w-10">

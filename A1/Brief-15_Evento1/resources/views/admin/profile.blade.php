@@ -5,13 +5,12 @@
         <div class="max-w-md mx-auto mt-8">
             <div class="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="text-xl font-semibold mb-6">Edit Profile</div>
-                <img width="220px" class="mx-auto rounded-full mb-6" src="{{ asset('storage/'. $user->profile_image) }}" alt="Profile Image">
+                <img width="220px" class="mx-auto max-h-48 rounded-full mb-6" src="{{ asset('storage/'. $user->profile_image) }}" alt="Profile Image">
                 @if (session('success'))
                     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
                         <p class="font-bold">{{ session('success') }}</p>
                     </div>
                 @endif
-
                 <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">

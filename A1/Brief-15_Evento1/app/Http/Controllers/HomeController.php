@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $eventQuery = Event::query();
-        $title = $request->input('title');
+            $title = $request->input('title');
         $categoryId = $request->input('category');
 
         if ($title) {

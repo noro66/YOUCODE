@@ -99,8 +99,11 @@
             <div class="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach($events as $event)
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+
+                        <a href="{{route('event.show', $event->id)}}">
                         <img src="{{ asset('storage/' . $event->poster_image) }}" alt="Event Image" class="w-full h-64 object-cover">
-                        <div class="p-6">
+                        </a>
+                            <div class="p-6">
                             <h1 class="text-2xl font-bold mb-2">{{ $event->title }}</h1>
                             <p class="mb-4 text-gray-600">{{ $event->description }}</p>
                             <div class="flex items-center mb-2">
