@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware(['auth', 'user-access:organizer'])->except('show');
+    }
 
     public function index()
     {

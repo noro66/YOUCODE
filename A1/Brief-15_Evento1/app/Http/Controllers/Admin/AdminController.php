@@ -21,13 +21,15 @@ class AdminController extends Controller
 
     public function events()
     {
-        $events = Event::where('status',  '=', 'Pending' )->paginate(4);
+        $events = Event::where('status',  '=', 'Pending' )->get();
 
         return view('admin.events', compact('events'));
     }
 
-    public function approve()
+    public function approve(Event $event)
     {
-
+        $event->status = 'Approved';
+        $event->update();
+        return back();
     }
 }

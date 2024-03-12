@@ -13,14 +13,14 @@
                     <div class="flex items-center">
                         <form action="{{ route('event.approve', $event->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded-md">Refuse</button>
+                            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded-md">Approve</button>
                         </form>
                     </div>
                 </div>
             @endforeach
-            {{$events->links()}}
+{{--            {{$events->links()}}--}}
         @else
-            <p class="bg-gray-100 text-xl text-center py-2 rounded-md">There are no categories</p>
+            <p class="bg-gray-100 text-xl text-center py-2 rounded-md">There are no Events to Approve</p>
         @endif
     </div>
 @endsection

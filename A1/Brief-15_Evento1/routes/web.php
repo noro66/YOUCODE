@@ -59,10 +59,11 @@ Route::middleware(['auth', 'user-access:organizer'])
             ->name('organizer.dashboard');
         Route::get('organizer/profile', [OrganizerController::class, 'profile'])
             ->name('organizer.profile');
-        Route::resource('event', EventController::class);
         Route::put('booking/{booking}/approve', [BookingController::class, 'approve'])->name('booking.approve');
 
 });
+
+Route::resource('event', EventController::class);
 
 /*=========== Participant ============*/
 Route::middleware(['auth', 'user-access:participant'])
@@ -84,7 +85,7 @@ Route::middleware(['auth', 'user-access:admin'])
         Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
             ->name('admin.dashboard');
         Route::get('admin/events', [AdminController::class, 'events'])->name('admin.events');
-        Route::post('admin/events', [AdminController::class, 'approve'])->name('event.approve');
+        Route::post('admin/{event}/events', [AdminController::class, 'approve'])->name('event.approve');
 
         Route::resource('category', CategoryController::class);
 });

@@ -8,7 +8,7 @@
             <div class="p-6">
                 <img src="{{asset('storage/'.  $event->poster_image )}}" alt="Event Poster" class="mt-4 rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800 mt-1"> <spna class="text-3xl" >Title : </spna>{{ $event->title }}</h2>
-                <p class="text-gray-600 mt-1 "><span class="font-semibold">Date:</span> </p>
+                <p class="text-gray-600 mt-1 "><span class="font-semibold">Date: </span> {{ \Illuminate\Support\Carbon::parse($event->date)->format('D-M-Y H:i') }} </p>
                 <p class="text-gray-600 mt-1"><span class="font-semibold">Location:</span> {{ $event->Address }}</p>
                 <p class="text-gray-600 mt-1 "><span class="font-semibold" >Description : </span>{{ $event->description }}</p>
                 <p class="text-gray-600 mt-1 "><span class="font-semibold" >Available Seats : </span>{{ $event->available_seats . '/'.  $event->seats }}</p>
