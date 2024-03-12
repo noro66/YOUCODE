@@ -2,13 +2,18 @@
 
 @section('content')
     @section('title') Dashboard @endsection
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                        hello {{auth()->user()->name}}
-                </div>
-            </div>
+    <div class="flex flex-wrap justify-around gap-y-2 gap-x-1  p-10 ">
+        <div class="w-1/3 bg-gray-300 text-gray-800 p-4 border-2 border-gray-800 text-center">
+            <span class="text-3xl font-semibold">{{ $trashed_events }}</span>
+            <h1 class="text-xl font-semibold">Trashed Events</h1>
+        </div>
+        <div class="w-1/3 bg-gray-300 text-gray-800 p-4 border-2 border-gray-800 text-center">
+            <span class="text-3xl font-semibold">{{ $not_trashed_events }}</span>
+            <h1 class="text-xl font-semibold">Non-Trashed Events</h1>
+        </div>
+        <div class="w-1/3 bg-gray-300 text-gray-800 p-4 border-2 border-gray-800 text-center">
+            <span class="text-3xl font-semibold">{{ $total_events }}</span>
+            <h1 class="text-xl font-semibold">Total Events</h1>
         </div>
     </div>
 @endsection

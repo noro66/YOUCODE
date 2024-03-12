@@ -8,7 +8,7 @@
 
         @if($events->count())
             @foreach($events as $event)
-                <div class="bg-white shadow rounded-md p-4 mb-4">
+                <div class="bg-gray-300 text-gray-800 shadow rounded-md p-4 mb-4">
                     <h3 class="text-xl font-semibold mb-2">Event Title: <span class="underline"><a href="{{route('event.show', $event->id)}}">{{ $event->title }}</a></span></h3>
                     <div class="flex items-center">
                         <form action="{{ route('event.approve', $event->id) }}" method="POST">
