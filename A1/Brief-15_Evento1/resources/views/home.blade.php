@@ -96,7 +96,7 @@
             </form>
         </div>
         @isset($events)
-            <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach($events as $event)
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg">
                         <img src="{{ asset('storage/' . $event->poster_image) }}" alt="Event Image" class="w-full h-64 object-cover">
