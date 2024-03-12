@@ -87,5 +87,9 @@ Route::middleware(['auth', 'user-access:admin'])
         Route::get('admin/events', [AdminController::class, 'events'])->name('admin.events');
         Route::post('admin/{event}/events', [AdminController::class, 'approve'])->name('event.approve');
 
+        Route::post('admin/{user}/users', [AdminController::class, 'restrict'])->name('user.restrict');
+
+        Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+
         Route::resource('category', CategoryController::class);
 });

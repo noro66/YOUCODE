@@ -40,7 +40,7 @@
                         <span class="hidden md:inline">Events</span>
                     </li>
                 </a>
-                <a href="/admin/events" class="ml-4 font-semibold text-lg text-white">
+                <a href="{{route('admin.users')}}" class="ml-4 font-semibold text-lg text-white">
                     <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
                         <img src="{{ asset('storage/publicImages/users.svg') }}" alt="Users img" class="w-10">
                         <span class="hidden md:inline">Users</span>
