@@ -90,6 +90,7 @@ Route::middleware(['auth', 'user-access:admin'])
         Route::post('admin/{user}/users', [AdminController::class, 'restrict'])->name('user.restrict');
 
         Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+        Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
 
         Route::resource('category', CategoryController::class);
 });

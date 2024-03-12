@@ -9,7 +9,8 @@ class OrganizerController extends Controller
 {
     public function dashboard()
     {
-        return view('organizer.dashboard');
+        $user = Auth::user();
+        return view('organizer.profile', compact('user'));
     }
 
     public function profile()

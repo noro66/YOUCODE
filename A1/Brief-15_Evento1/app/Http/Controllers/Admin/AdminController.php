@@ -46,4 +46,6 @@ class AdminController extends Controller
         $user->update();
         return back()->with('success', 'the user has been restricted successfully !');
     }
+
+
 }
