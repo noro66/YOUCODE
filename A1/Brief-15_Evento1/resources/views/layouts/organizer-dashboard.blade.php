@@ -43,13 +43,6 @@
                         </li>
                     </a>
 
-                    <a href="{{'organizer.settings'}}" class="ml-4 font-semibold text-lg text-white">
-                        <li class="flex items-center gap-x-4 bg-gray-100/10 rounded py-2 px-6 hover:bg-gray-500">
-                            <img src="{{ asset('storage/publicImages/setting.svg') }}" alt="Settings Img" class="w-10">
-                            <span class="hidden md:inline">Settings</span>
-                        </li>
-                    </a>
-
                     <form class="m-auto" action="{{route('logout')}}" method="post">
                         <button type="submit">
                             <li class="mt-4 flex items-center gap-x-4 bg-red-900 rounded py-2 px-6 hover:bg-red-500">
