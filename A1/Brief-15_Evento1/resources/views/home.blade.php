@@ -43,6 +43,7 @@
                     @csrf
                     <button type="submit" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Logout</button>
                 </form>
+                {{Auth::user()->is_restricted}}
             @else
                 <a href="{{route('auth.login')}}" class="px-6 py-2 rounded-full bg-orange-700 hover:bg-slate-900">Log In</a>
             @endauth

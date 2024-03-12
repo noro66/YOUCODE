@@ -42,7 +42,6 @@ class AdminController extends Controller
 
     public function restrict(User $user)
     {
-
         $user->is_restricted  ?  $user->is_restricted = false : $user->is_restricted = true;
         $user->update();
         return back()->with('success', 'the user has been restricted successfully !');

@@ -73,11 +73,18 @@ class AuthController extends Controller
             'password' => 'required',
         ])->validate();
 
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))){
+        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed')
             ]);
-        };
+        }
+
+        if (Auth::user()->is_restricted) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return to_route('auth.login')->with('error', 'You have been restricted by admin');
+        }
         $request->session()->regenerate();
         return  Auth::user()->type === 'participant' ? to_route('home') :
             to_route(Auth::user()->type . '.dashboard');
