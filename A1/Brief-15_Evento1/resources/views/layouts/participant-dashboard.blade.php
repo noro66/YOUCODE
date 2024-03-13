@@ -15,9 +15,9 @@
 
 <body>
 <div>
-    <main>
-        <section class="flex justify-between h-screen">
-            <div class="w-1/5 bg-gray-900 py-6 md:px-6">
+    <main class="h-screen">
+        <section class="h-screen flex justify-between h-screen ">
+            <div class="w-1/5 bg-gray-900 py-6 md:px-6 h-screen">
                 <ul>
                     <a class="cursor-pointer" href="{{route('home')}}">
                     <li class="flex items-center gap-x-4 mb-8">

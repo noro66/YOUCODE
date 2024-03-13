@@ -1,7 +1,7 @@
 @extends('layouts.participant-dashboard')
 
 @section('content')
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 h-screen">
         <div class="max-w-md mx-auto mt-8">
             <div class="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="text-xl font-semibold mb-6">Edit Profile</div>
