@@ -14,7 +14,7 @@
                     </div>
                 </div>
             @endforeach
-{{--            {{$events->links()}}--}}
+            {{$events->links()}}
         @else
             <p class="bg-gray-100 text-xl text-center py-2 rounded-md">There are no Events to Approve</p>
         @endif

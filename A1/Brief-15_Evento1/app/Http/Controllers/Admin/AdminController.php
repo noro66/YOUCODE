@@ -34,7 +34,7 @@ class AdminController extends Controller
 
     public function events()
     {
-        $events = Event::where('status',  '=', 'Pending' )->get();
+        $events = Event::where('status',  '=', 'Pending' )->paginate(5);
 
         return view('admin.events', compact('events'));
     }

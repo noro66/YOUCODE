@@ -10,7 +10,7 @@ class OrganizerController extends Controller
 {
     public function dashboard()
     {
-        $organizerId = Auth::id();
+        $organizerId = Auth::user()->organizer->id;
 
         $trashed_events = Event::onlyTrashed()->where('added_by', '=', $organizerId)->count();
         $not_trashed_events = Event::withoutTrashed()->where('added_by', '=', $organizerId)->count();

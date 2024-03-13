@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class EventController extends Controller
 
     public function index()
     {
-       $events =  Event::latest()->paginate(4);
+       $events =  Auth::user()->organizer->events()->paginate(4);
         return view('organizer.event.index', compact('events'));
     }
 
