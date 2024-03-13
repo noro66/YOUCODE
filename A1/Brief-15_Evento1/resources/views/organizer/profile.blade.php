@@ -16,14 +16,14 @@
                     @csrf
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 font-bold mb-2">Name</label>
-                        <input id="name" type="text" class="w-80 bg-gray-300 outline-none p-1 @error('name') border-red-500 @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="w-full bg-gray-300 outline-none p-1 @error('name') border-red-500 @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
                         @error('name')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
-                        <input id="email" type="email" class="w-80 bg-gray-300 outline-none p-1 @error('email') border-red-500 @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
+                        <input id="email" type="email" class="w-full bg-gray-300 outline-none p-1 @error('email') border-red-500 @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
 
                         @error('email')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="profile_image" class="block text-gray-700 font-bold mb-2">Profile Image</label>
-                        <input id="profile_image" type="file" class="w-80 bg-gray-300 outline-none p-1 @error('profile_image') border-red-500 @enderror" name="profile_image">
+                        <input id="profile_image" type="file" class="w-full bg-gray-300 outline-none p-1 @error('profile_image') border-red-500 @enderror" name="profile_image">
 
                         @error('profile_image')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>

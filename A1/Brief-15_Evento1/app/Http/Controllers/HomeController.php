@@ -27,7 +27,7 @@ class HomeController extends Controller
             $query->where('status', 'Approved');
         })->get();
 
-        $events = $eventQuery->where('status' , '=', 'Approved')->get();
+        $events = $eventQuery->where('status' , '=', 'Approved')->paginate(9);
 
         return view('home', compact('events', 'categories'));
     }

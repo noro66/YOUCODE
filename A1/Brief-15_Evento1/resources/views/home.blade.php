@@ -96,7 +96,7 @@
             </form>
         </div>
         @isset($events)
-            <div class="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="container mx-auto mx-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach($events as $event)
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg">
 
@@ -104,8 +104,8 @@
                         <img src="{{ asset('storage/' . $event->poster_image) }}" alt="Event Image" class="w-full h-64 object-cover">
                         </a>
                             <div class="p-6">
-                            <h1 class="text-2xl font-bold mb-2">{{ $event->title }}</h1>
-                            <p class="mb-4 text-gray-600">{{ $event->description }}</p>
+                            <h1 class="text-2xl font-bold mb-2">{{ Str::limit($event->title, 20) }}</h1>
+                            <p class="mb-4 text-gray-600">{{ Str::limit($event->description, 45) }}</p>
                             <div class="flex items-center mb-2">
                                 <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -116,7 +116,7 @@
                                 <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M3 21v-2a4 4 0 014-4h10a4 4 0 014 4v2m-3-10a4 4 0 11-8 0 4 4 0 018 0zM3 7h18M4 11v-6a1 1 0 011-1h14a1 1 0 011 1v6m-5 4h3"></path>
                                 </svg>
-                                <span>{{ $event->Address }}</span>
+                                <span>{{ Str::limit($event->Address, 45) }}</span>
                             </div>
                             <div class="flex items-center mb-2">
                                 <svg class="h-6 w-6 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +147,7 @@
                             @can('reserve', $event)
                                 <form action="{{route('event.booking', $event->id)}}" method="POST">
                                     @csrf
-                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                    <button type="submit" class="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                         Book Now
                                     </button>
                                 </form>
@@ -165,13 +165,13 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-4">
-{{--                {{ $events->links() }}--}}
-            </div>
         @else
             <p>No events available.</p>
         @endisset
     </div>
+        <div class="my-4 flex justify-center items-center">
+            {{ $events->links() }}
+        </div>
 </section>
 
 
