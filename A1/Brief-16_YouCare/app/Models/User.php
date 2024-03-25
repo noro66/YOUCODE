@@ -9,7 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
+    protected $fillable = [
+        'name',
+        'email',
+        'password'
+    ];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
