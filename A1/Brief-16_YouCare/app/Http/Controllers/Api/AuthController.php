@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Nette\Schema\ValidationException;
-use PHPUnit\Framework\MockObject\Exception;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -21,34 +20,29 @@ class AuthController extends Controller
 
     function login(Request $request)
     {
-        try {
-            try {
-                $credentials = $request->validate([
-                    'email' => 'required|email',
-                    'password' => 'required',
-                ]);
-            } catch (ValidationException $e) {
-                return $e->getMessage();
-            }
-            $token = Auth::guard('api')->attempt($credentials);
-            if (!$token) {
-                return response()->json(['msg' => 'error']);
-            }
-            $user = Auth::guard('api')->user();
-            $user->token = $token;
+        $credentials = $request->validate([
+            'email' => 'required|email|max:255',
+            'password' => 'required|max:255',
+        ]);
+        $token = JWTAuth::attempt($credentials);
+        if ($token){
             return response()->json([
-                'msg' => $user
+                'status' => true,
+                'message'  => 'User sign in successfully',
+                'token' => $token
             ]);
-        } catch (\Exception $e ) {
-            return $e->getMessage();
         }
+        return response()->json([
+               'status' => false,
+                'message' => 'Invalid login details'
+            ]);
     }
     public function register(Request $request)
     {
         $credentials = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:6',
+            'password' => 'required|string|confirmed|min:6|max:255',
         ]);
           $user = User::create([
                'name'=> $credentials['name'],
