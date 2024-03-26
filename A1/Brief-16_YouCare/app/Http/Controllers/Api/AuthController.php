@@ -22,6 +22,7 @@ class AuthController extends Controller
 
     function login(Request $request)
     {
+        if ($request->isMethod('POST')) {
         $credentials = $request->validate([
             'email' => 'required|email|max:255',
             'password' => 'required|max:255',
@@ -38,6 +39,13 @@ class AuthController extends Controller
                'status' => false,
                 'message' => 'Invalid login details'
             ]);
+        }
+        if ($request->isMethod('GET')) {
+            return \response()->json([
+                'success' => false,
+                'message' => 'you have to log in first to access to this page',
+            ]);
+        }
     }
     public function register(Request $request)
     {
