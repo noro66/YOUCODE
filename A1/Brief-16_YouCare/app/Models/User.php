@@ -14,7 +14,8 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'type'
     ];
 
     /**
@@ -55,5 +56,14 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public function organizer(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+      return  $this->hasOne(Organizer::class, 'user_id');
+    }
+    public function volunteer(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Volunteer::class, 'user_id');
     }
 }

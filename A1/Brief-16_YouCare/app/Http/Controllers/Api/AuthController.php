@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organizer;
 use App\Models\User;
+use App\Models\Volunteer;
 use http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,19 +41,29 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
+
         $credentials = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:6|max:255',
+            'type' => 'required|string|in:organizer,volunteer'
         ]);
           $user = User::create([
                'name'=> $credentials['name'],
                'email'=> $credentials['email'],
-               'password'=> Hash::make($credentials['password'])
+               'password'=> Hash::make($credentials['password']),
+              'type' => $credentials['type']
            ]);
+          if ($user->type === 'organizer'){
+              Organizer::create(['user_id' => $user->id]);
+          }else{
+              Volunteer::create(['user_id' => $user->id]);
+          }
+
         return \response()->json([
            'status' => true,
-            'message' => 'User Created Successfully'
+            'message' => 'User Created Successfully',
+            'type' => $user->type,
         ]);
     }
 
