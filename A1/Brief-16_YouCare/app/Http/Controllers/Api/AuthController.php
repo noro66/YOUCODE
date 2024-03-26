@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Nette\Schema\ValidationException;
 use PHPUnit\Framework\MockObject\Exception;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api')->except(['login', 'register']);
+    }
+
     function login(Request $request)
     {
         try {
@@ -39,25 +45,32 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        try {
-            try {
-                $credentials = $request->validate([
-                    'name' => 'required|string|max:255',
-                    'email' => 'required|string|email|max:255|unique:users',
-                    'password' => 'required|string|min:6',
-                ]);
-            } catch (ValidationException $e) {
-                return $e->getMessage();
-            }
+        $credentials = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:6',
+        ]);
           $user = User::create([
                'name'=> $credentials['name'],
                'email'=> $credentials['email'],
                'password'=> Hash::make($credentials['password'])
            ]);
-            return $user ??   \response()->json(['msg' => 'error']);
-        }catch (\Exception $e){
-            return $e->getMessage();
+        return \response()->json([
+           'status' => true,
+            'message' => 'User Created Successfully'
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+                $request->user()->currentAccessToken()->delete();
+                return response()->json(['message' => 'Successfully logged out']);
+
+        } catch (\Exception $e) {
+            return response()->json(['msg22' => $e->getMessage()]);
         }
+
 
     }
 }
