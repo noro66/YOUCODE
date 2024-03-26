@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('api')->except(['login', 'register']);
+        $this->middleware('auth:api')->except(['login', 'register']);
     }
 
     function login(Request $request)
@@ -55,16 +55,32 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        try {
-                $request->user()->currentAccessToken()->delete();
-                return response()->json(['message' => 'Successfully logged out']);
+        Auth::logout();
+        return \response()->json([
+            'status' => true,
+            'message' => 'Logout Successfully !!',
+        ]);
 
-        } catch (\Exception $e) {
-            return response()->json(['msg22' => $e->getMessage()]);
-        }
+    }
+    public function profile(): \Illuminate\Http\JsonResponse
+    {
+        $userData = Auth::user();
+        return \response()->json([
+            'status' => true,
+            'message' => 'Profile Data',
+            'User' => $userData,
+        ]);
+    }
 
-
+    public function refresh(): \Illuminate\Http\JsonResponse
+    {
+        $newToken = Auth::refresh();
+        return \response()->json([
+            'status' => true,
+            'message' => 'Access token generated successfully',
+            'token' => $newToken,
+        ]);
     }
 }
