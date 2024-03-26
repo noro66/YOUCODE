@@ -19,18 +19,23 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-       $events =  Event::all();
-       return response()->json(['events' => $events]);
-    }
+        $eventQuery = Event::query();
+        $type = $request->input('type');
+        $location = $request->input('location');
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        if ($type) {
+            $eventQuery->where('type', 'like', "%{$type}%");
+        }
+
+        if ($location) {
+            $eventQuery->where('location', 'like', "%{$type}%");
+        }
+
+        $events = $eventQuery->get();
+
+       return response()->json(['events' => $events]);
     }
 
     /**
