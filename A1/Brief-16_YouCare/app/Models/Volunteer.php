@@ -11,4 +11,9 @@ class Volunteer extends Model
     protected $fillable = [
         'user_id',
     ];
+
+    public function application()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

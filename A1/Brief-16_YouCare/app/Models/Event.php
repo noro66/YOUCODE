@@ -23,4 +23,13 @@ class Event extends Model
     {
         return $this->belongsTo(Organizer::class);
     }
+    public function application()
+    {
+        return $this->hasMany(Application::class, 'event_id');
+    }
+
+    public function appliedBy(User $user)
+    {
+        return  $this->application->contains('volunteer_id', $user->volunteer->id);
+    }
 }

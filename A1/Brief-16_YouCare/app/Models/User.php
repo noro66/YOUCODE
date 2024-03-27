@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
     protected $fillable = [
         'name',
         'email',
@@ -58,11 +59,11 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function organizer(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function organizer()
     {
       return  $this->hasOne(Organizer::class, 'user_id');
     }
-    public function volunteer(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function volunteer()
     {
         return $this->hasOne(Volunteer::class, 'user_id');
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,10 @@ Route::group(['prefix' => 'auth'],  function () {
 });
 
 Route::resource('event', EventController::class);
+//Route::resource('application', ApplicationController::class);
+Route::post('application/{event}/store', [ApplicationController::class, 'store']);
+Route::delete('application/{application}/destroy', [ApplicationController::class, 'destroy']);
+Route::get('application', [ApplicationController::class, 'index']);
+Route::post('application/{application}/acceptation', [ApplicationController::class, 'acceptApplication']);
+Route::get('application/{application}/show', [ApplicationController::class, 'show']);
+
