@@ -20,7 +20,7 @@ class AuthController extends Controller
         $this->middleware('auth:api')->except(['login', 'register']);
     }
 
-    function login(Request $request)
+    public function login(Request $request)
     {
         if ($request->isMethod('POST')) {
         $credentials = $request->validate([

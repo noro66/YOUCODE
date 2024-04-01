@@ -9,16 +9,41 @@ use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 use Psy\Readline\Hoa\EventException;
 
+/**
+ * @OA\Info(
+ * title="Swagger with Laravel",
+ * version="1.0.0",
+ * )
+ * @OA\SecurityScheme(
+ * type="http",
+ * securityScheme="bearerAuth",
+ * scheme="bearer",
+ * bearerFormat="JWT"
+ * )
+ */
 class EventController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('show', 'index');
+        $this->middleware(['auth:api', 'userAccess:organizer'])->except('show', 'index');
     }
 
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/event",
+     *     summary="Get a list of events",
+     *     tags={"Events"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of events",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="http://127.0.0.1:8000/api/event")
+     *         )
+     *     )
+     * )
      */
+
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $eventQuery = Event::query();
@@ -42,6 +67,43 @@ class EventController extends Controller
      * Store a newly created resource in storage.
      * @throws AuthorizationException
      */
+    /**
+     * @OA\Post(
+     *     path="/api/event",
+     *     summary="Create a new event",
+     *     tags={"Events"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string", example="Event Title"),
+     *             @OA\Property(property="type", type="string", example="Event Type"),
+     *             @OA\Property(property="date", type="string", format="date", example="2024-04-01"),
+     *             @OA\Property(property="location", type="string", example="Event Location"),
+     *             @OA\Property(property="description", type="string", example="Event Description"),
+     *             @OA\Property(property="skills_required", type="string", example="Skills Required")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Event Created Successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Event Created Successfully"),
+     *             @OA\Property(property="event", ref="#/components/Event")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Event Creation Failed",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="message", type="string", example="Event Creation Failed"),
+     *             @OA\Property(property="event", type="string")
+     *         )
+     *     )
+     * )
+     */
+
     public function store(Request $request)
     {
         $this->authorize('create', Event::class);
