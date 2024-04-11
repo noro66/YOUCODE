@@ -16,7 +16,8 @@ class ApplicationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api', 'userAccess:volunteer']);
+        $this->middleware(['auth:api', 'userAccess:volunteer'])->except('acceptApplication');
+        $this->middleware(['auth:api', 'userAccess:organizer'])->only('acceptApplication');
 
     }
 

@@ -67,4 +67,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Volunteer::class, 'user_id');
     }
+
+    public function isOrganizer()
+    {
+        return $this->organizer()->exists();
+    }
+    public function isVolunteer()
+    {
+        return $this->volunteer()->exists();
+    }
 }

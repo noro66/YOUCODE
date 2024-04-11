@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="77e00587-c3b6-406a-8649-5f46ec173253" name="Changes" comment="" />
+    <list default="true" id="77e00587-c3b6-406a-8649-5f46ec173253" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Brief-16_YouCare/database/factories/ApplicationFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brief-16_YouCare/database/factories/VolunteerFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brief-16_YouCare/database/seeders/ApplicationSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brief-16_YouCare/database/seeders/volunteerSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brief-17_YouCare-i/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brief-17_YouCare-i/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brief-17_YouCare-i/src/App.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brief-17_YouCare-i/src/assets/react.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brief-16_YouCare/app/Http/Controllers/ApplicationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Brief-16_YouCare/app/Http/Controllers/ApplicationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brief-16_YouCare/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Brief-16_YouCare/app/Http/Controllers/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brief-16_YouCare/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Brief-16_YouCare/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brief-16_YouCare/app/Policies/EventPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/Brief-16_YouCare/app/Policies/EventPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brief-16_YouCare/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Brief-16_YouCare/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brief-16_YouCare/storage/api-docs/api-docs.json" beforeDir="false" afterPath="$PROJECT_DIR$/Brief-16_YouCare/storage/api-docs/api-docs.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,23 +38,28 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2blqjMOYHAaCBqUyA2bsyCD5n2J" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/var/www/html/YOUCODE/A1/Brief-17_YouCare-i",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-php-predefined-ba97393d7c68-6f8e3395a2b4-com.jetbrains.php.sharedIndexes-PS-233.14015.96" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-WS-241.14494.235" />
       </set>
     </attachedChunks>
   </component>
@@ -51,10 +73,14 @@
       <updated>1706800147716</updated>
       <workItem from="1706800150671" duration="12000" />
       <workItem from="1706812999489" duration="6000" />
+      <workItem from="1712488685258" duration="347000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

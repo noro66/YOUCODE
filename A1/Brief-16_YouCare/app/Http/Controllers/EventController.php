@@ -89,7 +89,7 @@ class EventController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Event Created Successfully"),
-     *             @OA\Property(property="event", ref="#/components/Event")
+     *             @OA\Property(property="event", ref="http://127.0.0.1:8000/api/event")
      *         )
      *     ),
      *     @OA\Response(
@@ -135,6 +135,36 @@ class EventController extends Controller
 
     /**
      * Display the specified resource.
+     */
+    /**
+     * @OA\Get(
+     *     path="/events/{event}",
+     *     summary="Get details of an event",
+     *     description="Returns details of a specific event.",
+     *     operationId="getEvent",
+     *     tags={"Events"},
+     *     @OA\Parameter(
+     *         name="event",
+     *         in="path",
+     *         description="ID of the event to retrieve",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             ref="http://127.0.0.1:8000/api/event/:id"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Event not found"
+     *     )
+     * )
      */
     public function show(Event $event)
     {

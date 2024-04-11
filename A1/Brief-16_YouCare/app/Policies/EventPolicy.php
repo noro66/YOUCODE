@@ -13,7 +13,7 @@ class EventPolicy
      */
     public function create(User $user)
     {
-        return $user->type === 'organizer';
+        return $user->isOrganizer();
     }
 
     /**
@@ -21,7 +21,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event): bool
     {
-        return $user->organizer->id = $event->organizer_id;
+        return $user->organizer->id === $event->organizer_id;
     }
 
 
