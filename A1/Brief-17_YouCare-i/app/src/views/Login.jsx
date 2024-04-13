@@ -1,18 +1,28 @@
 import {Link} from "react-router-dom";
+import {useStateContext} from "../Context/ContextProvider.jsx";
+import axiosClient from "../axiosClient.js";
+import {useForm} from "react-hook-form";
 
 export  default function Login () {
-    function handelSubmit(e) {
-        e.preventDefault();
-        
+    const {setUser, setToken} = useStateContext();
+
+    function onsubmit(data) {
+        console.log(data);
+        axiosClient.post("auth/login", data).then(({data}) =>  {
+            setUser(data.user);
+            setToken(data.token);
+        }).catch(err => console.log(err));
     }
+    const {register, handleSubmit,formState: {errors}} = useForm();
+
 
     return (
         <div className='login-signup-form animated fadeInDown'>
         <div className='form'>
             <h1 className={'title'}>Login To Your Account</h1>
-            <form onSubmit={handelSubmit}>
-                <input type="email" placeholder={'Email'}  />
-                <input type="password" placeholder="Password"/>
+            <form onSubmit={handleSubmit(onsubmit)}>
+                <input type="email" placeholder={'Email'} {...register('email', {required: true})} />
+                <input type="password" placeholder="Password" {...register('password', {required: true})}/>
                 <button type="submit" className={'btn btn-block'}>Login</button>
                 <p className={'message'}>
                     Not Registered ? <Link to={'/register'}>Create an account !</Link>
