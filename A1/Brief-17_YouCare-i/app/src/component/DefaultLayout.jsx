@@ -14,7 +14,7 @@ const { user ,token} = useStateContext();
                         header
                     </div>
                     <div>
-                        User Information
+                        {user.name}
                     </div>
                 </header>
                 <main>
