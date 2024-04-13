@@ -3,7 +3,8 @@ import Login from "./views/Login.jsx";
 import Register from "./views/Register.jsx";
 import DefaultLayout from "./component/DefaultLayout.jsx";
 import GuestLayout from "./component/GuestLayout.jsx";
-import Users from "./views/Users.jsx";
+import Events from "./views/Events.jsx";
+import EventForm from "./views/EventForm.jsx";
 
 
 
@@ -13,9 +14,17 @@ const router = createBrowserRouter([
         element: <DefaultLayout />,
         children: [
             {
-                path: '/users',
-                element: <Users />,
-            }
+                path: '/events',
+                element: <Events />,
+            },
+            {
+                path: '/events/new',
+                element: <EventForm key={'EventCreate'} />,
+            },
+            {
+                path: '/events/:id',
+                element: <EventForm key={'EventUpdate'} />,
+            },
         ]
     },
     {

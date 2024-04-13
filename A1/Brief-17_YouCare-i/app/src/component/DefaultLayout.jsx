@@ -11,7 +11,7 @@ const { user ,token} = useStateContext();
 
     function onLogout(e) {
             e.preventDefault();
-            axiosClient.get("auth/logout", {token: token}).then(({data}) =>  {
+            axiosClient.get("auth/logout", {token: token}).then(() =>  {
                 setToken('');
                 setUser('');
             }).catch(r => console.log(r));
