@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, Navigate} from "react-router-dom";
 import Login from "./views/Login.jsx";
 import Register from "./views/Register.jsx";
 import DefaultLayout from "./component/DefaultLayout.jsx";
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
         element: <DefaultLayout />,
         children: [
             {
+                path: '/',
+                element: <Navigate to="/events" />,
+            },
+            {
                 path: '/events',
                 element: <Events />,
             },
@@ -26,7 +30,8 @@ const router = createBrowserRouter([
                 element: <EventForm key={'EventUpdate'} />,
             },
         ]
-    },
+    }
+    ,
     {
         path: '/',
         element: <GuestLayout />,

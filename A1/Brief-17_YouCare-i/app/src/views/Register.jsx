@@ -7,11 +7,13 @@ export  default function Register () {
     const {setUser, setToken} = useStateContext()
 
     function onsubmit(data) {
-        console.log(data);
-        axiosClient.post("auth/register", data).then(({data}) =>  {
-            setUser(data.user);
-            setToken(data.token);
-        }).catch(err => console.log(err));
+        axiosClient.post("auth/register", data)
+            .then(({data})=> {
+                console.log(data);
+                setUser(JSON.stringify(data.user));
+                setToken(data.token);
+            })
+            .catch(err => console.log(err)); // Log any errors to the console
     }
     const {register, handleSubmit,formState: {errors}} = useForm();
 
@@ -23,10 +25,14 @@ export  default function Register () {
                     <input type="text" className={errors.username && 'border-red'} placeholder={'name'} {...register('name', {required: true})}/>
                     <input type="email" placeholder={'Email'} {...register('email', {required: true})}/>
                     <input type="password" placeholder="Password" {...register('password', {required: true})}/>
-                    <input type="text" name={'type'} defaultValue={'organizer'} hidden={true} {...register('type', {required: true})}/>
+                    <select className={'select'} name="type" defaultValue="organizer" {...register('type', {required: true})}>
+                        <option value="" selected={true} disabled={true}>Select Your Type</option>
+                        <option value="organizer">Organizer</option>
+                        <option value="volunteer">Volunteer</option>
+                    </select>
                     <button type="submit" className={'btn btn-block'}>Login</button>
                     <p className={'message'}>
-                        Already Have an account  ? <Link to={'/login'}>Log in !</Link>
+                        Already Have an account ? <Link to={'/login'}>Log in !</Link>
                     </p>
                 </form>
             </div>

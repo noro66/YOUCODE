@@ -6,13 +6,18 @@ import {Button} from "react-bootstrap";
 
 export default function Events() {
     const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const {user} = useStateContext();
 
     useEffect(() => {
-        getEvents();
-    }, []);
+        if (!user){
+            setLoading(true);
+        }else {
+            getEvents();
+        }
+
+    }, [user]);
 
     const getEvents = () => {
         setLoading(true);
