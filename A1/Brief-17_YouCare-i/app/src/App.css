@@ -4,7 +4,12 @@
   padding: 2rem;
   text-align: center;
 }
-
+.pointer {
+  cursor: pointer;
+}
+.mx{
+  margin-inside: 10px;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

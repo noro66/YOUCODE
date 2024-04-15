@@ -15,6 +15,8 @@ const { user ,token} = useStateContext();
             axiosClient.get("auth/logout", {token: token}).then(() =>  {
                 setToken(null);
                 setUser(null);
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
             }).catch(r => console.log(r));
     }
 
@@ -28,7 +30,7 @@ const { user ,token} = useStateContext();
                     </div>
                     <div>
                         {user && user.name}
-                        <a onClick={onLogout} className={'btn-logout cursor-pointer'}>Logout</a>
+                        <a onClick={onLogout} className={' mx btn-logout pointer'}>Logout</a>
                     </div>
                 </header>
                 <main>
