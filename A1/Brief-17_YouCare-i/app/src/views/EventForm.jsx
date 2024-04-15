@@ -2,6 +2,7 @@ import  { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../axiosClient";
 import { useForm } from "react-hook-form";
+import {Alert} from "react-bootstrap";
 
 export default function EventForm() {
     const navigate = useNavigate();
@@ -74,17 +75,17 @@ export default function EventForm() {
                 {!loading && (
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input {...register('title', { required: true })} placeholder="Title" />
-                        {formErrors.title && <p>Title is required</p>}
+                        {formErrors.title && <Alert typeof={'danger'}>Title is required</Alert>}
                         <input {...register('type', { required: true })} placeholder="Type" />
-                        {formErrors.type && <p>Type is required</p>}
+                        {formErrors.type && <Alert typeof={'danger'}>Type is required</Alert>}
                         <input {...register('skills_required', { required: true })} placeholder="Skills Required" />
-                        {formErrors.skills_required && <p>Skills Required is required</p>}
+                        {formErrors.skills_required && <Alert typeof={'danger'}>Skills Required is required</Alert>}
                         <input {...register('location', { required: true })} placeholder="Location" />
-                        {formErrors.location && <p>Location is required</p>}
+                        {formErrors.location && <Alert typeof={'danger'}>Location is required</Alert>}
                         <input type='datetime-local' {...register('date', { required: true })} />
-                        {formErrors.date && <p>Date is required</p>}
+                        {formErrors.date && <Alert typeof={'danger'}>Date is required</Alert>}
                         <input {...register('description', { required: true })} placeholder="Description" />
-                        {formErrors.description && <p>Description is required</p>}
+                        {formErrors.description && <Alert typeof={'danger'}>Description is required</Alert>}
                         <button className="btn">Save</button>
                     </form>
                 )}

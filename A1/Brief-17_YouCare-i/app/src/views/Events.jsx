@@ -48,6 +48,7 @@ export default function Events() {
     return (
         <div>
             <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
+                {!user ? <div>Loading...</div> : <h2>Welcome, {user.name}! {user.organizer_id}</h2>}
                 <h1>Events</h1>
                 <Link className="btn-add" to="/events/new">Add new</Link>
             </div>
@@ -85,11 +86,11 @@ export default function Events() {
                                 <td>{truncateText(u.location , 20)}</td>
                                 <td>{truncateText(u.description, 20)}</td>
                                 <td>{truncateText(u.skills_required, 20)}</td>
-                                {<td>
+                                {(user.organizer_id === u.organizer_id)  ? <td>
                                     <Link className="btn-edit" to={`/events/${u.id}`}>Edit</Link>
                                     &nbsp;
                                     <button className="btn-delete" onClick={() => onDelete(u.id)}>Delete</button>
-                                </td>}
+                                </td> : <td><button className="btn btn-primary">unauthorized</button></td> }
                             </tr>
                         ))}
                         </tbody>

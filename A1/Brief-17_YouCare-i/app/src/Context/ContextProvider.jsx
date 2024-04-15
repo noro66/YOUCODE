@@ -7,8 +7,10 @@ const stateContext = createContext({
     setUser: () => {},
 });
 
+// eslint-disable-next-line react/prop-types
 export const ContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const buffuser = JSON.parse(localStorage.getItem("user"));
+    const [user, _setUser] = useState(buffuser);
     const [token, _setToken] = useState(localStorage.getItem("token"));
 
     const setToken = (token) => {
@@ -17,6 +19,15 @@ export const ContextProvider = ({ children }) => {
             localStorage.setItem("token", token);
         } else {
             localStorage.removeItem("token");
+        }
+    };
+
+    const setUser = (user) => {
+        _setUser(user);
+        if (user) {
+            localStorage.setItem("user", user);
+        } else {
+            localStorage.removeItem("user");
         }
     };
 
