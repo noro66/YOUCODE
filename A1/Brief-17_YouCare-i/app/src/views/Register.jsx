@@ -9,11 +9,10 @@ export  default function Register () {
     function onsubmit(data) {
         axiosClient.post("auth/register", data)
             .then(({data})=> {
-                console.log(data);
                 setUser(JSON.stringify(data.user));
                 setToken(data.token);
             })
-            .catch(err => console.log(err)); // Log any errors to the console
+            .catch(err => console.log(err));
     }
     const {register, handleSubmit,formState: {errors}} = useForm();
 

@@ -31,7 +31,16 @@ input {
     font-size: 14px;
     transition: all 0.3s;
 }
+.d-none{
+    text-decoration: none;
+    color: #212121;
+}
+.d-none:hover{
+   border-radius: 10px;
+    border: #212121 solid 1px;
+    padding: 10px 20px;
 
+}
 input:focus {
     border-color: #5b08a7;
 }

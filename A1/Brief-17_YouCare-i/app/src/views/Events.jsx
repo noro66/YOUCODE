@@ -68,7 +68,7 @@ export default function Events() {
             <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
                 {!user ? <div>Loading...</div> : <h2>Welcome, {user.name}!</h2>}
                 <h1>Events</h1>
-                <Link className="btn-add" to="/events/new">Add new</Link>
+                {(user.type === 'organizer') && <Link className="btn-add" to="/events/new">Add new</Link>}
             </div>
             <div className="card animated fadeInDown">
                 <table>

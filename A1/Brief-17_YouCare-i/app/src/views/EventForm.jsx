@@ -1,14 +1,16 @@
 import  { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {Navigate, useNavigate, useParams} from "react-router-dom";
 import axiosClient from "../axiosClient";
 import { useForm } from "react-hook-form";
 import {Alert} from "react-bootstrap";
+import {useStateContext} from "../Context/ContextProvider.jsx";
+import Events from "./Events.jsx";
 
 export default function EventForm() {
-    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
-
+    const {user} = useStateContext();
+    const navigate  = useNavigate();
     const { register, handleSubmit, control, formState: { errors: formErrors }, setValue } = useForm();
 
     const { id } = useParams();
@@ -18,16 +20,22 @@ export default function EventForm() {
             setLoading(true);
             axiosClient.get(`/event/${id}`)
                 .then(({ data }) => {
-                    setValue('title', data.event.title);
-                    setValue('type', data.event.type);
-                    setValue('skills_required', data.event.skills_required);
-                    setValue('location', data.event.location);
-                    setValue('date', data.event.date ? new Date(data.event.date).toISOString().substring(0, 16) : '');
-                    setValue('description', data.event.description);
-                    setLoading(false);
+                    if (data.event.organizer_id === user.organizer_id) {
+                        setValue('title', data.event.title);
+                        setValue('type', data.event.type);
+                        setValue('skills_required', data.event.skills_required);
+                        setValue('location', data.event.location);
+                        setValue('date', data.event.date ? new Date(data.event.date).toISOString().substring(0, 16) : '');
+                        setValue('description', data.event.description);
+                        setLoading(false);
+                    }else {
+                        navigate('/events');
+                    }
+
                 })
                 .catch(() => {
                     setLoading(false);
+                   navigate('/events');
                 });
         }
     }, [id]);
