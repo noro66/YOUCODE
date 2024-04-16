@@ -30,7 +30,7 @@ const { user ,token} = useStateContext();
                         header
                     </div>
                     <div>
-                        <git Link className={'d-none'} to="/events">Events</gitLink>
+                        <Link className={'d-none'} to="/events">Events</Link>
                     </div>
                     <div>
                         {user && user.name}
